@@ -1,0 +1,21 @@
+{
+  "name": "graphdown",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "web-dev-server --node-resolve --app-index index.html --watch --open",
+    "test": "mocha --require esm",
+    "test:watch": "mocha --watch --require esm"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@web/dev-server": "0.0.27"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^8.2.1"
+  }
+}

@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: row;
+}
+.main > * {
+  border: 1px solid gray;
+  margin: 10px;
+  flex: 1 1;
+}
+
+#output > pre {
+  margin: 0;
+}
