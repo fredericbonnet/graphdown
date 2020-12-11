@@ -8,6 +8,22 @@
   flex: 1 1;
 }
 
-#output > pre {
-  margin: 0;
+.graphdown {
+  font-family: 'Consolas', monospace;
+  font-size: 24px;
+}
+.graphdown path,
+.graphdown polyline {
+  fill: none;
+  stroke: black;
+  stroke-width: 1.5;
+}
+.graphdown polygon {
+  fill: black;
+  stroke: none;
+}
+.graphdown text {
+  white-space: pre;
+  fill: black;
+  font-size: 1rem;
 }

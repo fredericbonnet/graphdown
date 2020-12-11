@@ -1,4 +1,5 @@
 // @ts-check
+import { patterns } from './patterns.js';
 
 /**
  * Escape special HTML chars
@@ -13,16 +14,6 @@ function htmlEscape(data) {
     .replace(/"/g, '&quot;');
 }
 
-/** Patterns */
-const patterns = [
-  {
-    hotspot: '>',
-    size: 1,
-    pattern: ['', '-> ', ''],
-    mask: [[], [true, true], []],
-  },
-];
-
 /** Set of distinct hotspot characters from all patterns */
 const hotspotCharacters = [
   ...new Set(patterns.map((pattern) => pattern.hotspot)),
@@ -32,13 +23,10 @@ const hotspotCharacters = [
 const hotspotsRE = charactersToRegExp(hotspotCharacters);
 
 /** Map of patterns per hotspot character */
-const patternsPerHotspot = patterns.reduce((acc, el) => {
-  const { hotspot } = el;
-  if (acc.has(hotspot)) {
-    acc.get(hotspot).push(el);
-  } else {
-    acc.set(hotspot, [el]);
-  }
+const patternsPerHotspot = patterns.reduce((acc, pattern) => {
+  const { hotspot } = pattern;
+  let patterns = [...(acc.get(hotspot) || []), pattern];
+  acc.set(hotspot, patterns);
   return acc;
 }, new Map());
 
@@ -48,20 +36,51 @@ const patternsPerHotspot = patterns.reduce((acc, el) => {
  * @param {string} data Source text
  */
 export function renderGraphdown(data) {
+  /** Global erasure mask */
   const globalMask = [];
+
+  /** Generated SVG */
+  const svgs = [];
+
   const lines = splitLines(data);
+  // Dynamic width
+  // const width = Math.max(...lines.map((line) => line.length));
+  // Fixed width
+  const width = 80;
+  const height = lines.length;
+
   const matches = findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot);
   for (let match of matches) {
     const {
       row,
       column,
-      pattern: { mask, size },
+      pattern: { mask, size, svg },
     } = match;
+
+    // Apply pattern erasure mask
     addMask(globalMask, mask, row - size, column - size);
+
+    // Add pattern SVG
+    const x = column * 10;
+    const y = row * 20;
+    svgs.push(`<g transform="translate(${x} ${y})">${svg}</g>`);
   }
-  const rawText = applyMask(lines, globalMask).join('\n');
-  const result = rawText;
-  return `<pre>${htmlEscape(result.toString())}</pre>`;
+
+  // Apply erasure mask to text
+  const rawText = applyMask(lines, globalMask);
+
+  // Add masked text as SVG
+  const texts = rawText.map(
+    (text, row) =>
+      `<text x="0" y="${(row + 1) * 20 - 5}" textLength="${
+        text.length * 10
+      }">${htmlEscape(text)}</text>`
+  );
+
+  return `<svg class="graphdown" viewBox="0 0 ${width * 10} ${height * 20}">${[
+    ...texts,
+    ...svgs,
+  ].join('\n')}</svg>`;
 }
 
 /**
@@ -73,19 +92,30 @@ export function renderGraphdown(data) {
  */
 function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
   let results = [];
+  // Try to find hotspots in text, row by row
   for (let row = 0; row < lines.length; row++) {
     const line = lines[row];
+    // @ts-ignore
     const matches = line.matchAll(hotspotsRE);
-    if (matches) {
-      for (let match of matches) {
-        const { 0: hotspot, index: column } = match;
-        const patterns = patternsPerHotspot.get(hotspot);
-        for (let pattern of patterns) {
-          const block = getBlock(lines, row, column, pattern.size);
-          if (matchAll(block, pattern.pattern)) {
-            results.push({ row, column, pattern });
-            break;
-          }
+    if (!matches) continue;
+
+    // Iterate over all the row's hotspots
+    for (let match of matches) {
+      const { 0: hotspot, index: column } = match;
+
+      // Try to find a matching pattern
+      const patterns = patternsPerHotspot.get(hotspot);
+      const blocks = [];
+      for (let pattern of patterns) {
+        // Extract a block around the hotspot and compare with pattern
+        if (!blocks[pattern.size]) {
+          blocks[patterns.size] = getBlock(lines, row, column, pattern.size);
+        }
+        const block = blocks[patterns.size];
+        if (matchAll(block, pattern.patterns)) {
+          // Found! stop there
+          results.push({ row, column, pattern });
+          break;
         }
       }
     }
