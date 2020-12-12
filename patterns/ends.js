@@ -39,6 +39,13 @@ export default [
     mask: [[true]],
     svg: ends['╷'],
   },
+  {
+    hotspot: '.',
+    size: 1,
+    patterns: ['', /[^|+].[^|+]/, /.[|+]./],
+    mask: [[], [false, true, false], []],
+    svg: ends['╷'],
+  },
 
   /* Bottom */
   {
@@ -53,6 +60,13 @@ export default [
     size: 0,
     patterns: ['.'],
     mask: [[true]],
+    svg: ends['╵'],
+  },
+  {
+    hotspot: "'",
+    size: 1,
+    patterns: [/.[|+]./, /[^|+].[^|+]/, ''],
+    mask: [[], [false, true, false], []],
     svg: ends['╵'],
   },
 

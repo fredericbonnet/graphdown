@@ -7,8 +7,8 @@ import symbols from './patterns/symbols.js';
 
 export const patterns = [
   ...junctions,
-  ...ends,
   ...corners,
+  ...ends,
   ...ticks,
   ...lines,
   ...symbols,
