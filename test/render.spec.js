@@ -6,28 +6,77 @@ import {
   addMask,
   charactersToRegExp,
   applyMask,
+  makeSpiral,
 } from '../render.js';
 
 const { expect } = chai;
 
 describe('render', () => {
+  describe('makeSpiral', () => {
+    specify('size zero', () => {
+      expect(makeSpiral(0)).to.deep.equal([[0, 0]]);
+    });
+    specify('size one', () => {
+      // prettier-ignore
+      expect(makeSpiral(1)).to.deep.equal([
+        [ 0,  0], 
+        [ 0, -1], [ 1, -1], 
+        [ 1,  0], [ 1,  1],
+        [ 0,  1], [-1,  1],
+        [-1,  0], [-1, -1],
+      ]);
+    });
+    specify('size two', () => {
+      // prettier-ignore
+      expect(makeSpiral(2)).to.deep.equal([
+        [ 0,  0], 
+        [ 0, -1], [ 1, -1], 
+        [ 1,  0], [ 1,  1],
+        [ 0,  1], [-1,  1],
+        [-1,  0], [-1, -1],
+        [-1, -2], [ 0, -2], [ 1, -2], [ 2, -2],
+        [ 2, -1], [ 2,  0], [ 2,  1], [ 2,  2], 
+        [ 1,  2], [ 0,  2], [-1,  2], [-2,  2],
+        [-2,  1], [-2,  0], [-2, -1], [-2, -2],
+      ]);
+    });
+    specify('size three', () => {
+      // prettier-ignore
+      expect(makeSpiral(3)).to.deep.equal([
+        [ 0,  0], 
+        [ 0, -1], [ 1, -1], 
+        [ 1,  0], [ 1,  1],
+        [ 0,  1], [-1,  1],
+        [-1,  0], [-1, -1],
+        [-1, -2], [ 0, -2], [ 1, -2], [ 2, -2],
+        [ 2, -1], [ 2,  0], [ 2,  1], [ 2,  2], 
+        [ 1,  2], [ 0,  2], [-1,  2], [-2,  2],
+        [-2,  1], [-2,  0], [-2, -1], [-2, -2],
+        [-2, -3], [-1, -3], [ 0, -3], [ 1, -3], [ 2, -3], [ 3, -3],
+        [ 3, -2], [ 3, -1], [ 3,  0], [ 3,  1], [ 3,  2], [ 3,  3], 
+        [ 2,  3], [ 1,  3], [ 0,  3], [-1,  3], [-2,  3], [-3,  3],
+        [-3,  2], [-3,  1], [-3,  0], [-3, -1], [-3, -2], [-3, -3], 
+      ]);
+    });
+  });
+
   describe('getBlock', () => {
     describe('size zero', () => {
       it('should return single space from empty data', () => {
         const lines = [];
-        const expected = [' '];
+        const expected = ' ';
         expect(getBlock(lines, 0, 0, 0)).to.deep.equal(expected);
         expect(getBlock(lines, 1, 2, 0)).to.deep.equal(expected);
         expect(getBlock(lines, -1, 0, 0)).to.deep.equal(expected);
       });
       it('should return source character', () => {
         const lines = ['a'];
-        const expected = ['a'];
+        const expected = 'a';
         expect(getBlock(lines, 0, 0, 0)).to.deep.equal(expected);
       });
       it('should return single space from out-of-range coordinates', () => {
         const lines = ['a'];
-        const expected = [' '];
+        const expected = ' ';
         expect(getBlock(lines, -1, 0, 0)).to.deep.equal(expected);
         expect(getBlock(lines, 0, -1, 0)).to.deep.equal(expected);
         expect(getBlock(lines, -1, -1, 0)).to.deep.equal(expected);
@@ -39,30 +88,30 @@ describe('render', () => {
     describe('size one', () => {
       it('should return empty block from empty data', () => {
         const lines = [];
-        const expected = ['   ', '   ', '   '];
+        const expected = ' '.repeat(9);
         expect(getBlock(lines, 0, 0, 1)).to.deep.equal(expected);
         expect(getBlock(lines, 1, 2, 1)).to.deep.equal(expected);
         expect(getBlock(lines, -1, 0, 1)).to.deep.equal(expected);
       });
       it('should return existing data', () => {
         const lines = ['1234', '5678', '9ABC', 'DEF0'];
-        expect(getBlock(lines, 3, 2, 0)).to.deep.equal(['F']);
-        expect(getBlock(lines, 1, 1, 1)).to.deep.equal(['123', '567', '9AB']);
-        expect(getBlock(lines, 2, 2, 1)).to.deep.equal(['678', 'ABC', 'EF0']);
+        expect(getBlock(lines, 3, 2, 0)).to.deep.equal('F');
+        expect(getBlock(lines, 1, 1, 1)).to.deep.equal('6237BA951');
+        expect(getBlock(lines, 2, 2, 1)).to.deep.equal('B78C0FEA6');
       });
       it('should fill missing data with spaces', () => {
         const lines = ['a'];
-        expect(getBlock(lines, 0, 0, 1)).to.deep.equal(['   ', ' a ', '   ']);
-        expect(getBlock(lines, 1, 0, 1)).to.deep.equal([' a ', '   ', '   ']);
-        expect(getBlock(lines, 0, 1, 1)).to.deep.equal(['   ', 'a  ', '   ']);
-        expect(getBlock(lines, 1, 1, 1)).to.deep.equal(['a  ', '   ', '   ']);
-        expect(getBlock(lines, -1, 0, 1)).to.deep.equal(['   ', '   ', ' a ']);
-        expect(getBlock(lines, 0, -1, 1)).to.deep.equal(['   ', '  a', '   ']);
-        expect(getBlock(lines, -1, -1, 1)).to.deep.equal(['   ', '   ', '  a']);
+        expect(getBlock(lines, 0, 0, 1)).to.deep.equal('a        ');
+        expect(getBlock(lines, 1, 0, 1)).to.deep.equal(' a       ');
+        expect(getBlock(lines, 0, 1, 1)).to.deep.equal('       a ');
+        expect(getBlock(lines, 1, 1, 1)).to.deep.equal('        a');
+        expect(getBlock(lines, -1, 0, 1)).to.deep.equal('     a   ');
+        expect(getBlock(lines, 0, -1, 1)).to.deep.equal('   a     ');
+        expect(getBlock(lines, -1, -1, 1)).to.deep.equal('    a    ');
       });
       it('should return empty block from out-of-range coordinates', () => {
         const lines = ['a'];
-        const expected = ['   ', '   ', '   '];
+        const expected = '         ';
         expect(getBlock(lines, -2, 0, 1)).to.deep.equal(expected);
         expect(getBlock(lines, 0, -2, 1)).to.deep.equal(expected);
         expect(getBlock(lines, -2, -2, 1)).to.deep.equal(expected);

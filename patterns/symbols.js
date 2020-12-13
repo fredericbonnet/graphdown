@@ -5,7 +5,7 @@ export default [
   {
     hotspot: '+',
     size: 0,
-    patterns: [/\+/],
+    pattern: /^.$/,
     mask: [[true]],
     svg: `<path d="M 2 10, 8 10, M 5 7, 5 13"/>`,
   },

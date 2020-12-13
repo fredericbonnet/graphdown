@@ -112,7 +112,7 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
           blocks[patterns.size] = getBlock(lines, row, column, pattern.size);
         }
         const block = blocks[patterns.size];
-        if (matchAll(block, pattern.patterns)) {
+        if (block.match(pattern.pattern)) {
           // Found! stop there
           results.push({ row, column, pattern });
           break;
@@ -133,27 +133,68 @@ export function splitLines(data) {
 }
 
 /**
+ * Encode spiral coordinates for a square block
+ *
+ * @param {number} size Size of square block to encode
+ *
+ * @return {[number,number][]} Coordinates in [column, row] format
+ */
+export function makeSpiral(size) {
+  /** @type {[number,number][]} */
+  const result = [[0, 0]];
+  let column = 0,
+    row = -1;
+  for (let s = 1; s <= size; s++) {
+    for (; column < s; column++) {
+      result.push([column, row]);
+    }
+    for (; row < s; row++) {
+      result.push([column, row]);
+    }
+    for (; column > -s; column--) {
+      result.push([column, row]);
+    }
+    for (; row >= -s; row--) {
+      result.push([column, row]);
+    }
+  }
+  return result;
+}
+
+/**
  * Get square block of characters centered around (row, column)
+ *
+ * The block is encoded as a single string that follows a clockwise spiral path
+ * around the center starting at top.
+ *
+ *  For example:
+ *
+ *     0 1 2 3 4
+ *
+ *  0  O 9 A B C
+ *  1  N 8 1 2 D
+ *  2  M 7 0 3 E
+ *  3  L 6 5 4 F
+ *  4  K J I H G
+ *
+ * The block of size 1 centered at (2, 2) is '012345678'
  *
  * @param {string[]} lines Source lines
  * @param {number} row Row position of center character
  * @param {number} column Column position of center character
  * @param {number} size Size of square = Chebyshev distance from center (king moves)
  *
- * @return {string[]} array of block line strings
+ * @return {string} Spiral string around the center
+ *
+ * @see makeSpiral
  */
 export function getBlock(lines, row, column, size) {
-  const rows = [];
-  for (let r = row - size; r <= row + size; r++) {
-    const line = lines[r] || '';
-    const chars = [];
-    for (let c = column - size; c <= column + size; c++) {
-      const char = line[c] || ' ';
-      chars.push(char);
-    }
-    rows.push(chars.join(''));
+  const chars = [];
+  for (let [c, r] of makeSpiral(size)) {
+    const line = lines[row + r];
+    chars.push(line ? line[column + c] || ' ' : ' ');
   }
-  return rows;
+  return chars.join('');
 }
 
 /**
