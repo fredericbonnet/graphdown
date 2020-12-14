@@ -136,7 +136,7 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^.[^|+].[-+].[|+].[^-+].$/,
+    pattern: /^.[^|+].[-+].[|+' ].[^-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['╭'],
   },
@@ -152,7 +152,7 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^.[^|+].[^-+].[|+].[-+].$/,
+    pattern: /^.[^|+].[^-+].[|+' ].[-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['╮'],
   },
@@ -168,7 +168,7 @@ export default [
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[|+].[-+].[^|+].[^-+].$/,
+    pattern: /^.[|+. ].[-+].[^|+].[^-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['╰'],
   },
@@ -184,7 +184,7 @@ export default [
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[|+].[^-+].[^|+].[-+].$/,
+    pattern: /^.[|+. ].[^-+].[^|+].[-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['╯'],
   },
