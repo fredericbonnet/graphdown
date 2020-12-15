@@ -63,7 +63,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[-+].[^|+].[-+].$/,
+    pattern: /^.['|+].[-+.'].[^|+.].[-+.'].$/,
     mask: [[], [false, true, false], []],
     svg: junctions['┴'],
   },
@@ -86,7 +86,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[-+].[|+].[-+].$/,
+    pattern: /^.[^|+.].[-+.'].[|+'].[-+.'].$/,
     mask: [[], [false, true, false], []],
     svg: junctions['┬'],
   },

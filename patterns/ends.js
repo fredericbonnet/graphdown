@@ -3,7 +3,7 @@ import { wide } from './utils.js';
 /*
  * SVG templates
  */
-const ends = {
+export const ends = {
   '╷': `<path d="M 5 10, 5 20"/>`,
   '╵': `<path d="M 5 10, 5 0"/>`,
   '╶': `<path d="M 5 10, 10 10"/>`,

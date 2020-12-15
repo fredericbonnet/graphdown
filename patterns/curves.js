@@ -1,3 +1,5 @@
+import { ends } from './ends.js';
+
 /*
  * SVG templates
  */
@@ -6,10 +8,6 @@ const arcs = {
   '╮': `<path d="M 0 10, Q 15 10, 15, 25, L 15 30"/>`,
   '╰': `<path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/>`,
   '╯': `<path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/>`,
-};
-const starts = {
-  '╷': `<path d="M 5 10, 5 20"/>`,
-  '╵': `<path d="M 5 10, 5 0"/>`,
 };
 
 /*
@@ -38,7 +36,7 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^....[^+][^|+][|+][|+. ].$/,
+    pattern: /^....[^+][^|+][|+][|. ].$/,
     mask: [[], [false, true, false], []],
     svg: arcs['╭'],
   },
@@ -47,14 +45,28 @@ export default [
     size: 1,
     pattern: /^.[ ][.][^|+].....$/,
     mask: [[], [false, true, false], []],
-    svg: starts['╷'],
+    svg: ends['╷'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^.[ ][.]....[-+.'].$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╴'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^.[ ][.][-+.'].....$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╶'],
   },
 
   /* Top right arc */
   {
     hotspot: '.',
     size: 1,
-    pattern: /^...[|+. ][|+][^|+][^+]..$/,
+    pattern: /^...[|. ][|+][^|+][^+]..$/,
     mask: [[], [false, true, false], []],
     svg: arcs['╮'],
   },
@@ -63,14 +75,28 @@ export default [
     size: 1,
     pattern: /^.[ ].....[^|+][.]$/,
     mask: [[], [false, true, false], []],
-    svg: starts['╷'],
+    svg: ends['╷'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^.[ ].[-+.']....[.]$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╶'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^.[ ].....[-+.'][.]$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╴'],
   },
 
   /* Bottom left arc */
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[^|+][^+]....[|+' ][|+]$/,
+    pattern: /^.[^|+][^+]....[|' ][|+]$/,
     mask: [[], [false, true, false], []],
     svg: arcs['╰'],
   },
@@ -79,14 +105,28 @@ export default [
     size: 1,
     pattern: /^...[^|+]['][ ]...$/,
     mask: [[], [false, true, false], []],
-    svg: starts['╵'],
+    svg: ends['╵'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^....['][ ].[-+.'].$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╴'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^...[-+.']['][ ]...$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╶'],
   },
 
   /* Bottom right arc */
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[^|+][|+][|+' ]....[^+]$/,
+    pattern: /^.[^|+][|+][|' ]....[^+]$/,
     mask: [[], [false, true, false], []],
     svg: arcs['╯'],
   },
@@ -96,6 +136,20 @@ export default [
     // pattern: /^...[^|+]['][ ]...$/,
     pattern: /^.....[ ]['][^|+].$/,
     mask: [[], [false, true, false], []],
-    svg: starts['╵'],
+    svg: ends['╵'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^...[-+.'].[ ][']..$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╶'],
+  },
+  {
+    hotspot: '+',
+    size: 1,
+    pattern: /^.....[ ]['][-+.'].$/,
+    mask: [[], [false, true, false], []],
+    svg: ends['╴'],
   },
 ];

@@ -3,7 +3,7 @@ import { wide } from './utils.js';
 /*
  * SVG templates
  */
-const corners = {
+export const corners = {
   '┌': `<path d="M 10 10, 5 10, 5 20"/>`,
   '┐': `<path d="M 0 10, 5 10, 5 20"/>`,
   '└': `<path d="M 10 10, 5 10, 5 0"/>`,
@@ -40,7 +40,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[-+].[|+].[^-+].$/,
+    pattern: /^.[^|+].[-+.'].[|+'].[^-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['┌'],
   },
@@ -63,7 +63,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[^-+].[|+].[-+].$/,
+    pattern: /^.[^|+].[^-+].[|+'].[-+.'].$/,
     mask: [[], [false, true, false], []],
     svg: corners['┐'],
   },
@@ -93,7 +93,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[-+].[^|+].[^-+].$/,
+    pattern: /^.[|+.].[-+'.].[^|+].[^-+].$/,
     mask: [[], [false, true, false], []],
     svg: corners['└'],
   },
@@ -116,7 +116,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[^-+].[^|+].[-+].$/,
+    pattern: /^.[|+.].[^-+].[^|+].[-+'.].$/,
     mask: [[], [false, true, false], []],
     svg: corners['┘'],
   },
