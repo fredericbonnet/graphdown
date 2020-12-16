@@ -1,5 +1,15 @@
-import { connections } from '../utils.js';
+import { connections, include } from '../utils.js';
 import { wide } from '../svg.js';
+import {
+  blank,
+  arcTop,
+  arcBottom,
+  anchor,
+  vline,
+  hline,
+  endTop,
+  endBottom,
+} from './characters.js';
 
 /*
  * SVG templates
@@ -39,7 +49,7 @@ export default [
     svg: wide(corners['┌']),
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , true, , false]),
     mask: [[], [, true], []],
@@ -62,7 +72,7 @@ export default [
     svg: wide(corners['┐']),
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , true, , true]),
     mask: [[], [, true], []],
@@ -92,7 +102,7 @@ export default [
     svg: corners['└'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , false, , false]),
     mask: [[], [, true], []],
@@ -115,7 +125,7 @@ export default [
     svg: wide(corners['┘']),
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , false, , true]),
     mask: [[], [, true], []],
@@ -135,9 +145,17 @@ export default [
     svg: corners['╭'],
   },
   {
-    hotspot: '.',
+    hotspot: arcTop,
     size: 1,
-    pattern: connections([false, , `[-+]`, , `[|+' ]`, , false]),
+    pattern: connections([
+      false,
+      ,
+      include(hline + anchor),
+      ,
+      include(vline + anchor + endBottom + blank),
+      ,
+      false,
+    ]),
     mask: [[], [, true], []],
     svg: corners['╭'],
   },
@@ -151,9 +169,17 @@ export default [
     svg: corners['╮'],
   },
   {
-    hotspot: '.',
+    hotspot: arcTop,
     size: 1,
-    pattern: connections([false, , false, , `[|+' ]`, , `[-+]`]),
+    pattern: connections([
+      false,
+      ,
+      false,
+      ,
+      include(vline + anchor + endBottom + blank),
+      ,
+      include(hline + anchor),
+    ]),
     mask: [[], [, true], []],
     svg: corners['╮'],
   },
@@ -167,9 +193,17 @@ export default [
     svg: corners['╰'],
   },
   {
-    hotspot: "'",
+    hotspot: arcBottom,
     size: 1,
-    pattern: connections([`[|+. ]`, , `[-+]`, , false, , false]),
+    pattern: connections([
+      include(vline + anchor + endTop + blank),
+      ,
+      include(hline + anchor),
+      ,
+      false,
+      ,
+      false,
+    ]),
     mask: [[], [, true], []],
     svg: corners['╰'],
   },
@@ -183,9 +217,17 @@ export default [
     svg: corners['╯'],
   },
   {
-    hotspot: "'",
+    hotspot: arcBottom,
     size: 1,
-    pattern: connections([`[|+. ]`, , false, , false, , `[-+]`]),
+    pattern: connections([
+      include(vline + anchor + endTop + blank),
+      ,
+      false,
+      ,
+      false,
+      ,
+      include(hline + anchor),
+    ]),
     mask: [[], [, true], []],
     svg: corners['╯'],
   },

@@ -1,4 +1,5 @@
 import { wide } from '../svg.js';
+import { vline, hline } from './characters.js';
 
 /*
  * SVG templates
@@ -28,7 +29,7 @@ export default [
     svg: lines['─'],
   },
   {
-    hotspot: '-',
+    hotspot: hline,
     size: 0,
     pattern: /^.$/,
     mask: [[true]],
@@ -51,7 +52,7 @@ export default [
     svg: lines['│'],
   },
   {
-    hotspot: '|',
+    hotspot: vline,
     size: 0,
     pattern: /^.$/,
     mask: [[true]],

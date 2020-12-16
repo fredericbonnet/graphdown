@@ -12,10 +12,10 @@
 export const regexpEscape = (string) => string.replace(/([\\\[\]^-])/g, '\\$1');
 
 /** Build a pattern including all characters */
-const include = (range) => `[${regexpEscape(range)}]`;
+export const include = (range) => `[${regexpEscape(range)}]`;
 
 /** Build a pattern excluding all characters */
-const exclude = (range) => `[^${regexpEscape(range)}]`;
+export const exclude = (range) => `[^${regexpEscape(range)}]`;
 
 /**
  * Build a pattern for a given connection

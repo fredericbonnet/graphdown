@@ -1,9 +1,14 @@
+import { anchor } from './characters.js';
+
+/*
+ * Character patterns
+ */
 export default [
   /*
    * Single connector = plus sign
    */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 0,
     pattern: /^.$/,
     mask: [[true]],

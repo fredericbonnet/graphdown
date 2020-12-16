@@ -1,5 +1,6 @@
 import { wide } from '../svg.js';
 import { connections } from '../utils.js';
+import { endTop, endBottom, anchor } from './characters.js';
 
 /*
  * SVG templates
@@ -41,7 +42,7 @@ export default [
     svg: ends['╷'],
   },
   {
-    hotspot: '.',
+    hotspot: endTop,
     size: 1,
     pattern: connections([, , , , true, ,]),
     mask: [[], [false, true, false], []],
@@ -64,7 +65,7 @@ export default [
     svg: ends['╵'],
   },
   {
-    hotspot: "'",
+    hotspot: endBottom,
     size: 1,
     pattern: connections([true, , , , , ,]),
     mask: [[], [false, true, false], []],
@@ -109,7 +110,7 @@ export default [
 
   /* Top */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , true, , false]),
     mask: [[], [false, true, false], []],
@@ -118,7 +119,7 @@ export default [
 
   /* Bottom */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , false, , false]),
     mask: [[], [false, true, false], []],
@@ -127,7 +128,7 @@ export default [
 
   /* Left */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , false, , false]),
     mask: [[], [false, true, false], []],
@@ -136,7 +137,7 @@ export default [
 
   /* Right */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , false, , true]),
     mask: [[], [false, true, false], []],

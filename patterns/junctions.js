@@ -1,5 +1,6 @@
 import { connections } from '../utils.js';
 import { wide } from '../svg.js';
+import { anchor } from './characters.js';
 
 /*
  * SVG templates
@@ -35,7 +36,7 @@ export default [
     svg: junctions['┼'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , true, , true]),
     mask: [[], [, true], []],
@@ -62,7 +63,7 @@ export default [
     svg: junctions['┴'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , false, , true]),
     mask: [[], [, true], []],
@@ -85,7 +86,7 @@ export default [
     svg: junctions['┬'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , true, , true]),
     mask: [[], [, true], []],
@@ -108,7 +109,7 @@ export default [
     svg: junctions['┤'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , true, , true]),
     mask: [[], [, true], []],
@@ -131,7 +132,7 @@ export default [
     svg: junctions['├'],
   },
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , true, , false]),
     mask: [[], [, true], []],

@@ -1,5 +1,9 @@
 import { connections } from '../utils';
+import { anchor } from './characters.js';
 
+/*
+ * Character patterns
+ */
 export default [
   /*
    * Ticks
@@ -7,7 +11,7 @@ export default [
 
   /* Vertical line, horizontal tick */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , true, , false]),
     mask: [[], [, true], []],
@@ -16,7 +20,7 @@ export default [
 
   /* Horizontal line, vertical tick */
   {
-    hotspot: '+',
+    hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , false, , true]),
     mask: [[], [, true], []],
