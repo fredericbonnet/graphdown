@@ -1,4 +1,5 @@
-import { wide } from './utils.js';
+import { wide } from '../svg.js';
+import { connections } from '../utils.js';
 
 /*
  * SVG templates
@@ -42,7 +43,7 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^...[^-+].[|+'].[^-+].$/,
+    pattern: connections([, , , , true, ,]),
     mask: [[], [false, true, false], []],
     svg: ends['╷'],
   },
@@ -65,7 +66,7 @@ export default [
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[|+.].[^-+]...[^-+].$/,
+    pattern: connections([true, , , , , ,]),
     mask: [[], [false, true, false], []],
     svg: ends['╵'],
   },
@@ -110,7 +111,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[^-+].[|+].[^-+].$/,
+    pattern: connections([false, , false, , true, , false]),
     mask: [[], [false, true, false], []],
     svg: ticks['┬'],
   },
@@ -119,7 +120,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[^-+].[^|+].[^-+].$/,
+    pattern: connections([true, , false, , false, , false]),
     mask: [[], [false, true, false], []],
     svg: ticks['┴'],
   },
@@ -128,7 +129,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[-+].[^|+].[^-+].$/,
+    pattern: connections([false, , true, , false, , false]),
     mask: [[], [false, true, false], []],
     svg: ticks['├'],
   },
@@ -137,7 +138,7 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[^-+].[^|+].[-+].$/,
+    pattern: connections([false, , false, , false, , true]),
     mask: [[], [false, true, false], []],
     svg: ticks['┤'],
   },

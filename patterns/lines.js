@@ -1,4 +1,4 @@
-import { wide } from './utils.js';
+import { wide } from '../svg.js';
 
 /*
  * SVG templates

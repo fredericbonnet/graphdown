@@ -1,4 +1,5 @@
-import { wide } from './utils.js';
+import { connections } from '../utils.js';
+import { wide } from '../svg.js';
 
 /*
  * SVG templates
@@ -40,8 +41,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[-+.'].[|+'].[^-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([false, , true, , true, , false]),
+    mask: [[], [, true], []],
     svg: corners['┌'],
   },
 
@@ -63,8 +64,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+].[^-+].[|+'].[-+.'].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([false, , false, , true, , true]),
+    mask: [[], [, true], []],
     svg: corners['┐'],
   },
 
@@ -93,8 +94,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+.].[-+'.].[^|+].[^-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , true, , false, , false]),
+    mask: [[], [, true], []],
     svg: corners['└'],
   },
 
@@ -116,8 +117,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+.].[^-+].[^|+].[-+'.].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , false, , false, , true]),
+    mask: [[], [, true], []],
     svg: corners['┘'],
   },
 
@@ -136,8 +137,8 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^.[^|+].[-+].[|+' ].[^-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([false, , `[-+]`, , `[|+' ]`, , false]),
+    mask: [[], [, true], []],
     svg: corners['╭'],
   },
 
@@ -152,8 +153,8 @@ export default [
   {
     hotspot: '.',
     size: 1,
-    pattern: /^.[^|+].[^-+].[|+' ].[-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([false, , false, , `[|+' ]`, , `[-+]`]),
+    mask: [[], [, true], []],
     svg: corners['╮'],
   },
 
@@ -168,8 +169,8 @@ export default [
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[|+. ].[-+].[^|+].[^-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([`[|+. ]`, , `[-+]`, , false, , false]),
+    mask: [[], [, true], []],
     svg: corners['╰'],
   },
 
@@ -184,8 +185,8 @@ export default [
   {
     hotspot: "'",
     size: 1,
-    pattern: /^.[|+. ].[^-+].[^|+].[-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([`[|+. ]`, , false, , false, , `[-+]`]),
+    mask: [[], [, true], []],
     svg: corners['╯'],
   },
 ];

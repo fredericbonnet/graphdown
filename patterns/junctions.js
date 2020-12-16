@@ -1,4 +1,5 @@
-import { wide } from './utils.js';
+import { connections } from '../utils.js';
+import { wide } from '../svg.js';
 
 /*
  * SVG templates
@@ -36,8 +37,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[-+].[|+].[-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , true, , true, , true]),
+    mask: [[], [, true], []],
     svg: junctions['┼'],
   },
 
@@ -63,8 +64,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.['|+].[-+.'].[^|+.].[-+.'].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , true, , false, , true]),
+    mask: [[], [, true], []],
     svg: junctions['┴'],
   },
 
@@ -86,8 +87,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[^|+.].[-+.'].[|+'].[-+.'].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([false, , true, , true, , true]),
+    mask: [[], [, true], []],
     svg: junctions['┬'],
   },
 
@@ -109,8 +110,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[^-+].[|+].[-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , false, , true, , true]),
+    mask: [[], [, true], []],
     svg: junctions['┤'],
   },
 
@@ -132,8 +133,8 @@ export default [
   {
     hotspot: '+',
     size: 1,
-    pattern: /^.[|+].[-+].[|+].[^-+].$/,
-    mask: [[], [false, true, false], []],
+    pattern: connections([true, , true, , true, , false]),
+    mask: [[], [, true], []],
     svg: junctions['├'],
   },
 ];

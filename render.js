@@ -1,4 +1,5 @@
 // @ts-check
+import { regexpEscape } from './utils.js';
 import { patterns } from './patterns.js';
 
 /**
@@ -238,15 +239,6 @@ export function addMask(destination, source, row, column) {
     }
   }
   return destination;
-}
-
-/**
- * Escape characters for RegExp range syntax
- *
- * @param {string} string String to escape
- */
-function regexpEscape(string) {
-  return string.replace(/([\\\[\]^-])/g, '\\$1');
 }
 
 /**
