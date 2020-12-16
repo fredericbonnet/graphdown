@@ -17,22 +17,16 @@ export default [
   {
     hotspot: '━',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(lines['─']),
   },
   {
     hotspot: '─',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: lines['─'],
   },
   {
     hotspot: hline,
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: lines['─'],
   },
 
@@ -40,22 +34,16 @@ export default [
   {
     hotspot: '┃',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(lines['│']),
   },
   {
     hotspot: '│',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: lines['│'],
   },
   {
     hotspot: vline,
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: lines['│'],
   },
 ];

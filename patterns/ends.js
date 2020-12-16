@@ -30,22 +30,17 @@ export default [
   {
     hotspot: '╻',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(ends['╷']),
   },
   {
     hotspot: '╷',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: ends['╷'],
   },
   {
     hotspot: endTop,
     size: 1,
     pattern: connections([, , , , true, ,]),
-    mask: [[], [false, true, false], []],
     svg: ends['╷'],
   },
 
@@ -53,22 +48,17 @@ export default [
   {
     hotspot: '╹',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(ends['╵']),
   },
   {
     hotspot: '╵',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: ends['╵'],
   },
   {
     hotspot: endBottom,
     size: 1,
     pattern: connections([true, , , , , ,]),
-    mask: [[], [false, true, false], []],
     svg: ends['╵'],
   },
 
@@ -76,15 +66,11 @@ export default [
   {
     hotspot: '╺',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(ends['╶']),
   },
   {
     hotspot: '╶',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: ends['╶'],
   },
 
@@ -92,15 +78,11 @@ export default [
   {
     hotspot: '╸',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(ends['╴']),
   },
   {
     hotspot: '╴',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: ends['╴'],
   },
 
@@ -113,7 +95,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , true, , false]),
-    mask: [[], [false, true, false], []],
     svg: ticks['┬'],
   },
 
@@ -122,7 +103,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , false, , false]),
-    mask: [[], [false, true, false], []],
     svg: ticks['┴'],
   },
 
@@ -131,7 +111,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , false, , false]),
-    mask: [[], [false, true, false], []],
     svg: ticks['├'],
   },
 
@@ -140,7 +119,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , false, , true]),
-    mask: [[], [false, true, false], []],
     svg: ticks['┤'],
   },
 ];

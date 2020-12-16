@@ -58,8 +58,13 @@ export function renderGraphdown(data) {
       pattern: { mask, size, svg },
     } = match;
 
-    // Apply pattern erasure mask
-    addMask(globalMask, mask, row - size, column - size);
+    if (!mask) {
+      // Erase hotspot
+      addMask(globalMask, [[true]], row, column);
+    } else {
+      // Apply pattern erasure mask
+      addMask(globalMask, mask, row - size, column - size);
+    }
 
     // Add pattern SVG
     const x = column * 10;
@@ -113,7 +118,7 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
           blocks[patterns.size] = getBlock(lines, row, column, pattern.size);
         }
         const block = blocks[patterns.size];
-        if (block.match(pattern.pattern)) {
+        if (!pattern.pattern || block.match(pattern.pattern)) {
           // Found! stop there
           results.push({ row, column, pattern });
           break;

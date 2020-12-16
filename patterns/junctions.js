@@ -24,22 +24,17 @@ export default [
   {
     hotspot: '╋',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(junctions['┼']),
   },
   {
     hotspot: '┼',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: junctions['┼'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , true, , true]),
-    mask: [[], [, true], []],
     svg: junctions['┼'],
   },
 
@@ -51,22 +46,17 @@ export default [
   {
     hotspot: '┻',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(junctions['┴']),
   },
   {
     hotspot: '┴',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: junctions['┴'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , false, , true]),
-    mask: [[], [, true], []],
     svg: junctions['┴'],
   },
 
@@ -74,22 +64,17 @@ export default [
   {
     hotspot: '┳',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(junctions['┬']),
   },
   {
     hotspot: '┬',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: junctions['┬'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , true, , true]),
-    mask: [[], [, true], []],
     svg: junctions['┬'],
   },
 
@@ -97,22 +82,17 @@ export default [
   {
     hotspot: '┫',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(junctions['┤']),
   },
   {
     hotspot: '┤',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: junctions['┤'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , true, , true]),
-    mask: [[], [, true], []],
     svg: junctions['┤'],
   },
 
@@ -120,22 +100,17 @@ export default [
   {
     hotspot: '┣',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(junctions['├']),
   },
   {
     hotspot: '├',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: junctions['├'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , true, , false]),
-    mask: [[], [, true], []],
     svg: junctions['├'],
   },
 ];

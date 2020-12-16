@@ -37,22 +37,17 @@ export default [
   {
     hotspot: '┌',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['┌'],
   },
   {
     hotspot: '┏',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(corners['┌']),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , true, , true, , false]),
-    mask: [[], [, true], []],
     svg: corners['┌'],
   },
 
@@ -60,22 +55,17 @@ export default [
   {
     hotspot: '┐',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['┐'],
   },
   {
     hotspot: '┓',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(corners['┐']),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([false, , false, , true, , true]),
-    mask: [[], [, true], []],
     svg: corners['┐'],
   },
 
@@ -83,29 +73,22 @@ export default [
   {
     hotspot: '└',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['└'],
   },
   {
     hotspot: '┗',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(corners['└']),
   },
   {
     hotspot: '└',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['└'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , true, , false, , false]),
-    mask: [[], [, true], []],
     svg: corners['└'],
   },
 
@@ -113,22 +96,17 @@ export default [
   {
     hotspot: '┘',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['┘'],
   },
   {
     hotspot: '┛',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: wide(corners['┘']),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections([true, , false, , false, , true]),
-    mask: [[], [, true], []],
     svg: corners['┘'],
   },
 
@@ -140,8 +118,6 @@ export default [
   {
     hotspot: '╭',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['╭'],
   },
   {
@@ -156,7 +132,6 @@ export default [
       ,
       false,
     ]),
-    mask: [[], [, true], []],
     svg: corners['╭'],
   },
 
@@ -164,8 +139,6 @@ export default [
   {
     hotspot: '╮',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['╮'],
   },
   {
@@ -180,7 +153,6 @@ export default [
       ,
       include(hline + anchor),
     ]),
-    mask: [[], [, true], []],
     svg: corners['╮'],
   },
 
@@ -188,8 +160,6 @@ export default [
   {
     hotspot: '╰',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['╰'],
   },
   {
@@ -204,7 +174,6 @@ export default [
       ,
       false,
     ]),
-    mask: [[], [, true], []],
     svg: corners['╰'],
   },
 
@@ -212,8 +181,6 @@ export default [
   {
     hotspot: '╯',
     size: 0,
-    pattern: /^.$/,
-    mask: [[true]],
     svg: corners['╯'],
   },
   {
@@ -228,7 +195,6 @@ export default [
       ,
       include(hline + anchor),
     ]),
-    mask: [[], [, true], []],
     svg: corners['╯'],
   },
 ];

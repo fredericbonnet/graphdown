@@ -36,7 +36,6 @@ export default [
       ,
       false,
     ]),
-    mask: [[], [, true], []],
     svg: '',
   },
 
@@ -54,7 +53,6 @@ export default [
       false,
       include(arcTop),
     ]),
-    mask: [[], [, true], []],
     svg: '',
   },
 
@@ -71,7 +69,6 @@ export default [
       include(vline + anchor),
       include(vline + arcTop + blank),
     ]),
-    mask: [[], [, true], []],
     svg: arcs['╭'],
   },
   {
@@ -82,7 +79,6 @@ export default [
       include(arcTop),
       exclude(vline + anchor),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╷'],
   },
   {
@@ -97,7 +93,6 @@ export default [
       ,
       include(hline + anchor + arcTop + arcBottom),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╴'],
   },
   {
@@ -108,7 +103,6 @@ export default [
       include(arcTop),
       include(hline + vline + arcTop + arcBottom),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╶'],
   },
 
@@ -124,7 +118,6 @@ export default [
       exclude(vline + anchor),
       exclude(anchor),
     ]),
-    mask: [[], [, true], []],
     svg: arcs['╮'],
   },
   {
@@ -140,7 +133,6 @@ export default [
       exclude(vline + anchor),
       include(arcTop),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╷'],
   },
   {
@@ -156,7 +148,6 @@ export default [
       ,
       include(arcTop),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╶'],
   },
   {
@@ -172,7 +163,6 @@ export default [
       include(hline + anchor + arcTop + arcBottom),
       include(arcTop),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╴'],
   },
 
@@ -190,7 +180,6 @@ export default [
       include(vline + arcBottom + blank),
       include(vline + anchor),
     ]),
-    mask: [[], [, true], []],
     svg: arcs['╰'],
   },
   {
@@ -203,7 +192,6 @@ export default [
       include(arcBottom),
       include(blank),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╵'],
   },
   {
@@ -218,7 +206,6 @@ export default [
       ,
       include(hline + anchor + arcTop + arcBottom),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╴'],
   },
   {
@@ -231,7 +218,6 @@ export default [
       include(arcBottom),
       include(blank),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╶'],
   },
 
@@ -249,7 +235,6 @@ export default [
       ,
       exclude(anchor),
     ]),
-    mask: [[], [, true], []],
     svg: arcs['╯'],
   },
   {
@@ -264,7 +249,6 @@ export default [
       include(arcBottom),
       exclude(vline + anchor),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╵'],
   },
   {
@@ -278,7 +262,6 @@ export default [
       include(blank),
       include(arcBottom),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╶'],
   },
   {
@@ -293,7 +276,6 @@ export default [
       include(arcBottom),
       include(hline + anchor + arcTop + arcBottom),
     ]),
-    mask: [[], [, true], []],
     svg: ends['╴'],
   },
 ];
