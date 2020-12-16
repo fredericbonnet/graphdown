@@ -6,7 +6,8 @@ import {
   arcBottom,
   anchor,
   vline,
-  hline,
+  endBottom,
+  endTop,
 } from './characters.js';
 
 /*
@@ -67,7 +68,7 @@ export default [
       exclude(anchor),
       false,
       include(vline + anchor),
-      include(vline + arcTop + blank),
+      include(vline + endTop + blank),
     ]),
     svg: arcs['╭'],
   },
@@ -84,25 +85,13 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      include(blank),
-      include(arcTop),
-      ,
-      ,
-      ,
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-    ]),
+    pattern: connections([include(blank), include(arcTop), , , , , true]),
     svg: ends['╴'],
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      include(blank),
-      include(arcTop),
-      include(hline + vline + arcTop + arcBottom),
-    ]),
+    pattern: connections([include(blank), include(arcTop), true]),
     svg: ends['╶'],
   },
 
@@ -113,7 +102,7 @@ export default [
     pattern: connections([
       ,
       ,
-      include(vline + arcTop + blank),
+      include(vline + endTop + blank),
       include(vline + anchor),
       exclude(vline + anchor),
       exclude(anchor),
@@ -138,31 +127,13 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      include(blank),
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-      ,
-      ,
-      ,
-      ,
-      include(arcTop),
-    ]),
+    pattern: connections([include(blank), , true, , , , , include(arcTop)]),
     svg: ends['╶'],
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      include(blank),
-      ,
-      ,
-      ,
-      ,
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-      include(arcTop),
-    ]),
+    pattern: connections([include(blank), , , , , , true, include(arcTop)]),
     svg: ends['╴'],
   },
 
@@ -177,7 +148,7 @@ export default [
       ,
       ,
       ,
-      include(vline + arcBottom + blank),
+      include(vline + endBottom + blank),
       include(vline + anchor),
     ]),
     svg: arcs['╰'],
@@ -197,27 +168,13 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      ,
-      ,
-      ,
-      include(arcBottom),
-      include(blank),
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-    ]),
+    pattern: connections([, , , include(arcBottom), include(blank), , true]),
     svg: ends['╴'],
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      ,
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-      include(arcBottom),
-      include(blank),
-    ]),
+    pattern: connections([, , true, include(arcBottom), include(blank)]),
     svg: ends['╶'],
   },
 
@@ -228,7 +185,7 @@ export default [
     pattern: connections([
       exclude(vline + anchor),
       include(vline + anchor),
-      include(vline + arcBottom + blank),
+      include(vline + endBottom + blank),
       ,
       ,
       ,
@@ -254,28 +211,13 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      ,
-      ,
-      include(hline + anchor + arcTop + arcBottom),
-      ,
-      include(blank),
-      include(arcBottom),
-    ]),
+    pattern: connections([, , true, , include(blank), include(arcBottom)]),
     svg: ends['╶'],
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([
-      ,
-      ,
-      ,
-      ,
-      include(blank),
-      include(arcBottom),
-      include(hline + anchor + arcTop + arcBottom),
-    ]),
+    pattern: connections([, , , , include(blank), include(arcBottom), true]),
     svg: ends['╴'],
   },
 ];
