@@ -34,7 +34,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , true, , true, , true]),
+    pattern: connections({ t: true, r: true, b: true, l: true }),
     svg: junctions['┼'],
   },
 
@@ -56,7 +56,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , true, , false, , true]),
+    pattern: connections({ t: true, r: true, b: false, l: true }),
     svg: junctions['┴'],
   },
 
@@ -74,7 +74,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , true, , true, , true]),
+    pattern: connections({ t: false, r: true, b: true, l: true }),
     svg: junctions['┬'],
   },
 
@@ -92,7 +92,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , false, , true, , true]),
+    pattern: connections({ t: true, r: false, b: true, l: true }),
     svg: junctions['┤'],
   },
 
@@ -110,7 +110,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , true, , true, , false]),
+    pattern: connections({ t: true, r: true, b: true, l: false }),
     svg: junctions['├'],
   },
 ];

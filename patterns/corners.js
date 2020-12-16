@@ -47,7 +47,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , true, , true, , false]),
+    pattern: connections({ t: false, r: true, b: true, l: false }),
     svg: corners['┌'],
   },
 
@@ -65,7 +65,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , false, , true, , true]),
+    pattern: connections({ t: false, r: false, b: true, l: true }),
     svg: corners['┐'],
   },
 
@@ -88,7 +88,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , true, , false, , false]),
+    pattern: connections({ t: true, r: true, b: false, l: false }),
     svg: corners['└'],
   },
 
@@ -106,7 +106,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , false, , false, , true]),
+    pattern: connections({ t: true, r: false, b: false, l: true }),
     svg: corners['┘'],
   },
 
@@ -123,15 +123,12 @@ export default [
   {
     hotspot: arcTop,
     size: 1,
-    pattern: connections([
-      false,
-      ,
-      include(hline + anchor),
-      ,
-      include(vline + anchor + endBottom + blank),
-      ,
-      false,
-    ]),
+    pattern: connections({
+      t: false,
+      r: include(hline + anchor),
+      b: include(vline + anchor + endBottom + blank),
+      l: false,
+    }),
     svg: corners['╭'],
   },
 
@@ -144,15 +141,12 @@ export default [
   {
     hotspot: arcTop,
     size: 1,
-    pattern: connections([
-      false,
-      ,
-      false,
-      ,
-      include(vline + anchor + endBottom + blank),
-      ,
-      include(hline + anchor),
-    ]),
+    pattern: connections({
+      t: false,
+      r: false,
+      b: include(vline + anchor + endBottom + blank),
+      l: include(hline + anchor),
+    }),
     svg: corners['╮'],
   },
 
@@ -165,15 +159,12 @@ export default [
   {
     hotspot: arcBottom,
     size: 1,
-    pattern: connections([
-      include(vline + anchor + endTop + blank),
-      ,
-      include(hline + anchor),
-      ,
-      false,
-      ,
-      false,
-    ]),
+    pattern: connections({
+      t: include(vline + anchor + endTop + blank),
+      r: include(hline + anchor),
+      b: false,
+      l: false,
+    }),
     svg: corners['╰'],
   },
 
@@ -186,15 +177,12 @@ export default [
   {
     hotspot: arcBottom,
     size: 1,
-    pattern: connections([
-      include(vline + anchor + endTop + blank),
-      ,
-      false,
-      ,
-      false,
-      ,
-      include(hline + anchor),
-    ]),
+    pattern: connections({
+      t: include(vline + anchor + endTop + blank),
+      r: false,
+      b: false,
+      l: include(hline + anchor),
+    }),
     svg: corners['╯'],
   },
 ];

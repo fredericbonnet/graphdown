@@ -52,9 +52,9 @@ const neighbors = {
  * Allowed connections are given for each 8 directions around the center,
  * starting at top and clockwise.
  *
- * @param {(boolean|string)[]} dirs Allowed connections
+ * @param {{[key: string]: string|boolean}} dirs Allowed connections
  */
-export function connections([t, tr, r, br, b, bl, l, tl]) {
+export function connections({ t, tr, r, br, b, bl, l, tl }) {
   return new RegExp(
     [
       '^.',

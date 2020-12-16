@@ -40,7 +40,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections([, , , , true, ,]),
+    pattern: connections({ b: true }),
     svg: ends['╷'],
   },
 
@@ -58,7 +58,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections([true, , , , , ,]),
+    pattern: connections({ t: true }),
     svg: ends['╵'],
   },
 
@@ -94,7 +94,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , false, , true, , false]),
+    pattern: connections({ t: false, r: false, b: true, l: false }),
     svg: ticks['┬'],
   },
 
@@ -102,7 +102,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([true, , false, , false, , false]),
+    pattern: connections({ t: true, r: false, b: false, l: false }),
     svg: ticks['┴'],
   },
 
@@ -110,7 +110,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , true, , false, , false]),
+    pattern: connections({ t: false, r: true, b: false, l: false }),
     svg: ticks['├'],
   },
 
@@ -118,7 +118,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections([false, , false, , false, , true]),
+    pattern: connections({ t: false, r: false, b: false, l: true }),
     svg: ticks['┤'],
   },
 ];
