@@ -8,6 +8,8 @@ export const endBottom = "'";
 export const anchor = '+';
 export const vline = '|';
 export const hline = '-';
+export const dline = '\\';
+export const uline = '/';
 
 /*
  * Linkable neighbors in each direction

@@ -11,6 +11,7 @@ const junctions = {
   '┬': `<path d="M 5 20, 5 10, M 0 10, 10 10"/>`,
   '┤': `<path d="M 0 10, 5 10, M 5 0, 5 20"/>`,
   '├': `<path d="M 10 10, 5 10, M 5 0, 5 20"/>`,
+  '╳': `<path d="M 0 0, 10 20, M 0 20, 10 0"/>`,
 };
 
 /*
@@ -36,6 +37,13 @@ export default [
     size: 1,
     pattern: connections({ t: true, r: true, b: true, l: true }),
     svg: junctions['┼'],
+  },
+
+  /* Diagonals */
+  {
+    hotspot: '╳',
+    size: 1,
+    svg: junctions['╳'],
   },
 
   /*
