@@ -1,5 +1,5 @@
 import { wide } from '../svg.js';
-import { vline, hline } from './characters.js';
+import { vline, hline } from '../characters.js';
 
 /*
  * SVG templates

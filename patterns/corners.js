@@ -1,15 +1,12 @@
-import { connections, include } from '../utils.js';
-import { wide } from '../svg.js';
+import { connections, include, except } from '../utils.js';
+import { wide, highlight } from '../svg.js';
 import {
-  blank,
-  arcTop,
-  arcBottom,
-  anchor,
-  vline,
-  hline,
   endTop,
   endBottom,
-} from './characters.js';
+  anchor,
+  linkLeft,
+  linkRight,
+} from '../characters.js';
 
 /*
  * SVG templates
@@ -121,12 +118,11 @@ export default [
     svg: corners['╭'],
   },
   {
-    hotspot: arcTop,
+    hotspot: endTop,
     size: 1,
     pattern: connections({
       t: false,
-      r: include(hline + anchor),
-      b: include(vline + anchor + endBottom + blank),
+      r: except(endTop) + include(linkRight),
       l: false,
     }),
     svg: corners['╭'],
@@ -139,13 +135,12 @@ export default [
     svg: corners['╮'],
   },
   {
-    hotspot: arcTop,
+    hotspot: endTop,
     size: 1,
     pattern: connections({
       t: false,
       r: false,
-      b: include(vline + anchor + endBottom + blank),
-      l: include(hline + anchor),
+      l: except(endTop) + include(linkLeft),
     }),
     svg: corners['╮'],
   },
@@ -157,11 +152,10 @@ export default [
     svg: corners['╰'],
   },
   {
-    hotspot: arcBottom,
+    hotspot: endBottom,
     size: 1,
     pattern: connections({
-      t: include(vline + anchor + endTop + blank),
-      r: include(hline + anchor),
+      r: except(endBottom) + include(linkRight),
       b: false,
       l: false,
     }),
@@ -175,13 +169,12 @@ export default [
     svg: corners['╯'],
   },
   {
-    hotspot: arcBottom,
+    hotspot: endBottom,
     size: 1,
     pattern: connections({
-      t: include(vline + anchor + endTop + blank),
       r: false,
       b: false,
-      l: include(hline + anchor),
+      l: except(endBottom) + include(linkLeft),
     }),
     svg: corners['╯'],
   },

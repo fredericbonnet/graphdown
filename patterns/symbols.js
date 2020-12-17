@@ -1,4 +1,4 @@
-import { anchor } from './characters.js';
+import { anchor } from '../characters.js';
 
 /*
  * Character patterns

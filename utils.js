@@ -1,5 +1,7 @@
 // @ts-check
 
+import { linkTop, linkBottom, linkLeft, linkRight } from './characters.js';
+
 /*
  * RegExp Utilities
  */
@@ -13,6 +15,9 @@ export const regexpEscape = (string) => string.replace(/([\\\[\]^-])/g, '\\$1');
 
 /** Build a pattern including all characters */
 export const include = (range) => `[${regexpEscape(range)}]`;
+
+/** Build a negative lookeahead excluding all characters */
+export const except = (range) => (range ? `(?![${regexpEscape(range)}])` : '');
 
 /** Build a pattern excluding all characters */
 export const exclude = (range) => `[^${regexpEscape(range)}]`;
@@ -38,14 +43,6 @@ const connection = (spec, range) =>
     ? '.'
     : spec;
 
-/** Connectable neighbors in each direction */
-const neighbors = {
-  t: '|.+',
-  b: "|'+",
-  l: "-+.'",
-  r: "-+.'",
-};
-
 /**
  * Build a pattern for all allowed connections from a character
  *
@@ -58,13 +55,13 @@ export function connections({ t, tr, r, br, b, bl, l, tl }) {
   return new RegExp(
     [
       '^.',
-      connection(t, neighbors.t),
+      connection(t, linkTop),
       connection(tr),
-      connection(r, neighbors.r),
+      connection(r, linkRight),
       connection(br),
-      connection(b, neighbors.b),
+      connection(b, linkBottom),
       connection(bl),
-      connection(l, neighbors.l),
+      connection(l, linkLeft),
       connection(tl),
       '$',
     ].join('')

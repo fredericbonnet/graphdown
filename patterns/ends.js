@@ -1,6 +1,6 @@
 import { wide } from '../svg.js';
 import { connections } from '../utils.js';
-import { endTop, endBottom, anchor } from './characters.js';
+import { endTop, endBottom, anchor } from '../characters.js';
 
 /*
  * SVG templates
