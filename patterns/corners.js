@@ -1,26 +1,44 @@
 import { connections, include, except } from '../utils.js';
-import { wide, highlight } from '../svg.js';
+import { wide } from '../svg.js';
 import {
   endTop,
   endBottom,
   anchor,
   linkLeft,
   linkRight,
+  linkTopLeft,
+  linkTopRight,
+  linkBottomLeft,
+  linkBottomRight,
 } from '../characters.js';
+import { rays } from './ends.js';
 
 /*
  * SVG templates
  */
 export const corners = {
-  '┌': `<path d="M 10 10, 5 10, 5 20"/>`,
-  '┐': `<path d="M 0 10, 5 10, 5 20"/>`,
-  '└': `<path d="M 10 10, 5 10, 5 0"/>`,
-  '┘': `<path d="M 0 10, 5 10, 5 0"/>`,
-  '╭': `<path d="M 5 20, 5 15, Q 5 10, 10 10"/>`,
-  '╮': `<path d="M 5 20, 5 15, Q 5 10, 0 10"/>`,
-  '╰': `<path d="M 5 0, 5 5, Q 5 10, 10 10"/>`,
-  '╯': `<path d="M 5 0, 5 5, Q 5 10, 0 10"/>`,
+  tl: `<path d="M 5 20, 5 10, 10 10"/>`,
+  tr: `<path d="M 5 20, 5 10,  0 10"/>`,
+  bl: `<path d="M 5  0, 5 10, 10 10"/>`,
+  br: `<path d="M 5  0, 5 10,  0 10"/>`,
+  t: `<path d="M 0 20, 5 10, 10 20"/>`,
+  b: `<path d="M 0  0, 5 10, 10  0"/>`,
+  r: `<path d="M 0  0, 5 10,  0 20"/>`,
+  l: `<path d="M 10 0, 5 10, 10 20"/>`,
 };
+
+export const roundedCorners = {
+  tl: `<path d="M 5 20, 5 15, Q 5 10, 10 10"/>`,
+  tr: `<path d="M 5 20, 5 15, Q 5 10,  0 10"/>`,
+  bl: `<path d="M 5  0, 5  5, Q 5 10, 10 10"/>`,
+  br: `<path d="M 5  0, 5  5, Q 5 10,  0 10"/>`,
+  t: `<path d="M 0 20, Q 5 10, 10 20"/>`,
+  b: `<path d="M 0  0, Q 5 10, 10  0"/>`,
+  r: `<path d="M 0  0, Q 5 10,  0 20"/>`,
+  l: `<path d="M 10 0, Q 5 10, 10 20"/>`,
+};
+
+export const diagonalCorners = {};
 
 /*
  * Character patterns
@@ -33,78 +51,109 @@ export default [
   /* Top-left */
   {
     hotspot: '┌',
-    size: 0,
-    svg: corners['┌'],
+    svg: corners.tl,
   },
   {
     hotspot: '┏',
-    size: 0,
-    svg: wide(corners['┌']),
+    svg: wide(corners.tl),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: true, b: true, l: false }),
-    svg: corners['┌'],
+    svg: corners.tl,
+    rules: rays,
+  },
+
+  /* Top */
+  {
+    hotspot: anchor,
+    size: 1,
+    pattern: connections({ tl: false, tr: false, br: true, bl: true }),
+    svg: corners.t,
+    rules: rays,
   },
 
   /* Top-right */
   {
     hotspot: '┐',
-    size: 0,
-    svg: corners['┐'],
+    svg: corners.tr,
   },
   {
     hotspot: '┓',
-    size: 0,
-    svg: wide(corners['┐']),
+    svg: wide(corners.tr),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: false, b: true, l: true }),
-    svg: corners['┐'],
+    svg: corners.tr,
+    rules: rays,
   },
 
-  /* Bottom-left */
-  {
-    hotspot: '└',
-    size: 0,
-    svg: corners['└'],
-  },
-  {
-    hotspot: '┗',
-    size: 0,
-    svg: wide(corners['└']),
-  },
-  {
-    hotspot: '└',
-    size: 0,
-    svg: corners['└'],
-  },
+  /* Right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: true, b: false, l: false }),
-    svg: corners['└'],
+    pattern: connections({ tr: false, br: false, tl: true, bl: true }),
+    svg: corners.r,
+    rules: rays,
   },
 
   /* Bottom-right */
   {
     hotspot: '┘',
-    size: 0,
-    svg: corners['┘'],
+    svg: corners.br,
   },
   {
     hotspot: '┛',
-    size: 0,
-    svg: wide(corners['┘']),
+    svg: wide(corners.br),
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: true, r: false, b: false, l: true }),
-    svg: corners['┘'],
+    svg: corners.br,
+    rules: rays,
+  },
+
+  /* Bottom */
+  {
+    hotspot: anchor,
+    size: 1,
+    pattern: connections({ tl: true, tr: true, br: false, bl: false }),
+    svg: corners.b,
+    rules: rays,
+  },
+
+  /* Bottom-left */
+  {
+    hotspot: '└',
+    svg: corners.bl,
+  },
+  {
+    hotspot: '┗',
+    svg: wide(corners.bl),
+  },
+  {
+    hotspot: '└',
+    svg: corners.bl,
+  },
+  {
+    hotspot: anchor,
+    size: 1,
+    pattern: connections({ t: true, r: true, b: false, l: false }),
+    svg: corners.bl,
+    rules: rays,
+  },
+
+  /* Left */
+  {
+    hotspot: anchor,
+    size: 1,
+    pattern: connections({ tr: true, br: true, tl: false, bl: false }),
+    svg: corners.l,
+    rules: rays,
   },
 
   /*
@@ -114,8 +163,7 @@ export default [
   /* Top-left */
   {
     hotspot: '╭',
-    size: 0,
-    svg: corners['╭'],
+    svg: roundedCorners.tl,
   },
   {
     hotspot: endTop,
@@ -125,14 +173,21 @@ export default [
       r: except(endTop) + include(linkRight),
       l: false,
     }),
-    svg: corners['╭'],
+    svg: roundedCorners.tl,
+  },
+
+  /* Top */
+  {
+    hotspot: endTop,
+    size: 1,
+    pattern: connections({ br: true, bl: true }),
+    svg: roundedCorners.t,
   },
 
   /* Top-right */
   {
     hotspot: '╮',
-    size: 0,
-    svg: corners['╮'],
+    svg: roundedCorners.tr,
   },
   {
     hotspot: endTop,
@@ -142,31 +197,30 @@ export default [
       r: false,
       l: except(endTop) + include(linkLeft),
     }),
-    svg: corners['╮'],
+    svg: roundedCorners.tr,
   },
 
-  /* Bottom-left */
+  /* Right */
   {
-    hotspot: '╰',
-    size: 0,
-    svg: corners['╰'],
-  },
-  {
-    hotspot: endBottom,
+    hotspot: ')',
     size: 1,
-    pattern: connections({
-      r: except(endBottom) + include(linkRight),
-      b: false,
-      l: false,
-    }),
-    svg: corners['╰'],
+    rules: [
+      {
+        pattern: connections({ tl: include(linkTopLeft + anchor + endTop) }),
+      },
+      {
+        pattern: connections({
+          bl: include(linkBottomLeft + anchor + endBottom),
+        }),
+      },
+    ],
+    svg: roundedCorners.r,
   },
 
   /* Bottom-right */
   {
     hotspot: '╯',
-    size: 0,
-    svg: corners['╯'],
+    svg: roundedCorners.br,
   },
   {
     hotspot: endBottom,
@@ -176,6 +230,47 @@ export default [
       b: false,
       l: except(endBottom) + include(linkLeft),
     }),
-    svg: corners['╯'],
+    svg: roundedCorners.br,
+  },
+
+  /* Bottom */
+  {
+    hotspot: endBottom,
+    size: 1,
+    pattern: connections({ tl: true, tr: true }),
+    svg: roundedCorners.b,
+  },
+
+  /* Bottom-left */
+  {
+    hotspot: '╰',
+    svg: roundedCorners.bl,
+  },
+  {
+    hotspot: endBottom,
+    size: 1,
+    pattern: connections({
+      r: except(endBottom) + include(linkRight),
+      b: false,
+      l: false,
+    }),
+    svg: roundedCorners.bl,
+  },
+
+  /* Left */
+  {
+    hotspot: '(',
+    size: 1,
+    rules: [
+      {
+        pattern: connections({ tr: include(linkTopRight + anchor + endTop) }),
+      },
+      {
+        pattern: connections({
+          br: include(linkBottomRight + anchor + endBottom),
+        }),
+      },
+    ],
+    svg: roundedCorners.l,
   },
 ];

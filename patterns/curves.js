@@ -1,5 +1,5 @@
 import { connections, include, exclude } from '../utils.js';
-import { ends } from './ends.js';
+import { ends, rays } from './ends.js';
 import {
   endTop,
   endBottom,
@@ -14,10 +14,10 @@ import {
  * SVG templates
  */
 const arcs = {
-  '╭': `<path d="M 10 10, Q -5 10, -5, 25, L -5 30"/>`,
-  '╮': `<path d="M 0 10, Q 15 10, 15, 25, L 15 30"/>`,
-  '╰': `<path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/>`,
-  '╯': `<path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/>`,
+  tl: `<path d="M 10 10, Q -5 10, -5, 25, L -5 30"/>`,
+  tr: `<path d="M 0 10, Q 15 10, 15, 25, L 15 30"/>`,
+  bl: `<path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/>`,
+  br: `<path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/>`,
 };
 
 /*
@@ -59,7 +59,7 @@ export default [
       bl: include(linkTop),
       l: exclude(hline + anchor),
     }),
-    svg: arcs['╭'],
+    svg: arcs.tl,
   },
   {
     hotspot: vline,
@@ -69,19 +69,13 @@ export default [
       tr: include(endTop),
       r: exclude(linkBottom),
     }),
-    svg: ends['╷'],
+    svg: ends.t,
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: false, l: true, tr: include(endTop) }),
-    svg: ends['╴'],
-  },
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: true, tr: include(endTop) }),
-    svg: ends['╶'],
+    pattern: connections({ tr: include(endTop) }),
+    rules: rays,
   },
 
   /* Top right arc */
@@ -93,7 +87,7 @@ export default [
       br: include(linkTop),
       r: exclude(hline + anchor),
     }),
-    svg: arcs['╮'],
+    svg: arcs.tr,
   },
   {
     hotspot: vline,
@@ -103,19 +97,13 @@ export default [
       tl: include(endTop),
       l: exclude(linkBottom),
     }),
-    svg: ends['╷'],
+    svg: ends.t,
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: false, r: true, tl: include(endTop) }),
-    svg: ends['╶'],
-  },
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, l: true, tl: include(endTop) }),
-    svg: ends['╴'],
+    pattern: connections({ tl: include(endTop) }),
+    rules: rays,
   },
 
   /* Bottom left arc */
@@ -127,7 +115,7 @@ export default [
       tl: include(linkBottom),
       l: exclude(hline + anchor),
     }),
-    svg: arcs['╰'],
+    svg: arcs.bl,
   },
   {
     hotspot: vline,
@@ -137,27 +125,13 @@ export default [
       br: include(endBottom),
       r: exclude(linkTop),
     }),
-    svg: ends['╵'],
+    svg: ends.b,
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({
-      b: false,
-      l: true,
-      br: include(endBottom),
-    }),
-    svg: ends['╴'],
-  },
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({
-      b: false,
-      r: true,
-      br: include(endBottom),
-    }),
-    svg: ends['╶'],
+    pattern: connections({ br: include(endBottom) }),
+    rules: rays,
   },
 
   /* Bottom right arc */
@@ -169,7 +143,7 @@ export default [
       tr: include(linkBottom),
       r: exclude(hline + anchor),
     }),
-    svg: arcs['╯'],
+    svg: arcs.br,
   },
   {
     hotspot: vline,
@@ -179,26 +153,12 @@ export default [
       bl: include(endBottom),
       l: exclude(linkTop),
     }),
-    svg: ends['╵'],
+    svg: ends.b,
   },
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({
-      b: false,
-      r: true,
-      bl: include(endBottom),
-    }),
-    svg: ends['╶'],
-  },
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({
-      b: false,
-      l: true,
-      bl: include(endBottom),
-    }),
-    svg: ends['╴'],
+    pattern: connections({ bl: include(endBottom) }),
+    rules: rays,
   },
 ];

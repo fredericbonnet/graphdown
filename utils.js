@@ -1,6 +1,15 @@
 // @ts-check
 
-import { linkTop, linkBottom, linkLeft, linkRight } from './characters.js';
+import {
+  linkTop,
+  linkBottom,
+  linkLeft,
+  linkRight,
+  linkTopRight,
+  linkBottomRight,
+  linkBottomLeft,
+  linkTopLeft,
+} from './characters.js';
 
 /*
  * RegExp Utilities
@@ -56,13 +65,13 @@ export function connections({ t, tr, r, br, b, bl, l, tl }) {
     [
       '^.',
       connection(t, linkTop),
-      connection(tr),
+      connection(tr, linkTopRight),
       connection(r, linkRight),
-      connection(br),
+      connection(br, linkBottomRight),
       connection(b, linkBottom),
-      connection(bl),
+      connection(bl, linkBottomLeft),
       connection(l, linkLeft),
-      connection(tl),
+      connection(tl, linkTopLeft),
       '$',
     ].join('')
   );

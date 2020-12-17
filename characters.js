@@ -18,3 +18,7 @@ export const linkTop = vline + anchor + endTop;
 export const linkBottom = vline + anchor + endBottom;
 export const linkLeft = hline + anchor + endTop + endBottom;
 export const linkRight = hline + anchor + endTop + endBottom;
+export const linkTopLeft = dline + '(';
+export const linkTopRight = uline + ')';
+export const linkBottomLeft = uline + '(';
+export const linkBottomRight = dline + ')';

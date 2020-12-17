@@ -52,11 +52,7 @@ export function renderGraphdown(data) {
 
   const matches = findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot);
   for (let match of matches) {
-    const {
-      row,
-      column,
-      pattern: { mask, size, svg },
-    } = match;
+    const { row, column, mask, size, svg } = match;
 
     if (!mask) {
       // Erase hotspot
@@ -113,14 +109,48 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
       const patterns = patternsPerHotspot.get(hotspot);
       const blocks = [];
       for (let pattern of patterns) {
-        // Extract a block around the hotspot and compare with pattern
+        if (!pattern.pattern && !pattern.rules) {
+          // Simple case: no pattern, no rules, simple hotspot matching rule
+          results.push({ row, column, ...pattern });
+          break;
+        }
+
+        // Extract a block around the hotspot and compare with pattern/rules
         if (!blocks[pattern.size]) {
           blocks[patterns.size] = getBlock(lines, row, column, pattern.size);
         }
         const block = blocks[patterns.size];
-        if (!pattern.pattern || block.match(pattern.pattern)) {
-          // Found! stop there
-          results.push({ row, column, pattern });
+
+        if (pattern.pattern) {
+          // Must match pattern
+          if (!block.match(pattern.pattern)) continue;
+
+          // Add main SVG
+          let svgs = [];
+          if (pattern.svg) svgs.push(pattern.svg);
+
+          if (pattern.rules) {
+            // Apply extra rules
+            for (let rule of pattern.rules) {
+              if (block.match(rule.pattern)) svgs.push(rule.svg);
+            }
+          }
+
+          // Add to results
+          results.push({ row, column, ...pattern, svg: svgs.join('') });
+          break;
+        } else if (pattern.rules) {
+          // No pattern, must match at least one rule
+          let svgs = [];
+
+          for (let rule of pattern.rules) {
+            if (block.match(rule.pattern)) svgs.push(rule.svg);
+          }
+          if (!svgs.length) continue;
+
+          // At least one rule matched
+          if (pattern.svg) svgs.push(pattern.svg);
+          results.push({ row, column, ...pattern, svg: svgs.join('') });
           break;
         }
       }
