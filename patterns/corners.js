@@ -167,7 +167,6 @@ export default [
     hotspot: endTop,
     size: 1,
     pattern: connections({
-      t: false,
       r: except(endTop) + include(linkRight),
       l: false,
     }),
@@ -191,7 +190,6 @@ export default [
     hotspot: endTop,
     size: 1,
     pattern: connections({
-      t: false,
       r: false,
       l: except(endTop) + include(linkLeft),
     }),
@@ -225,7 +223,6 @@ export default [
     size: 1,
     pattern: connections({
       r: false,
-      b: false,
       l: except(endBottom) + include(linkLeft),
     }),
     svg: roundedCorners.br,
@@ -249,7 +246,6 @@ export default [
     size: 1,
     pattern: connections({
       r: except(endBottom) + include(linkRight),
-      b: false,
       l: false,
     }),
     svg: roundedCorners.bl,
