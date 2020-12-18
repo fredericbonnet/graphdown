@@ -5,6 +5,7 @@
 export const blank = ' ';
 export const endTop = '.';
 export const endBottom = "'";
+export const hsplit = ':';
 export const anchor = '+';
 export const vline = '|';
 export const hline = '-';

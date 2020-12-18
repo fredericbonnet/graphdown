@@ -8,6 +8,7 @@ import {
   hline,
   linkTop,
   linkBottom,
+  hsplit,
 } from '../characters.js';
 
 /*
@@ -50,6 +51,34 @@ export default [
     svg: '',
   },
 
+  /* Left arc split */
+  {
+    hotspot: hsplit,
+    size: 1,
+    pattern: connections({
+      t: false,
+      b: false,
+      tl: include(linkTop),
+      bl: include(linkTop),
+      l: exclude(hline + anchor),
+    }),
+    svg: arcs.tl + arcs.bl,
+  },
+
+  /* Right arc split */
+  {
+    hotspot: hsplit,
+    size: 1,
+    pattern: connections({
+      t: false,
+      b: false,
+      tr: include(linkTop),
+      br: include(linkTop),
+      r: exclude(hline + anchor),
+    }),
+    svg: arcs.tr + arcs.br,
+  },
+
   /* Top left arc */
   {
     hotspot: endTop,
@@ -66,7 +95,7 @@ export default [
     size: 1,
     pattern: connections({
       t: false,
-      tr: include(endTop),
+      tr: include(endTop + hsplit),
       r: exclude(linkBottom),
     }),
     svg: ends.t,
@@ -94,7 +123,7 @@ export default [
     size: 1,
     pattern: connections({
       t: false,
-      tl: include(endTop),
+      tl: include(endTop + hsplit),
       l: exclude(linkBottom),
     }),
     svg: ends.t,
@@ -122,7 +151,7 @@ export default [
     size: 1,
     pattern: connections({
       b: false,
-      br: include(endBottom),
+      br: include(endBottom + hsplit),
       r: exclude(linkTop),
     }),
     svg: ends.b,
@@ -150,7 +179,7 @@ export default [
     size: 1,
     pattern: connections({
       b: false,
-      bl: include(endBottom),
+      bl: include(endBottom + hsplit),
       l: exclude(linkTop),
     }),
     svg: ends.b,

@@ -1,7 +1,15 @@
-import { connections } from '../utils.js';
+import { connections, include, except } from '../utils.js';
 import { wide } from '../svg.js';
-import { anchor } from '../characters.js';
+import {
+  anchor,
+  endTop,
+  endBottom,
+  linkLeft,
+  linkRight,
+  hsplit,
+} from '../characters.js';
 import { rays } from './ends.js';
+import { roundedCorners } from './corners.js';
 
 /*
  * SVG templates
@@ -43,6 +51,18 @@ export default [
     pattern: connections({ t: true, r: true, b: true, l: true }),
     svg: junctions['┼'],
     rules: rays,
+  },
+
+  /* Rounded */
+  {
+    hotspot: hsplit,
+    size: 1,
+    pattern: connections({ t: true, r: true, b: true, l: true }),
+    svg:
+      roundedCorners.tr +
+      roundedCorners.tl +
+      roundedCorners.br +
+      roundedCorners.bl,
   },
 
   /* Diagonals */
@@ -128,6 +148,54 @@ export default [
     pattern: connections({ t: true, r: true, b: true, l: false }),
     svg: junctions['├'],
     rules: rays,
+  },
+
+  /* Rounded no top */
+  {
+    hotspot: endTop,
+    size: 1,
+    pattern: connections({
+      r: except(endTop) + include(linkRight),
+      l: except(endTop) + include(linkLeft),
+    }),
+    svg: roundedCorners.tr + roundedCorners.tl,
+  },
+
+  /* Rounded no bottom */
+  {
+    hotspot: endBottom,
+    size: 1,
+    pattern: connections({
+      r: except(endBottom) + include(linkRight),
+      l: except(endBottom) + include(linkLeft),
+    }),
+    svg: roundedCorners.br + roundedCorners.bl,
+  },
+
+  /* Rounded no left */
+  {
+    hotspot: hsplit,
+    size: 1,
+    pattern: connections({
+      r: true,
+      l: false,
+      t: true,
+      b: true,
+    }),
+    svg: roundedCorners.tl + roundedCorners.bl,
+  },
+
+  /* Rounded no right */
+  {
+    hotspot: hsplit,
+    size: 1,
+    pattern: connections({
+      r: false,
+      l: true,
+      t: true,
+      b: true,
+    }),
+    svg: roundedCorners.tr + roundedCorners.br,
   },
 
   /* Diagonals no top-left */
