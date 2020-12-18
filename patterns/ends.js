@@ -1,7 +1,7 @@
-import {} from '../characters.js';
 import { endTop, endBottom, anchor } from '../characters.js';
 import { wide } from '../svg.js';
 import { connections } from '../utils.js';
+import { ticks } from './ticks.js';
 
 /*
  * SVG templates
@@ -9,22 +9,12 @@ import { connections } from '../utils.js';
 export const ends = {
   t: `<path d="M 5 10,  5 20"/>`,
   b: `<path d="M 5 10,  5  0"/>`,
-  r: `<path d="M 5 10, 10 10"/>`,
-  l: `<path d="M 5 10,  0 10"/>`,
+  l: `<path d="M 5 10, 10 10"/>`,
+  r: `<path d="M 5 10,  0 10"/>`,
   tl: `<path d="M 5 10, 10 20"/>`,
   tr: `<path d="M 5 10,  0 20"/>`,
   br: `<path d="M 5 10,  0  0"/>`,
   bl: `<path d="M 5 10, 10  0"/>`,
-};
-const ticks = {
-  t: `<path d="M 5 10,  5 20, M 2 10, 8 10"/>`,
-  b: `<path d="M 5 10,  5  0, M 2 10, 8 10"/>`,
-  l: `<path d="M 5 10, 10 10, M 5  7, 5 13"/>`,
-  r: `<path d="M 5 10,  0 10, M 5  7, 5 13"/>`,
-  tl: `<path d="M 5 10, 10 20, M 3 11, 7  9"/>`,
-  tr: `<path d="M 5 10,  0 20, M 3  9, 7 11"/>`,
-  br: `<path d="M 5 10,  0  0, M 3 11, 7  9"/>`,
-  bl: `<path d="M 5 10, 10  0, M 3  9, 7 11"/>`,
 };
 
 /*
@@ -46,7 +36,7 @@ export const rays = [
   },
   {
     pattern: connections({ r: true }),
-    svg: ends.r,
+    svg: ends.l,
   },
   {
     pattern: connections({ br: true }),
@@ -62,7 +52,7 @@ export const rays = [
   },
   {
     pattern: connections({ l: true }),
-    svg: ends.l,
+    svg: ends.r,
   },
 ];
 
@@ -104,11 +94,11 @@ export default [
   /* Right */
   {
     hotspot: '╸',
-    svg: wide(ends.l),
+    svg: wide(ends.r),
   },
   {
     hotspot: '╴',
-    svg: ends.l,
+    svg: ends.r,
   },
 
   /* Bottom-right */
@@ -144,11 +134,11 @@ export default [
   /* Left */
   {
     hotspot: '╺',
-    svg: wide(ends.r),
+    svg: wide(ends.l),
   },
   {
     hotspot: '╶',
-    svg: ends.r,
+    svg: ends.l,
   },
 
   /*
@@ -160,7 +150,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: false, tr: false, br: true, bl: false }),
-    svg: ticks.tl,
+    svg: ends.tl + ticks['╱'],
   },
 
   /* Top */
@@ -168,7 +158,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: false, b: true, l: false }),
-    svg: ticks.t,
+    svg: ends.t + ticks['─'],
   },
 
   /* Top-right */
@@ -176,7 +166,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: false, tr: false, br: false, bl: true }),
-    svg: ticks.tr,
+    svg: ends.tr + ticks['╲'],
   },
 
   /* Right */
@@ -184,7 +174,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: false, b: false, l: true }),
-    svg: ticks.r,
+    svg: ends.r + ticks['│'],
   },
 
   /* Bottom-right */
@@ -192,7 +182,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: true, tr: false, br: false, bl: false }),
-    svg: ticks.br,
+    svg: ends.br + ticks['╱'],
   },
 
   /* Bottom */
@@ -200,7 +190,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: true, r: false, b: false, l: false }),
-    svg: ticks.b,
+    svg: ends.b + ticks['─'],
   },
 
   /* Bottom-left */
@@ -208,7 +198,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: false, tr: true, br: false, bl: false }),
-    svg: ticks.bl,
+    svg: ends.bl + ticks['╲'],
   },
 
   /* Left */
@@ -216,6 +206,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: true, b: false, l: false }),
-    svg: ticks.l,
+    svg: ends.l + ticks['│'],
   },
 ];

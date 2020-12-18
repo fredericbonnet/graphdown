@@ -58,21 +58,29 @@ const connection = (spec, range) =>
  * Allowed connections are given for each 8 directions around the center,
  * starting at top and clockwise.
  *
+ * @param {*} dirs Allowed connections
+ */
+export const connections = (...dirs) =>
+  new RegExp(dirs.map(connectionString).join('|'));
+
+/**
+ * Build a pattern for all allowed connections from a character
+ *
+ * Allowed connections are given for each 8 directions around the center,
+ * starting at top and clockwise.
+ *
  * @param {{[key: string]: string|boolean}} dirs Allowed connections
  */
-export function connections({ t, tr, r, br, b, bl, l, tl }) {
-  return new RegExp(
-    [
-      '^.',
-      connection(t, linkTop),
-      connection(tr, linkTopRight),
-      connection(r, linkRight),
-      connection(br, linkBottomRight),
-      connection(b, linkBottom),
-      connection(bl, linkBottomLeft),
-      connection(l, linkLeft),
-      connection(tl, linkTopLeft),
-      '$',
-    ].join('')
-  );
-}
+export const connectionString = ({ t, tr, r, br, b, bl, l, tl }) =>
+  [
+    '^.',
+    connection(t, linkTop),
+    connection(tr, linkTopRight),
+    connection(r, linkRight),
+    connection(br, linkBottomRight),
+    connection(b, linkBottom),
+    connection(bl, linkBottomLeft),
+    connection(l, linkLeft),
+    connection(tl, linkTopLeft),
+    '$',
+  ].join('');
