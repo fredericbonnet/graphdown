@@ -38,8 +38,6 @@ export const roundedCorners = {
   l: `<path d="M 10 0, Q 5 10, 10 20"/>`,
 };
 
-export const diagonalCorners = {};
-
 /*
  * Character patterns
  */
