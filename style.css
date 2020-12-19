@@ -11,19 +11,21 @@
 .graphdown {
   font-family: 'Consolas', monospace;
   font-size: 24px;
+  stroke-width: 2;
+  stroke: black;
+  stroke-linecap: round;
+  fill: black;
 }
 .graphdown path,
 .graphdown polyline {
   fill: none;
-  stroke: black;
-  stroke-width: 1.5;
 }
 .graphdown polygon {
-  fill: black;
   stroke: none;
 }
 .graphdown text {
   white-space: pre;
   fill: black;
+  stroke: none;
   font-size: 1rem;
 }
