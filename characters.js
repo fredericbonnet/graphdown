@@ -15,6 +15,10 @@ export const arrowLeft = '<';
 export const arrowRight = '>';
 export const arrowTop = '^';
 export const arrowBottom = 'v';
+export const disc = '*';
+export const ring = 'o';
+
+export const decorations = disc + ring;
 
 /*
  * Linkable neighbors in each direction

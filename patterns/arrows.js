@@ -4,13 +4,27 @@ import {
   arrowBottom,
   arrowLeft,
   arrowRight,
+  decorations,
 } from '../characters.js';
 import { connections, include } from '../utils.js';
-import { lines } from './lines.js';
+import { rays } from './ends.js';
+import { ticks } from './ticks.js';
 
 /*
  * SVG templates
  */
+
+const arrowShapes = {
+  t: `l  -5  10, 10  0 z`,
+  b: `l  -5 -10, 10  0 z`,
+  l: `l  10  -5,  0 10 z`,
+  r: `l -10  -5,  0 10 z`,
+  tl: `l 0  12, 9 -5 z`,
+  tr: `l 0  12,-9 -5 z`,
+  bl: `l 0 -12, 9  5 z`,
+  br: `l 0 -12,-9  5 z`,
+};
+
 const branches = {
   t: `<path d="M 5 10,  5  0"/>`,
   b: `<path d="M 5 10,  5 20"/>`,
@@ -20,18 +34,18 @@ const branches = {
   bl: `<path d="M 5 10,  0 20"/>`,
 };
 const arrows = {
-  t: `<polygon points=" 5  0,  0 10, 10 10"/>`,
-  b: `<polygon points=" 5 20,  0 10, 10 10"/>`,
-  l: `<polygon points=" 0 10, 10  5, 10 15"/>`,
-  r: `<polygon points="10 10,  0  5,  0 15"/>`,
-  tl: `<polygon points=" 0  0,  0 12,  9  7"/>`,
-  tr: `<polygon points="10  0, 10 12,  1  7"/>`,
-  bl: `<polygon points=" 0 20,  0  8,  9 13"/>`,
-  br: `<polygon points="10 20, 10  8,  1 13"/>`,
+  t: `<path d="M  5  0, ${arrowShapes.t}" class="filled"/>`,
+  b: `<path d="M  5 20, ${arrowShapes.b}" class="filled"/>`,
+  l: `<path d="M  0 10, ${arrowShapes.l}" class="filled"/>`,
+  r: `<path d="M 10 10, ${arrowShapes.r}" class="filled"/>`,
+  tl: `<path d="M  0  0, ${arrowShapes.tl}" class="filled"/>`,
+  tr: `<path d="M 10  0, ${arrowShapes.tr}" class="filled"/>`,
+  bl: `<path d="M  0 20, ${arrowShapes.bl}" class="filled"/>`,
+  br: `<path d="M 10 20, ${arrowShapes.br}" class="filled"/>`,
 };
 const longBranches = {
-  t: `<path d="M 5  0, 5 20"/>`,
-  b: `<path d="M 5 20, 5  0"/>`,
+  t: `<path d="M 5  0,  5 20"/>`,
+  b: `<path d="M 5 20,  5  0"/>`,
   r: `<path d="M 5 10, 10 10"/>`,
   l: `<path d="M 5 10,  0 10"/>`,
   tr: `<path d="M 5 20, Q 5 10, 10  0"/>`,
@@ -39,11 +53,19 @@ const longBranches = {
   br: `<path d="M 5  0, Q 5 10, 10 20"/>`,
   bl: `<path d="M 5  0, Q 5 10,  0 20"/>`,
 };
-const connectedArrows = {
-  t: `<polygon points=" 5 -10,  0  0, 10  0"/>`,
-  b: `<polygon points=" 5  30,  0 20, 10 20"/>`,
-  l: `<polygon points="-5  10,  5  5,  5 15"/>`,
-  r: `<polygon points="15  10,  5  5,  5 15"/>`,
+const anchoredArrows = {
+  t: `<path d="M  5 -10, ${arrowShapes.t}" class="filled"/>`,
+  b: `<path d="M  5  30, ${arrowShapes.b}" class="filled"/>`,
+  l: `<path d="M -5  10, ${arrowShapes.l}" class="filled"/>`,
+  r: `<path d="M 15  10, ${arrowShapes.r}" class="filled"/>`,
+};
+const decoratedArrows = {
+  t: `<path d="M 5 20, 5  5"/><path d="M 5 -5, ${arrowShapes.t}" class="filled"/>`,
+  b: `<path d="M 5  0, 5 15"/><path d="M 5 25, ${arrowShapes.b}" class="filled"/>`,
+  tl: `<path d="M 10 20, 2.5  5"/><path d="M -2.5 -5, ${arrowShapes.tl}" class="filled"/>`,
+  tr: `<path d="M  0 20, 7.5  5"/><path d="M 12.5 -5, ${arrowShapes.tr}" class="filled"/>`,
+  bl: `<path d="M 10  0, 2.5 15"/><path d="M -2.5 25, ${arrowShapes.bl}" class="filled"/>`,
+  br: `<path d="M  0  0, 7.5 15"/><path d="M 12.5 25, ${arrowShapes.br}" class="filled"/>`,
 };
 
 /*
@@ -51,13 +73,13 @@ const connectedArrows = {
  */
 export default [
   /*
-   * Connected arrows
+   * Anchored arrows
    */
   {
     hotspot: arrowTop,
     size: 1,
     pattern: connections({ t: include(anchor) }),
-    svg: connectedArrows.t,
+    svg: anchoredArrows.t,
     rules: [
       {
         pattern: connections({ b: true }),
@@ -76,7 +98,8 @@ export default [
   {
     hotspot: anchor,
     pattern: connections({ b: include(arrowTop) }),
-    svg: lines['─'],
+    svg: ticks['─'],
+    rules: rays,
   },
 
   /* Bottom */
@@ -84,7 +107,7 @@ export default [
     hotspot: arrowBottom,
     size: 1,
     pattern: connections({ b: include(anchor) }),
-    svg: connectedArrows.b,
+    svg: anchoredArrows.b,
     rules: [
       {
         pattern: connections({ t: true }),
@@ -103,7 +126,8 @@ export default [
   {
     hotspot: anchor,
     pattern: connections({ t: include(arrowBottom) }),
-    svg: lines['─'],
+    svg: ticks['─'],
+    rules: rays,
   },
 
   /* Left */
@@ -111,12 +135,13 @@ export default [
     hotspot: arrowLeft,
     size: 1,
     pattern: connections({ l: include(anchor) }),
-    svg: connectedArrows.l + longBranches.r,
+    svg: anchoredArrows.l + longBranches.r,
   },
   {
     hotspot: anchor,
     pattern: connections({ r: include(arrowLeft) }),
-    svg: lines['│'],
+    svg: ticks['│'],
+    rules: rays,
   },
 
   /* Right */
@@ -124,12 +149,66 @@ export default [
     hotspot: arrowRight,
     size: 1,
     pattern: connections({ r: include(anchor) }),
-    svg: connectedArrows.r + longBranches.l,
+    svg: anchoredArrows.r + longBranches.l,
   },
   {
     hotspot: anchor,
     pattern: connections({ l: include(arrowRight) }),
-    svg: lines['│'],
+    svg: ticks['│'],
+    rules: rays,
+  },
+
+  /*
+   * Decorated arrows
+   */
+
+  {
+    hotspot: arrowTop,
+    size: 1,
+    rules: [
+      {
+        pattern: connections({ tl: include(decorations) }),
+        svg: decoratedArrows.tl,
+      },
+      {
+        pattern: connections({ t: include(decorations) }),
+        svg: decoratedArrows.t,
+      },
+      {
+        pattern: connections({ tr: include(decorations) }),
+        svg: decoratedArrows.tr,
+      },
+    ],
+  },
+  {
+    hotspot: arrowBottom,
+    size: 1,
+    rules: [
+      {
+        pattern: connections({ bl: include(decorations) }),
+        svg: decoratedArrows.bl,
+      },
+      {
+        pattern: connections({ b: include(decorations) }),
+        svg: decoratedArrows.b,
+      },
+      {
+        pattern: connections({ br: include(decorations) }),
+        svg: decoratedArrows.br,
+      },
+    ],
+  },
+  {
+    hotspot: arrowLeft,
+    size: 1,
+    pattern: connections({ l: include(decorations) }),
+    svg: arrows.l,
+  },
+  {
+    hotspot: arrowRight,
+    size: 1,
+    pattern: connections({ r: include(decorations) }),
+    svg: arrows.r,
   },
 
   /*

@@ -1,14 +1,15 @@
 import { anchor } from '../characters.js';
+import { ticks } from './ticks.js';
 
 /*
  * Character patterns
  */
 export default [
   /*
-   * Single connector = plus sign
+   * Single anchor = double ticks
    */
   {
     hotspot: anchor,
-    svg: `<path d="M 2 10, 8 10, M 5 7, 5 13"/>`,
+    svg: ticks['│'] + ticks['─'],
   },
 ];

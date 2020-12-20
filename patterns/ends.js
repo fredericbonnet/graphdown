@@ -1,7 +1,6 @@
-import { endTop, endBottom, anchor } from '../characters.js';
+import { endTop, endBottom } from '../characters.js';
 import { wide } from '../svg.js';
 import { connections } from '../utils.js';
-import { ticks } from './ticks.js';
 
 /*
  * SVG templates
@@ -139,73 +138,5 @@ export default [
   {
     hotspot: '╶',
     svg: ends.l,
-  },
-
-  /*
-   * Terminal tick
-   */
-
-  /* Top-left */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: false, tr: false, br: true, bl: false }),
-    svg: ends.tl + ticks['╱'],
-  },
-
-  /* Top */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: false, b: true, l: false }),
-    svg: ends.t + ticks['─'],
-  },
-
-  /* Top-right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: false, tr: false, br: false, bl: true }),
-    svg: ends.tr + ticks['╲'],
-  },
-
-  /* Right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: false, b: false, l: true }),
-    svg: ends.r + ticks['│'],
-  },
-
-  /* Bottom-right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: true, tr: false, br: false, bl: false }),
-    svg: ends.br + ticks['╱'],
-  },
-
-  /* Bottom */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: true, r: false, b: false, l: false }),
-    svg: ends.b + ticks['─'],
-  },
-
-  /* Bottom-left */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: false, tr: true, br: false, bl: false }),
-    svg: ends.bl + ticks['╲'],
-  },
-
-  /* Left */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: true, b: false, l: false }),
-    svg: ends.l + ticks['│'],
   },
 ];
