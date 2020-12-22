@@ -7,6 +7,7 @@ import {
   charactersToRegExp,
   applyMask,
   makeSpiral,
+  extractBlocks,
 } from '../render.js';
 
 const { expect } = chai;
@@ -231,6 +232,157 @@ describe('render', () => {
       const mask = [[, true], , [false, , true], [, , , true]];
       const expected = ['1 34', '5678', '9A C', 'DEF '];
       expect(applyMask(source, mask)).to.deep.equal(expected);
+    });
+  });
+
+  describe('extractBlocks', () => {
+    it('should detect no block on empty text', () => {
+      const data = '';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal(['']);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.be.empty;
+    });
+    it('should detect no block on plain text', () => {
+      const data = 'this is some text';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal(['this is some text']);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.be.empty;
+    });
+    it('should detect single blocks', () => {
+      const data = 'this is { a block } with some text';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal(['this is             with some text']);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.deep.equal([
+        {
+          row: 0,
+          column: 8,
+          width: 11,
+          height: 1,
+          lines: ['{ a block }'],
+        },
+      ]);
+    });
+    it('should escape block delimiters', () => {
+      const data = 'this is { a \\} block } with some text';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal(['this is                with some text']);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.deep.equal([
+        {
+          row: 0,
+          column: 8,
+          width: 14,
+          height: 1,
+          lines: ['{ a \\} block }'],
+        },
+      ]);
+    });
+    it('should detect multiple blocks', () => {
+      const data = 'this is { a block } and { a second block } with some text';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal([
+        'this is             and                    with some text',
+      ]);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.deep.equal([
+        {
+          row: 0,
+          column: 8,
+          width: 11,
+          height: 1,
+          lines: ['{ a block }'],
+        },
+        {
+          row: 0,
+          column: 24,
+          width: 18,
+          height: 1,
+          lines: ['{ a second block }'],
+        },
+      ]);
+    });
+    it('should detect blocks on multiple lines', () => {
+      const data =
+        'this is { a block } and\nanother line with { a second block }\n and some text';
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal([
+        'this is             and',
+        'another line with                   ',
+        ' and some text',
+      ]);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.deep.equal([
+        {
+          row: 0,
+          column: 8,
+          width: 11,
+          height: 1,
+          lines: ['{ a block }'],
+        },
+        {
+          row: 1,
+          column: 18,
+          width: 18,
+          height: 1,
+          lines: ['{ a second block }'],
+        },
+      ]);
+    });
+    it('should group multiline blocks', () => {
+      const data = `
+this is { a block     }
+        { that spans  }   this is { another block }   this is { a second        }
+        { three lines }        and { a third block }          { multiline block }
+`;
+      const { lines, blocks } = extractBlocks(data);
+      expect(lines).to.be.instanceOf(Array);
+      expect(lines).to.deep.equal([
+        '',
+        'this is                ',
+        '                          this is                     this is                    ',
+        '                               and                                               ',
+        '',
+      ]);
+      expect(blocks).to.be.instanceOf(Array);
+      expect(blocks).to.deep.equal([
+        {
+          row: 1,
+          column: 8,
+          width: 15,
+          height: 3,
+          lines: ['{ a block     }', '{ that spans  }', '{ three lines }'],
+        },
+        {
+          row: 2,
+          column: 34,
+          width: 17,
+          height: 1,
+          lines: ['{ another block }'],
+        },
+        {
+          row: 2,
+          column: 62,
+          width: 19,
+          height: 2,
+          lines: ['{ a second        }', '{ multiline block }'],
+        },
+        {
+          row: 3,
+          column: 35,
+          width: 17,
+          height: 1,
+          lines: ['{ a third block }'],
+        },
+      ]);
     });
   });
 });

@@ -1,6 +1,7 @@
 // @ts-check
 import { regexpEscape } from './utils.js';
 import { patterns } from './patterns.js';
+import { blockRE } from './characters.js';
 
 /**
  * Escape special HTML chars
@@ -35,17 +36,20 @@ const patternsPerHotspot = patterns.reduce((acc, pattern) => {
  * Render GraphDown string
  *
  * @param {string} data Source text
+ *
+ * @return SVG code
  */
 export function renderGraphdown(data) {
   /** Global erasure mask */
   const globalMask = [];
 
-  /** Generated SVG */
+  /** Generated SVGs */
   const svgs = [];
 
-  const lines = splitLines(data);
+  const { lines, blocks } = extractBlocks(data);
   // Dynamic width
   // const width = Math.max(...lines.map((line) => line.length));
+  // const width = Math.max(80, ...lines.map((line) => line.length));
   // Fixed width
   const width = 80;
   const height = lines.length;
@@ -71,19 +75,69 @@ export function renderGraphdown(data) {
   // Apply erasure mask to text
   const rawText = applyMask(lines, globalMask);
 
-  // Add masked text as SVG
-  const texts = rawText.map(
-    (text, row) =>
-      `<text x="0" y="${(row + 1) * 20 - 5}" textLength="${
-        text.length * 10
-      }">${htmlEscape(text)}</text>`
-  );
-
   return `<svg class="graphdown" viewBox="0 0 ${width * 10} ${height * 20}">${[
-    ...texts,
+    ...renderTextLines(rawText),
+    ...renderBlocks(blocks),
     ...svgs,
   ].join('\n')}</svg>`;
 }
+
+/**
+ * Render text lines
+ *
+ * @param {string[]} lines Text lines
+ *
+ * @return SVG code
+ */
+const renderTextLines = (lines) =>
+  lines.map((line, row) => renderTextLine(line, row, 0));
+
+/**
+ * Render text line
+ *
+ * @param {*} line Text line
+ * @param {*} row Row
+ * @param {*} column Column of first character
+ *
+ * @return SVG code
+ */
+const renderTextLine = (line, row, column) =>
+  `<text x="${column * 10}" y="${(row + 1) * 20 - 5}" textLength="${
+    line.length * 10
+  }">${htmlEscape(line)}</text>`;
+
+/**
+ * Render text blocks
+ *
+ * @param {*} blocks Blocks to render
+ *
+ * @return SVG code
+ */
+const renderBlocks = (blocks) => blocks.map(renderBlock);
+
+/**
+ * Render text block
+ *
+ * @return SVG code
+ */
+const renderBlock = ({ row, column, width, height, lines }) =>
+  `<foreignObject x="${column * 10}" y="${row * 20}" width="${
+    width * 10
+  }" height="${height * 20}"><div class="block">${renderBlockContent(
+    lines
+  )}</div></foreignObject>`;
+
+/**
+ * Render text block content
+ *
+ * @param {string[]} lines Text lines
+ *
+ * @return HTML code
+ */
+const renderBlockContent = (lines) =>
+  `<div>${htmlEscape(
+    lines.map((line) => line.substring(1, line.length - 1)).join('\n')
+  )}</div>`;
 
 /**
  * Find all matching patterns with locations
@@ -310,4 +364,76 @@ export function applyMask(lines, mask) {
     result[row] = maskedLine;
   }
   return result;
+}
+
+/**
+ * Extract text blocks
+ *
+ * @param {string} data Source text
+ *
+ * @return {{lines: string[], blocks: object[]}} Lines and blocks
+ */
+export function extractBlocks(data) {
+  // Detect block lines
+  let lines = splitLines(data);
+  const blockLines = [];
+  for (let row = 0; row < lines.length; row++) {
+    let line = lines[row];
+    // @ts-ignore
+    const matches = line.matchAll(blockRE);
+    if (!matches) continue;
+
+    for (let match of matches) {
+      const { 0: text, index: column } = match;
+
+      // Remove block content from line
+      line =
+        line.substr(0, column) +
+        ' '.repeat(text.length) +
+        line.substr(column + text.length);
+
+      // Add block line
+      blockLines.push({
+        row,
+        column,
+        width: text.length,
+        height: 1,
+        lines: [text],
+      });
+    }
+    lines[row] = line;
+  }
+
+  // Merge multiline blocks, i.e. consecutive blocks with same column and width
+  const canMerge = (previous, next) =>
+    previous.column === next.column &&
+    previous.width === next.width &&
+    previous.row + previous.height === next.row;
+  let blocks = [];
+  let previousBlock;
+  // Iterate column by column to find mergeable block lines
+  for (let blockLine of blockLines.sort(
+    (a, b) => a.column - b.column || a.row - b.row
+  )) {
+    if (!previousBlock) {
+      previousBlock = blockLine;
+      continue;
+    }
+
+    if (canMerge(previousBlock, blockLine)) {
+      // Merge current line into previous block
+      previousBlock.height += blockLine.height;
+      previousBlock.lines.push(...blockLine.lines);
+      continue;
+    }
+
+    // Add completed block
+    blocks.push(previousBlock);
+    previousBlock = blockLine;
+  }
+  if (previousBlock) blocks.push(previousBlock);
+
+  // Ensure that blocks are in reading order (top-down, left-right)
+  blocks = blocks.sort((a, b) => a.row - b.row || a.column - b.column);
+  return { lines, blocks };
 }

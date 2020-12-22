@@ -31,3 +31,9 @@ export const linkTopLeft = dline + '(';
 export const linkTopRight = uline + ')';
 export const linkBottomLeft = uline + '(';
 export const linkBottomRight = dline + ')';
+
+/*
+ * Text blocks
+ */
+
+export const blockRE = /{(\\.|[^}])*}/g;
