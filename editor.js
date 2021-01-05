@@ -1,5 +1,5 @@
 // @ts-check
-import { renderGraphdown } from './render.js';
+import { renderGraphdown } from './src/render.js';
 
 /** @type {HTMLTextAreaElement} */
 // @ts-ignore

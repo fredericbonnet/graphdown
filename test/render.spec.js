@@ -8,7 +8,7 @@ import {
   applyMask,
   makeSpiral,
   extractBlocks,
-} from '../render.js';
+} from '../src/render.js';
 
 const { expect } = chai;
 

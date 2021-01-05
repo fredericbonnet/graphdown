@@ -10,7 +10,7 @@ module.exports = {
   // buildOptions: {},
   experiments: {
     optimize: {
-      entrypoints: ['render.js'],
+      entrypoints: ['src/render.js'],
       bundle: true,
       minify: true,
       sourceMaps: true,

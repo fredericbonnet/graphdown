@@ -1,7 +1,7 @@
 import chai from 'chai';
 import fs from 'fs';
 import path from 'path';
-import { renderGraphdown } from '../render.js';
+import { renderGraphdown } from '../src/render.js';
 
 const { expect, Assertion } = chai;
 
@@ -19,7 +19,7 @@ Assertion.addMethod('matchSnapshot', function (filename, snapshot = false) {
 function render(filename) {
   const data = fs.readFileSync(path.join(__dirname, filename)).toString();
   const style = fs
-    .readFileSync(path.join(__dirname, '../graphdown.css'))
+    .readFileSync(path.join(__dirname, '../src/graphdown.css'))
     .toString();
 
   return renderGraphdown(data, style);
