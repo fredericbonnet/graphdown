@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="graphdown" viewBox="0 0 800 80">
+<style>
+.graphdown {
+  font-family: 'Consolas', monospace;
+  font-size: 16px;
+  stroke-width: 2;
+  stroke: black;
+  stroke-linecap: round;
+  fill: black;
+}
+.graphdown .outline {
+  fill: white;
+}
+.graphdown path.filled {
+  fill: black;
+  stroke: none;
+}
+.graphdown path,
+.graphdown polyline {
+  fill: none;
+}
+.graphdown polygon {
+  stroke: none;
+}
+.graphdown text {
+  white-space: pre;
+  fill: black;
+  stroke: none;
+  font-size: 1em;
+}
+.graphdown .block {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: pre;
+  font-size: 1em;
+}
+
+</style>
+<text x="0" y="15" textLength="170">                 </text>
+<text x="0" y="35" textLength="170">                 </text>
+<text x="0" y="55" textLength="160">                </text>
+<text x="0" y="75" textLength="0"></text>
+<g transform="translate(10 0)"><path d="M 10 10, Q -5 10, -5, 25, L -5 30"/></g>
+<g transform="translate(40 0)"><path d="M 10 10, Q -5 10, -5, 25, L -5 30"/></g>
+<g transform="translate(50 0)"><path d="M 0 10, 10 10"/></g>
+<g transform="translate(90 0)"><path d="M 10 10, Q -5 10, -5, 25, L -5 30"/></g>
+<g transform="translate(100 0)"><path d="M 0 10, 10 10"/></g>
+<g transform="translate(110 0)"><path d="M 0 10, Q 15 10, 15, 25, L 15 30"/></g>
+<g transform="translate(150 0)"><path d="M 0 10, Q 15 10, 15, 25, L 15 30"/></g>
+<g transform="translate(0 20)"></g>
+<g transform="translate(30 20)"><path d="M 5 10,  5 20"/></g>
+<g transform="translate(80 20)"></g>
+<g transform="translate(120 20)"></g>
+<g transform="translate(160 20)"></g>
+<g transform="translate(10 40)"><path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/></g>
+<g transform="translate(20 40)"><path d="M 0 10, 10 10"/></g>
+<g transform="translate(30 40)"><path d="M 5  0, 5  5, Q 5 10,  0 10"/></g>
+<g transform="translate(60 40)"><path d="M 0 10, 10 10"/></g>
+<g transform="translate(70 40)"><path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/></g>
+<g transform="translate(130 40)"><path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/></g>
+<g transform="translate(140 40)"><path d="M 0 10, 10 10"/></g>
+<g transform="translate(150 40)"><path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/></g></svg>

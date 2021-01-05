@@ -25,29 +25,36 @@ const arcs = {
  * Character patterns
  */
 export default [
-  /* Left arc junctions */
+  /* Arc/S-curve junctions */
   {
     hotspot: vline,
     size: 1,
-    pattern: connections({
-      t: false,
-      tr: include(endTop),
-      br: include(endBottom),
-      b: false,
-    }),
-    svg: '',
-  },
-
-  /* Right arc junctions */
-  {
-    hotspot: vline,
-    size: 1,
-    pattern: connections({
-      t: false,
-      tl: include(endTop),
-      bl: include(endBottom),
-      b: false,
-    }),
+    pattern: connections(
+      {
+        t: false,
+        tr: include(endTop),
+        br: include(endBottom),
+        b: false,
+      },
+      {
+        t: false,
+        tl: include(endTop),
+        bl: include(endBottom),
+        b: false,
+      },
+      {
+        t: false,
+        tr: include(endTop),
+        bl: include(endBottom),
+        b: false,
+      },
+      {
+        t: false,
+        tl: include(endTop),
+        br: include(endBottom),
+        b: false,
+      }
+    ),
     svg: '',
   },
 

@@ -20,7 +20,8 @@ function render(filename) {
   const data = fs.readFileSync(path.join(__dirname, filename)).toString();
   const style = fs
     .readFileSync(path.join(__dirname, '../src/graphdown.css'))
-    .toString();
+    .toString()
+    .replace(/\r/g, '');
 
   return renderGraphdown(data, style);
 }
@@ -33,5 +34,9 @@ describe('snapshots', () => {
   specify('sample', function () {
     const gd = render('./examples/sample.txt');
     expect(gd).to.matchSnapshot('./examples/sample.svg');
+  });
+  specify('curves', function () {
+    const gd = render('./examples/curves.txt');
+    expect(gd).to.matchSnapshot('./examples/curves.svg');
   });
 });
