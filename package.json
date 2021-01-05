@@ -4,17 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "web-dev-server --node-resolve --app-index index.html --watch --open",
+    "start": "snowpack dev",
+    "build": "snowpack build",
     "test": "mocha --require esm",
     "test:watch": "mocha --watch --require esm"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@web/dev-server": "0.0.27",
     "chai": "^4.2.0",
     "esm": "^3.2.25",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "snowpack": "^2.18.5"
   },
   "dependencies": {}
 }
