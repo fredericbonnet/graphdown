@@ -36,10 +36,11 @@ const patternsPerHotspot = patterns.reduce((acc, pattern) => {
  * Render GraphDown string
  *
  * @param {string} data Source text
+ * @param {string} [style] Inline style
  *
  * @return SVG code
  */
-export function renderGraphdown(data) {
+export function renderGraphdown(data, style) {
   /** Global erasure mask */
   const globalMask = [];
 
@@ -75,7 +76,11 @@ export function renderGraphdown(data) {
   // Apply erasure mask to text
   const rawText = applyMask(lines, globalMask);
 
-  return `<svg class="graphdown" viewBox="0 0 ${width * 10} ${height * 20}">${[
+  const styleBlock = style ? `\n<style>\n${style}\n</style>` : '';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="graphdown" viewBox="0 0 ${
+    width * 10
+  } ${height * 20}">${styleBlock}\n${[
     ...renderTextLines(rawText),
     ...renderBlocks(blocks),
     ...svgs,
@@ -219,7 +224,7 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
  * @param {string} data Text to split into lines
  */
 export function splitLines(data) {
-  return data.split('\n');
+  return data.split(/\r?\n/);
 }
 
 /**
