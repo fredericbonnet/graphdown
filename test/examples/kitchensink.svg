@@ -108,7 +108,7 @@
 <text x="0" y="1315" textLength="650">                                                                 </text>
 <text x="0" y="1335" textLength="650">                                                                 </text>
 <text x="0" y="1355" textLength="630">                                                               </text>
-<text x="0" y="1375" textLength="630">                                                 ____          </text>
+<text x="0" y="1375" textLength="630">                                                               </text>
 <text x="0" y="1395" textLength="630">                                                               </text>
 <text x="0" y="1415" textLength="620">                                                              </text>
 <text x="0" y="1435" textLength="0"></text>
@@ -1199,6 +1199,10 @@
 <g transform="translate(360 1360)"><path d="M 5  0,  5 20"/></g>
 <g transform="translate(430 1360)"><path d="M 5  0,  5 20"/></g>
 <g transform="translate(480 1360)"><path d="M 5  0,  5 20"/></g>
+<g transform="translate(490 1360)"><path d="M  -5 20,  0 20"/><path d="M 0 20, 10 20"/></g>
+<g transform="translate(500 1360)"><path d="M 0 20, 10 20"/></g>
+<g transform="translate(510 1360)"><path d="M 0 20, 10 20"/></g>
+<g transform="translate(520 1360)"><path d="M  10 20, 15 20"/><path d="M 0 20, 10 20"/></g>
 <g transform="translate(530 1360)"><path d="M 5  0,  5 20"/></g>
 <g transform="translate(580 1360)"><path d="M 5  0,  5 20"/></g>
 <g transform="translate(620 1360)"><path d="M 5  0,  5 20"/></g>

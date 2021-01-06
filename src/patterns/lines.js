@@ -1,5 +1,5 @@
 import { wide } from '../svg.js';
-import { vline, hline, dline, uline } from '../characters.js';
+import { vline, hline, dline, uline, bline } from '../characters.js';
 
 /*
  * SVG templates
@@ -9,6 +9,7 @@ export const lines = {
   '│': `<path d="M 5  0,  5 20"/>`,
   '╲': `<path d="M 0  0, 10 20"/>`,
   '╱': `<path d="M 0 20, 10  0"/>`,
+  _: `<path d="M 0 20, 10 20"/>`,
 };
 
 /*
@@ -61,5 +62,11 @@ export default [
   {
     hotspot: uline,
     svg: lines['╱'],
+  },
+
+  /* Bottom line */
+  {
+    hotspot: bline,
+    svg: lines['_'],
   },
 ];

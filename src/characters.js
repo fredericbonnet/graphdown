@@ -9,6 +9,7 @@ export const hsplit = ':';
 export const anchor = '+';
 export const vline = '|';
 export const hline = '-';
+export const bline = '_';
 export const dline = '\\';
 export const uline = '/';
 export const arrowLeft = '<';

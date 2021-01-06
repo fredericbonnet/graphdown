@@ -9,6 +9,7 @@ import {
   linkTop,
   linkBottom,
   hsplit,
+  bline,
 } from '../characters.js';
 
 /*
@@ -19,6 +20,18 @@ const arcs = {
   tr: `<path d="M 0 10, Q 15 10, 15, 25, L 15 30"/>`,
   bl: `<path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/>`,
   br: `<path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/>`,
+};
+const shortArcsTop = {
+  tl: `<path d="M 10 10, Q 5 10, 5 15"/>`,
+  tr: `<path d="M  0 10, Q 5 10, 5 15"/>`,
+  bl: `<path d="M 10 20, Q 5 20, 5 15"/>`,
+  br: `<path d="M  0 20, Q 5 20, 5 15"/>`,
+};
+const shortArcsBottom = {
+  tl: `<path d="M 10  0, Q 5  0, 5 5"/>`,
+  tr: `<path d="M  0  0, Q 5  0, 5 5"/>`,
+  bl: `<path d="M 10 10, Q 5 10, 5 5"/>`,
+  br: `<path d="M  0 10, Q 5 10, 5 5"/>`,
 };
 
 /*
@@ -56,6 +69,68 @@ export default [
       }
     ),
     svg: '',
+  },
+
+  /* Short S-curve */
+  {
+    hotspot: endTop,
+    size: 1,
+    rules: [
+      {
+        pattern: connections({
+          b: false,
+          r: include(hline),
+          l: include(hline + bline),
+        }),
+        svg: shortArcsTop.tl,
+      },
+      {
+        pattern: connections({
+          b: false,
+          l: include(hline),
+          r: include(hline + bline),
+        }),
+        svg: shortArcsTop.tr,
+      },
+      {
+        pattern: connections({ b: false, r: include(bline) }),
+        svg: shortArcsTop.bl,
+      },
+      {
+        pattern: connections({ b: false, l: include(bline) }),
+        svg: shortArcsTop.br,
+      },
+    ],
+  },
+  {
+    hotspot: endBottom,
+    size: 1,
+    rules: [
+      {
+        pattern: connections({ t: false, tr: include(bline) }),
+        svg: shortArcsBottom.tl,
+      },
+      {
+        pattern: connections({ t: false, tl: include(bline) }),
+        svg: shortArcsBottom.tr,
+      },
+      {
+        pattern: connections({
+          t: false,
+          tl: include(bline),
+          r: include(hline),
+        }),
+        svg: shortArcsBottom.bl,
+      },
+      {
+        pattern: connections({
+          t: false,
+          tr: include(bline),
+          l: include(hline),
+        }),
+        svg: shortArcsBottom.br,
+      },
+    ],
   },
 
   /* Left arc split */

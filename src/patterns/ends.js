@@ -1,6 +1,15 @@
-import { endTop, endBottom } from '../characters.js';
+import {
+  endTop,
+  endBottom,
+  bline,
+  linkBottom,
+  linkTop,
+  linkTopRight,
+  linkTopLeft,
+} from '../characters.js';
 import { wide } from '../svg.js';
-import { connections } from '../utils.js';
+import { connections, include, except } from '../utils.js';
+import { lines } from './lines.js';
 
 /*
  * SVG templates
@@ -14,6 +23,12 @@ export const ends = {
   tr: `<path d="M 5 10,  0 20"/>`,
   br: `<path d="M 5 10,  0  0"/>`,
   bl: `<path d="M 5 10, 10  0"/>`,
+};
+const bottomEnds = {
+  l: `<path d="M  -5 20,  0 20"/>`,
+  r: `<path d="M  10 20, 15 20"/>`,
+  ll: `<path d="M -10 20,  0 20"/>`,
+  rr: `<path d="M  10 20, 20 20"/>`,
 };
 
 /*
@@ -138,5 +153,36 @@ export default [
   {
     hotspot: '╶',
     svg: ends.l,
+  },
+
+  /* Bottom line */
+  {
+    hotspot: bline,
+    size: 1,
+    svg: lines['_'],
+    rules: [
+      {
+        pattern: connections(
+          { l: except(endTop) + include(linkTop) },
+          { bl: except(endBottom) + include(linkBottom) }
+        ),
+        svg: bottomEnds.l,
+      },
+      {
+        pattern: connections(
+          { r: except(endTop) + include(linkTop) },
+          { br: except(endBottom) + include(linkBottom) }
+        ),
+        svg: bottomEnds.r,
+      },
+      {
+        pattern: connections({ l: include(linkTopRight) }),
+        svg: bottomEnds.ll,
+      },
+      {
+        pattern: connections({ r: include(linkTopLeft) }),
+        svg: bottomEnds.rr,
+      },
+    ],
   },
 ];
