@@ -7,14 +7,8 @@ module.exports = {
   // plugins: [],
   // installOptions: {},
   // devOptions: {},
-  // buildOptions: {},
-  experiments: {
-    optimize: {
-      entrypoints: ['src/render.js'],
-      bundle: true,
-      minify: true,
-      sourceMaps: true,
-      target: 'es2018',
-    },
+  exclude: ['scripts/**/*'],
+  testOptions: {
+    files: ['test/**/*'],
   },
 };

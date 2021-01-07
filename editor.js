@@ -1,5 +1,5 @@
 // @ts-check
-import { renderGraphdown } from './src/render.js';
+import { renderGraphdown } from './src';
 
 /** @type {HTMLTextAreaElement} */
 // @ts-ignore
@@ -23,10 +23,10 @@ function saveData(data) {
 // Render data into target
 let scheduledRefresh = null;
 function scheduleRefresh(data, target) {
-  clearTimeout(scheduledRefresh);
-  scheduledRefresh = setTimeout(() => {
+  cancelAnimationFrame(scheduledRefresh);
+  scheduledRefresh = requestAnimationFrame(() => {
     target.innerHTML = renderGraphdown(data);
-  }, 100);
+  });
 }
 
 // Refresh output from editor value

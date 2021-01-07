@@ -1,20 +1,45 @@
 {
   "name": "graphdown",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "GraphDown converts ASCII diagrams to SVG",
+  "author": "Frédéric Bonnet <fredericbonnet@free.fr>",
+  "homepage": "https://github.com/fredericbonnet/graphdown",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "documentation",
+    "markdown",
+    "svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fredericbonnet/graphdown.git"
+  },
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs"
+  },
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build",
+    "prebuild": "rm -rf dist",
+    "build": "node scripts/build.js",
+    "prepack": "package-check",
     "test": "mocha --require esm",
     "test:watch": "mocha --watch --require esm"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@skypack/package-check": "^0.2.2",
     "chai": "^4.2.0",
+    "esbuild": "^0.8.30",
     "esm": "^3.2.25",
     "mocha": "^8.2.1",
+    "recursive-copy": "^2.0.11",
     "snowpack": "^2.18.5"
   },
   "dependencies": {}
