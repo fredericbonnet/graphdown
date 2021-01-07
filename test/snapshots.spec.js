@@ -19,7 +19,7 @@ Assertion.addMethod('matchSnapshot', function (filename, snapshot = false) {
 function render(filename) {
   const data = fs.readFileSync(path.join(__dirname, filename)).toString();
   const style = fs
-    .readFileSync(path.join(__dirname, '../src/graphdown.css'))
+    .readFileSync(path.join(__dirname, '../css/graphdown.css'))
     .toString()
     .replace(/\r/g, '');
 
