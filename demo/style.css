@@ -1,0 +1,15 @@
+@import url('https://cdn.skypack.dev/graphdown/dist/css/graphdown.css');
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+.main > * {
+  border: 1px solid gray;
+  margin: 10px;
+  flex: 1 1;
+}
+textarea {
+  white-space: nowrap;
+  overflow: auto;
+}

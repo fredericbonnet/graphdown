@@ -29,6 +29,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "start": "snowpack dev",
+    "demo": "http-server demo -p 12345 -o",
     "prebuild": "rm -rf dist",
     "build": "node scripts/build.js",
     "prepack": "package-check",
@@ -40,6 +41,7 @@
     "chai": "^4.2.0",
     "esbuild": "^0.8.30",
     "esm": "^3.2.25",
+    "http-server": "^0.12.3",
     "mocha": "^8.2.1",
     "recursive-copy": "^2.0.11",
     "snowpack": "^2.18.5"
