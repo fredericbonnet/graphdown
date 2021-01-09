@@ -25,7 +25,7 @@ let scheduledRefresh = null;
 function scheduleRefresh(data, target) {
   cancelAnimationFrame(scheduledRefresh);
   scheduledRefresh = requestAnimationFrame(() => {
-    target.innerHTML = renderGraphdown(data);
+    target.innerHTML = renderGraphdown(data, { minWidth: 80 });
   });
 }
 

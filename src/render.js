@@ -2,6 +2,7 @@
 import { regexpEscape } from './utils.js';
 import { patterns } from './patterns.js';
 import { blockRE } from './characters.js';
+import { defaultStyle } from './default-style.js';
 
 /**
  * Escape special HTML chars
@@ -33,28 +34,39 @@ const patternsPerHotspot = patterns.reduce((acc, pattern) => {
 }, new Map());
 
 /**
+ * Render options
+ * @typedef {Object} RenderOptions
+ * @property {(string|boolean)} [style] Inline style; true = use default style; false or default = no style
+ * @property {number} [width] Width (characters); negative or default = adapt to widest line
+ * @property {number} [minWidth] Minimum width (characters); negative or default = no minimum
+ */
+
+/**
  * Render GraphDown string
  *
  * @param {string} data Source text
- * @param {string} [style] Inline style
+ * @param {RenderOptions} [options] Options
  *
  * @return SVG code
  */
-export function renderGraphdown(data, style) {
+export function renderGraphdown(data, options = {}) {
   /** Global erasure mask */
   const globalMask = [];
 
   /** Generated SVGs */
   const svgs = [];
 
+  // Split source text into lines and blocks
   const { lines, blocks } = extractBlocks(data);
-  // Dynamic width
-  // const width = Math.max(...lines.map((line) => line.length));
-  // const width = Math.max(80, ...lines.map((line) => line.length));
-  // Fixed width
-  const width = 80;
+
+  // Compute output size
+  const width = Math.max(
+    options.minWidth || 0,
+    ...(options.width > 0 ? [options.width] : lines.map((line) => line.length))
+  );
   const height = lines.length;
 
+  // Apply patterns to non-block text
   const matches = findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot);
   for (let match of matches) {
     const { row, column, mask, size, svg } = match;
@@ -76,7 +88,11 @@ export function renderGraphdown(data, style) {
   // Apply erasure mask to text
   const rawText = applyMask(lines, globalMask);
 
-  const styleBlock = style ? `\n<style>\n${style}\n</style>` : '';
+  const styleBlock = options.style
+    ? `\n<style>\n${
+        typeof options.style === 'string' ? options.style : defaultStyle
+      }\n</style>`
+    : '';
 
   return `<svg xmlns="http://www.w3.org/2000/svg" class="graphdown" viewBox="0 0 ${
     width * 10
