@@ -84,3 +84,26 @@ export const connectionString = ({ t, tr, r, br, b, bl, l, tl }) =>
     connection(tl, linkTopLeft),
     '$',
   ].join('');
+
+export const noDirection = {
+  t: false,
+  tr: false,
+  r: false,
+  br: false,
+  b: false,
+  bl: false,
+  l: false,
+  tl: false,
+};
+export const allDirections = {
+  t: true,
+  tr: true,
+  r: true,
+  br: true,
+  b: true,
+  bl: true,
+  l: true,
+  tl: true,
+};
+export const straightDirections = { t: true, r: true, b: true, l: true };
+export const diagonalDirections = { tl: true, tr: true, bl: true, br: true };

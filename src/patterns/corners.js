@@ -1,4 +1,10 @@
-import { connections, include, except } from '../utils.js';
+import {
+  connections,
+  include,
+  except,
+  straightDirections,
+  diagonalDirections,
+} from '../utils.js';
 import { wide } from '../svg.js';
 import {
   endTop,
@@ -60,7 +66,7 @@ export default [
     size: 1,
     pattern: connections({ t: false, r: true, b: true, l: false }),
     svg: corners.tl,
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Top */
@@ -69,7 +75,7 @@ export default [
     size: 1,
     pattern: connections({ tl: false, tr: false, br: true, bl: true }),
     svg: corners.t,
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Top-right */
@@ -86,7 +92,7 @@ export default [
     size: 1,
     pattern: connections({ t: false, r: false, b: true, l: true }),
     svg: corners.tr,
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Right */
@@ -95,7 +101,7 @@ export default [
     size: 1,
     pattern: connections({ tr: false, br: false, tl: true, bl: true }),
     svg: corners.r,
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Bottom-right */
@@ -112,7 +118,7 @@ export default [
     size: 1,
     pattern: connections({ t: true, r: false, b: false, l: true }),
     svg: corners.br,
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Bottom */
@@ -121,7 +127,7 @@ export default [
     size: 1,
     pattern: connections({ tl: true, tr: true, br: false, bl: false }),
     svg: corners.b,
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Bottom-left */
@@ -142,7 +148,7 @@ export default [
     size: 1,
     pattern: connections({ t: true, r: true, b: false, l: false }),
     svg: corners.bl,
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Left */
@@ -151,7 +157,7 @@ export default [
     size: 1,
     pattern: connections({ tr: true, br: true, tl: false, bl: false }),
     svg: corners.l,
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /*

@@ -1,6 +1,5 @@
-import { connections } from '../utils.js';
+import { connections, noDirection } from '../utils.js';
 import { endTop, endBottom, anchor } from '../characters.js';
-import { rays } from './ends.js';
 
 /*
  * SVG templates
@@ -57,72 +56,64 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ b: true, bl: true }),
+    pattern: connections({ ...noDirection, b: true, bl: true }),
     svg: narrowAngles.tl,
-    rules: rays,
   },
 
   /* Top-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ b: true, br: true }),
+    pattern: connections({ ...noDirection, b: true, br: true }),
     svg: narrowAngles.tr,
-    rules: rays,
   },
 
   /* Bottom-left */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, tl: true }),
+    pattern: connections({ ...noDirection, t: true, tl: true }),
     svg: narrowAngles.bl,
-    rules: rays,
   },
 
   /* Bottom-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, tr: true }),
+    pattern: connections({ ...noDirection, t: true, tr: true }),
     svg: narrowAngles.br,
-    rules: rays,
   },
 
   /* Left-upward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ r: true, tr: true }),
+    pattern: connections({ ...noDirection, r: true, tr: true }),
     svg: narrowAngles.lu,
-    rules: rays,
   },
 
   /* Left-downward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ r: true, br: true }),
+    pattern: connections({ ...noDirection, r: true, br: true }),
     svg: narrowAngles.ld,
-    rules: rays,
   },
 
   /* Right-upward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ l: true, tl: true }),
+    pattern: connections({ ...noDirection, l: true, tl: true }),
     svg: narrowAngles.ru,
-    rules: rays,
   },
 
   /* Right-downward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ l: true, bl: true }),
+    pattern: connections({ ...noDirection, l: true, bl: true }),
     svg: narrowAngles.rd,
-    rules: rays,
   },
 
   /*
@@ -133,72 +124,64 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ b: true, tl: true }),
+    pattern: connections({ ...noDirection, b: true, tl: true }),
     svg: wideAngles.tl,
-    rules: rays,
   },
 
   /* Top-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ b: true, tr: true }),
+    pattern: connections({ ...noDirection, b: true, tr: true }),
     svg: wideAngles.tr,
-    rules: rays,
   },
 
   /* Bottom-left */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, bl: true }),
+    pattern: connections({ ...noDirection, t: true, bl: true }),
     svg: wideAngles.bl,
-    rules: rays,
   },
 
   /* Bottom-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, br: true }),
+    pattern: connections({ ...noDirection, t: true, br: true }),
     svg: wideAngles.br,
-    rules: rays,
   },
 
   /* Left-upward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ r: true, tl: true }),
+    pattern: connections({ ...noDirection, r: true, tl: true }),
     svg: wideAngles.lu,
-    rules: rays,
   },
 
   /* Left-downward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ r: true, bl: true }),
+    pattern: connections({ ...noDirection, r: true, bl: true }),
     svg: wideAngles.ld,
-    rules: rays,
   },
 
   /* Right-upward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ l: true, tr: true }),
+    pattern: connections({ ...noDirection, l: true, tr: true }),
     svg: wideAngles.ru,
-    rules: rays,
   },
 
   /* Right-downward */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ l: true, br: true }),
+    pattern: connections({ ...noDirection, l: true, br: true }),
     svg: wideAngles.rd,
-    rules: rays,
   },
 
   /*
@@ -209,7 +192,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ b: true, bl: true }),
+    pattern: connections({ ...noDirection, b: true, bl: true }),
     svg: narrowRoundedAngles.tl,
   },
 
@@ -217,7 +200,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ b: true, br: true }),
+    pattern: connections({ ...noDirection, b: true, br: true }),
     svg: narrowRoundedAngles.tr,
   },
 
@@ -225,7 +208,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ t: true, tl: true }),
+    pattern: connections({ ...noDirection, t: true, tl: true }),
     svg: narrowRoundedAngles.bl,
   },
 
@@ -233,7 +216,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ t: true, tr: true }),
+    pattern: connections({ ...noDirection, t: true, tr: true }),
     svg: narrowRoundedAngles.br,
   },
 
@@ -241,7 +224,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ r: true, tr: true }),
+    pattern: connections({ ...noDirection, r: true, tr: true }),
     svg: narrowRoundedAngles.lu,
   },
 
@@ -249,7 +232,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ r: true, br: true }),
+    pattern: connections({ ...noDirection, r: true, br: true }),
     svg: narrowRoundedAngles.ld,
   },
 
@@ -257,7 +240,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ l: true, tl: true }),
+    pattern: connections({ ...noDirection, l: true, tl: true }),
     svg: narrowRoundedAngles.ru,
   },
 
@@ -265,7 +248,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ l: true, bl: true }),
+    pattern: connections({ ...noDirection, l: true, bl: true }),
     svg: narrowRoundedAngles.rd,
   },
 
@@ -277,7 +260,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ r: true, tl: true }),
+    pattern: connections({ ...noDirection, r: true, tl: true }),
     svg: wideRoundedAngles.lu,
   },
 
@@ -285,7 +268,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ r: true, bl: true }),
+    pattern: connections({ ...noDirection, r: true, bl: true }),
     svg: wideRoundedAngles.ld,
   },
 
@@ -293,7 +276,7 @@ export default [
   {
     hotspot: endBottom,
     size: 1,
-    pattern: connections({ l: true, tr: true }),
+    pattern: connections({ ...noDirection, l: true, tr: true }),
     svg: wideRoundedAngles.ru,
   },
 
@@ -301,7 +284,7 @@ export default [
   {
     hotspot: endTop,
     size: 1,
-    pattern: connections({ l: true, br: true }),
+    pattern: connections({ ...noDirection, l: true, br: true }),
     svg: wideRoundedAngles.rd,
   },
 ];

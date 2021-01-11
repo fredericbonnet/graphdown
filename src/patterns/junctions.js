@@ -1,4 +1,10 @@
-import { connections, include, except } from '../utils.js';
+import {
+  connections,
+  include,
+  except,
+  straightDirections,
+  diagonalDirections,
+} from '../utils.js';
 import { wide } from '../svg.js';
 import {
   anchor,
@@ -30,7 +36,6 @@ const junctions = {
 /*
  * Character patterns
  */
-
 export default [
   /*
    * 4-way connections
@@ -48,16 +53,16 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: true, b: true, l: true }),
+    pattern: connections(straightDirections),
     svg: junctions['┼'],
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Rounded */
   {
     hotspot: hsplit,
     size: 1,
-    pattern: connections({ t: true, r: true, b: true, l: true }),
+    pattern: connections(straightDirections),
     svg:
       roundedCorners.tr +
       roundedCorners.tl +
@@ -73,9 +78,9 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: true, tr: true, bl: true, br: true }),
+    pattern: connections(diagonalDirections),
     svg: junctions['╳'],
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /*
@@ -94,9 +99,9 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: true, b: false, l: true }),
+    pattern: connections({ ...straightDirections, b: false }),
     svg: junctions['┴'],
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Straight no top */
@@ -111,9 +116,9 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: false, r: true, b: true, l: true }),
+    pattern: connections({ ...straightDirections, t: false }),
     svg: junctions['┬'],
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Straight no right */
@@ -128,9 +133,9 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: false, b: true, l: true }),
+    pattern: connections({ ...straightDirections, r: false }),
     svg: junctions['┤'],
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Straight no left */
@@ -145,9 +150,9 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: true, b: true, l: false }),
+    pattern: connections({ ...straightDirections, l: false }),
     svg: junctions['├'],
-    rules: rays,
+    rules: rays(diagonalDirections),
   },
 
   /* Rounded no top */
@@ -202,35 +207,35 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: false, tr: true, bl: true, br: true }),
+    pattern: connections({ ...diagonalDirections, tl: false }),
     svg: junctions['▟'],
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Diagonals no top-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: true, tr: false, bl: true, br: true }),
+    pattern: connections({ ...diagonalDirections, tr: false }),
     svg: junctions['▙'],
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Diagonals no bottom-left */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: true, tr: true, bl: false, br: true }),
+    pattern: connections({ ...diagonalDirections, bl: false }),
     svg: junctions['▜'],
-    rules: rays,
+    rules: rays(straightDirections),
   },
 
   /* Diagonals no bottom-right */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: true, tr: true, bl: true, br: false }),
+    pattern: connections({ ...diagonalDirections, br: false }),
     svg: junctions['▛'],
-    rules: rays,
+    rules: rays(straightDirections),
   },
 ];

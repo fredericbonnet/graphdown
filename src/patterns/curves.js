@@ -1,4 +1,4 @@
-import { connections, include, exclude } from '../utils.js';
+import { connections, include, exclude, allDirections } from '../utils.js';
 import { ends, rays } from './ends.js';
 import {
   endTop,
@@ -186,7 +186,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tr: include(endTop) }),
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Top right arc */
@@ -214,7 +214,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: include(endTop) }),
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Bottom left arc */
@@ -242,7 +242,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ br: include(endBottom) }),
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Bottom right arc */
@@ -270,6 +270,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ bl: include(endBottom) }),
-    rules: rays,
+    rules: rays(allDirections),
   },
 ];

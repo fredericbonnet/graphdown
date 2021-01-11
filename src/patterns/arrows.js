@@ -6,7 +6,7 @@ import {
   arrowRight,
   decorations,
 } from '../characters.js';
-import { connections, include } from '../utils.js';
+import { allDirections, connections, include } from '../utils.js';
 import { rays } from './ends.js';
 import { ticks } from './ticks.js';
 
@@ -99,7 +99,7 @@ export default [
     hotspot: anchor,
     pattern: connections({ b: include(arrowTop) }),
     svg: ticks['─'],
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Bottom */
@@ -127,7 +127,7 @@ export default [
     hotspot: anchor,
     pattern: connections({ t: include(arrowBottom) }),
     svg: ticks['─'],
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Left */
@@ -141,7 +141,7 @@ export default [
     hotspot: anchor,
     pattern: connections({ r: include(arrowLeft) }),
     svg: ticks['│'],
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /* Right */
@@ -155,7 +155,7 @@ export default [
     hotspot: anchor,
     pattern: connections({ l: include(arrowRight) }),
     svg: ticks['│'],
-    rules: rays,
+    rules: rays(allDirections),
   },
 
   /*
