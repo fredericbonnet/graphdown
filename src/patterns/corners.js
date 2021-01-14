@@ -16,6 +16,7 @@ import {
   linkTopRight,
   linkBottomLeft,
   linkBottomRight,
+  bline,
 } from '../characters.js';
 import { rays } from './ends.js';
 
@@ -206,16 +207,11 @@ export default [
   {
     hotspot: ')',
     size: 1,
-    rules: [
-      {
-        pattern: connections({ tl: include(linkTopLeft + anchor + endTop) }),
-      },
-      {
-        pattern: connections({
-          bl: include(linkBottomLeft + anchor + endBottom),
-        }),
-      },
-    ],
+    pattern: connections(
+      { tl: include(linkTopLeft + anchor + endTop + bline) },
+      { bl: include(linkBottomLeft + anchor + endBottom) },
+      { l: include(bline) }
+    ),
     svg: roundedCorners.r,
   },
 
@@ -261,16 +257,11 @@ export default [
   {
     hotspot: '(',
     size: 1,
-    rules: [
-      {
-        pattern: connections({ tr: include(linkTopRight + anchor + endTop) }),
-      },
-      {
-        pattern: connections({
-          br: include(linkBottomRight + anchor + endBottom),
-        }),
-      },
-    ],
+    pattern: connections(
+      { tr: include(linkTopRight + anchor + endTop + bline) },
+      { br: include(linkBottomRight + anchor + endBottom) },
+      { r: include(bline) }
+    ),
     svg: roundedCorners.l,
   },
 ];
