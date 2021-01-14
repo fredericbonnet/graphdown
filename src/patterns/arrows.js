@@ -7,7 +7,7 @@ import {
   decorations,
 } from '../characters.js';
 import { allDirections, connections, include } from '../utils.js';
-import { rays } from './ends.js';
+import { rays } from './rays.js';
 import { ticks } from './ticks.js';
 
 /*

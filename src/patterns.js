@@ -8,6 +8,7 @@ import symbols from './patterns/symbols.js';
 import curves from './patterns/curves.js';
 import arrows from './patterns/arrows.js';
 import decorations from './patterns/decorations.js';
+import rays from './patterns/rays.js';
 
 export const patterns = [
   ...junctions,
@@ -19,5 +20,6 @@ export const patterns = [
   ...ends,
   ...ticks,
   ...lines,
+  ...rays,
   ...symbols,
 ];

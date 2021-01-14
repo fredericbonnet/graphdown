@@ -14,7 +14,7 @@ import {
   linkRight,
   hsplit,
 } from '../characters.js';
-import { rays } from './ends.js';
+import { rays } from './rays.js';
 import { roundedCorners } from './corners.js';
 
 /*

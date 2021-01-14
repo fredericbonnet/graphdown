@@ -16,7 +16,7 @@ import {
   linkTopLeft,
   linkTopRight,
 } from '../characters.js';
-import { connections, include, except } from '../utils.js';
+import { connections, include, except, noDirection } from '../utils.js';
 import { ticks } from './ticks.js';
 import { ends } from './ends.js';
 
@@ -100,68 +100,51 @@ export default [
    * Terminal tick
    */
 
-  /* Top-left */
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: false, tr: false, br: true, bl: false }),
-    svg: ends.tl + ticks['╱'],
-  },
-
-  /* Top */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: false, b: true, l: false }),
-    svg: ends.t + ticks['─'],
-  },
-
-  /* Top-right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: false, tr: false, br: false, bl: true }),
-    svg: ends.tr + ticks['╲'],
-  },
-
-  /* Right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: false, b: false, l: true }),
-    svg: ends.r + ticks['│'],
-  },
-
-  /* Bottom-right */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: true, tr: false, br: false, bl: false }),
-    svg: ends.br + ticks['╱'],
-  },
-
-  /* Bottom */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: true, r: false, b: false, l: false }),
-    svg: ends.b + ticks['─'],
-  },
-
-  /* Bottom-left */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ tl: false, tr: true, br: false, bl: false }),
-    svg: ends.bl + ticks['╲'],
-  },
-
-  /* Left */
-  {
-    hotspot: anchor,
-    size: 1,
-    pattern: connections({ t: false, r: true, b: false, l: false }),
-    svg: ends.l + ticks['│'],
+    rules: [
+      {
+        /* Top-left */
+        pattern: connections({ ...noDirection, br: true }),
+        svg: ends.tl + ticks['╱'],
+      },
+      {
+        /* Top */
+        pattern: connections({ ...noDirection, b: true }),
+        svg: ends.t + ticks['─'],
+      },
+      {
+        /* Top-right */
+        pattern: connections({ ...noDirection, bl: true }),
+        svg: ends.tr + ticks['╲'],
+      },
+      {
+        /* Right */
+        pattern: connections({ ...noDirection, l: true }),
+        svg: ends.r + ticks['│'],
+      },
+      {
+        /* Bottom-right */
+        pattern: connections({ ...noDirection, tl: true }),
+        svg: ends.br + ticks['╱'],
+      },
+      {
+        /* Bottom */
+        pattern: connections({ ...noDirection, t: true }),
+        svg: ends.b + ticks['─'],
+      },
+      {
+        /* Bottom-left */
+        pattern: connections({ ...noDirection, tr: true }),
+        svg: ends.bl + ticks['╲'],
+      },
+      {
+        /* Left */
+        pattern: connections({ ...noDirection, r: true }),
+        svg: ends.l + ticks['│'],
+      },
+    ],
   },
 
   /*

@@ -18,7 +18,7 @@ import {
   linkBottomRight,
   bline,
 } from '../characters.js';
-import { rays } from './ends.js';
+import { rays } from './rays.js';
 
 /*
  * SVG templates

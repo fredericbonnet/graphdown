@@ -1,4 +1,4 @@
-import { connections } from '../utils';
+import { connections, noDirection } from '../utils';
 import { anchor } from '../characters.js';
 import { lines } from './lines.js';
 
@@ -24,7 +24,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: true, r: false, b: true, l: false }),
+    pattern: connections({ ...noDirection, t: true, b: true }),
     svg: lines['│'] + ticks['─'],
   },
 
@@ -32,7 +32,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ t: false, r: true, b: false, l: true }),
+    pattern: connections({ ...noDirection, r: true, l: true }),
     svg: lines['─'] + ticks['│'],
   },
 
@@ -40,7 +40,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: true, tr: false, br: true, bl: false }),
+    pattern: connections({ ...noDirection, tl: true, br: true }),
     svg: lines['╲'] + ticks['╱'],
   },
 
@@ -48,7 +48,7 @@ export default [
   {
     hotspot: anchor,
     size: 1,
-    pattern: connections({ tl: false, tr: true, br: false, bl: true }),
+    pattern: connections({ ...noDirection, tr: true, bl: true }),
     svg: lines['╱'] + ticks['╲'],
   },
 ];

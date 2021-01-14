@@ -1,5 +1,6 @@
 import { connections, include, exclude, allDirections } from '../utils.js';
-import { ends, rays } from './ends.js';
+import { ends } from './ends.js';
+import { rays } from './rays.js';
 import {
   endTop,
   endBottom,
