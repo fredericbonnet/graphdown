@@ -1,6 +1,6 @@
 {
   "name": "graphdown",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "GraphDown converts ASCII diagrams to SVG",
   "author": "Frédéric Bonnet <fredericbonnet@free.fr>",
   "homepage": "https://github.com/fredericbonnet/graphdown",
