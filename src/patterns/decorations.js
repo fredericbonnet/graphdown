@@ -24,12 +24,12 @@ import { ends } from './ends.js';
  * SVG templates
  */
 export const discBranches = {
-  t: `<path d="M 5  0, 5  5"></path>`,
-  b: `<path d="M 5 20, 5 15"></path>`,
-  tl: `<path d="M 0 0, 2.5 5"></path>`,
-  tr: `<path d="M 10 0, 7.5 5"></path>`,
-  bl: `<path d="M 0 20, 2.5 15"></path>`,
-  br: `<path d="M 10 20, 7.5 15"></path>`,
+  t: `<path d="M  5  0, l  0    5"></path>`,
+  b: `<path d="M  5 20, l  0   -5"></path>`,
+  tl: `<path d="M  0  0, l  2.5  5"></path>`,
+  tr: `<path d="M 10  0, l -2.5  5"></path>`,
+  bl: `<path d="M  0 20, l  2.5 -5"></path>`,
+  br: `<path d="M 10 20, l -2.5 -5"></path>`,
 };
 const shapes = {
   disc: `<circle cx="5" cy="10" r="5"/>`,

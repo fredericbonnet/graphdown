@@ -17,22 +17,22 @@ import {
  * SVG templates
  */
 const arcs = {
-  tl: `<path d="M 10 10, Q -5 10, -5, 25, L -5 30"/>`,
-  tr: `<path d="M 0 10, Q 15 10, 15, 25, L 15 30"/>`,
-  bl: `<path d="M 10 10, Q -5 10, -5, -5, L -5 -10"/>`,
-  br: `<path d="M 0 10, Q 15 10, 15, -5, L 15 -10"/>`,
+  tl: `<path d="M 10 10, q -15 0, -15  15, l 0  5"/>`,
+  tr: `<path d="M  0 10, q  15 0,  15  15, l 0  5"/>`,
+  bl: `<path d="M 10 10, q -15 0, -15 -15, l 0 -5"/>`,
+  br: `<path d="M  0 10, q  15 0,  15 -15, l 0 -5"/>`,
 };
 const shortArcsTop = {
-  tl: `<path d="M 10 10, Q 5 10, 5 15"/>`,
-  tr: `<path d="M  0 10, Q 5 10, 5 15"/>`,
-  bl: `<path d="M 10 20, Q 5 20, 5 15"/>`,
-  br: `<path d="M  0 20, Q 5 20, 5 15"/>`,
+  tl: `<path d="M 10 10, q -5 0, -5  5"/>`,
+  tr: `<path d="M  0 10, q  5 0,  5  5"/>`,
+  bl: `<path d="M 10 20, q -5 0, -5 -5"/>`,
+  br: `<path d="M  0 20, q  5 0,  5 -5"/>`,
 };
 const shortArcsBottom = {
-  tl: `<path d="M 10  0, Q 5  0, 5 5"/>`,
-  tr: `<path d="M  0  0, Q 5  0, 5 5"/>`,
-  bl: `<path d="M 10 10, Q 5 10, 5 5"/>`,
-  br: `<path d="M  0 10, Q 5 10, 5 5"/>`,
+  tl: `<path d="M 10  0, q -5 0, -5  5"/>`,
+  tr: `<path d="M  0  0, q  5 0,  5  5"/>`,
+  bl: `<path d="M 10 10, q -5 0, -5 -5"/>`,
+  br: `<path d="M  0 10, q  5 0,  5 -5"/>`,
 };
 
 /*

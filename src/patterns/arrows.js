@@ -26,12 +26,12 @@ const arrowShapes = {
 };
 
 const branches = {
-  t: `<path d="M 5 10,  5  0"/>`,
-  b: `<path d="M 5 10,  5 20"/>`,
-  tr: `<path d="M 5 10, 10  0"/>`,
-  tl: `<path d="M 5 10,  0  0"/>`,
-  br: `<path d="M 5 10, 10 20"/>`,
-  bl: `<path d="M 5 10,  0 20"/>`,
+  t: `<path d="M 5 10, l  0 -10"/>`,
+  b: `<path d="M 5 10, l  0  10"/>`,
+  tr: `<path d="M 5 10, l  5 -10"/>`,
+  tl: `<path d="M 5 10, l -5 -10"/>`,
+  br: `<path d="M 5 10, l  5  10"/>`,
+  bl: `<path d="M 5 10, l -5  10"/>`,
 };
 const arrows = {
   t: `<path d="M  5  0, ${arrowShapes.t}" class="filled"/>`,
@@ -44,14 +44,14 @@ const arrows = {
   br: `<path d="M 10 20, ${arrowShapes.br}" class="filled"/>`,
 };
 const longBranches = {
-  t: `<path d="M 5  0,  5 20"/>`,
-  b: `<path d="M 5 20,  5  0"/>`,
-  r: `<path d="M 5 10, 10 10"/>`,
-  l: `<path d="M 5 10,  0 10"/>`,
-  tr: `<path d="M 5 20, Q 5 10, 10  0"/>`,
-  tl: `<path d="M 5 20, Q 5 10,  0  0"/>`,
-  br: `<path d="M 5  0, Q 5 10, 10 20"/>`,
-  bl: `<path d="M 5  0, Q 5 10,  0 20"/>`,
+  t: `<path d="M 5  0, l  0  20"/>`,
+  b: `<path d="M 5 20, l  0 -20"/>`,
+  r: `<path d="M 5 10, l  5   0"/>`,
+  l: `<path d="M 5 10, l -5   0"/>`,
+  tr: `<path d="M 5 20, q 0 -10,  5 -20"/>`,
+  tl: `<path d="M 5 20, q 0 -10, -5 -20"/>`,
+  br: `<path d="M 5  0, q 0  10,  5  20"/>`,
+  bl: `<path d="M 5  0, q 0  10, -5  20"/>`,
 };
 const anchoredArrows = {
   t: `<path d="M  5 -10, ${arrowShapes.t}" class="filled"/>`,
@@ -60,12 +60,12 @@ const anchoredArrows = {
   r: `<path d="M 15  10, ${arrowShapes.r}" class="filled"/>`,
 };
 const decoratedArrows = {
-  t: `<path d="M 5 20, 5  5"/><path d="M 5 -5, ${arrowShapes.t}" class="filled"/>`,
-  b: `<path d="M 5  0, 5 15"/><path d="M 5 25, ${arrowShapes.b}" class="filled"/>`,
-  tl: `<path d="M 10 20, 2.5  5"/><path d="M -2.5 -5, ${arrowShapes.tl}" class="filled"/>`,
-  tr: `<path d="M  0 20, 7.5  5"/><path d="M 12.5 -5, ${arrowShapes.tr}" class="filled"/>`,
-  bl: `<path d="M 10  0, 2.5 15"/><path d="M -2.5 25, ${arrowShapes.bl}" class="filled"/>`,
-  br: `<path d="M  0  0, 7.5 15"/><path d="M 12.5 25, ${arrowShapes.br}" class="filled"/>`,
+  t: `<path d="M  5 20, l  0   -15"/><path d="M  5   -5, ${arrowShapes.t}"  class="filled"/>`,
+  b: `<path d="M  5  0, l  0    15"/><path d="M  5   25, ${arrowShapes.b}"  class="filled"/>`,
+  tl: `<path d="M 10 20, l -7.5 -15"/><path d="M -2.5 -5, ${arrowShapes.tl}" class="filled"/>`,
+  tr: `<path d="M  0 20, l  7.5 -15"/><path d="M 12.5 -5, ${arrowShapes.tr}" class="filled"/>`,
+  bl: `<path d="M 10  0, l -7.5  15"/><path d="M -2.5 25, ${arrowShapes.bl}" class="filled"/>`,
+  br: `<path d="M  0  0, l  7.5  15"/><path d="M 12.5 25, ${arrowShapes.br}" class="filled"/>`,
 };
 
 /*

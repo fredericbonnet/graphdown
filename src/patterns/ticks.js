@@ -6,10 +6,10 @@ import { lines } from './lines.js';
  * SVG templates
  */
 export const ticks = {
-  '─': `<path d="M 2 10, 8 10"/>`,
-  '│': `<path d="M 5  7, 5 13"/>`,
-  '╲': `<path d="M 3  9, 7 11"/>`,
-  '╱': `<path d="M 3 11, 7  9"/>`,
+  '─': `<path d="M 2 10, l 6 0"/>`,
+  '│': `<path d="M 5  7, l 0 6"/>`,
+  '╲': `<path d="M 3  9, l 4 2"/>`,
+  '╱': `<path d="M 3 11, l 4 -2"/>`,
 };
 
 /*

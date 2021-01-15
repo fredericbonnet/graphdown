@@ -24,25 +24,25 @@ import { rays } from './rays.js';
  * SVG templates
  */
 export const corners = {
-  tl: `<path d="M 5 20, 5 10, 10 10"/>`,
-  tr: `<path d="M 5 20, 5 10,  0 10"/>`,
-  bl: `<path d="M 5  0, 5 10, 10 10"/>`,
-  br: `<path d="M 5  0, 5 10,  0 10"/>`,
-  t: `<path d="M 0 20, 5 10, 10 20"/>`,
-  b: `<path d="M 0  0, 5 10, 10  0"/>`,
-  r: `<path d="M 0  0, 5 10,  0 20"/>`,
-  l: `<path d="M 10 0, 5 10, 10 20"/>`,
+  tl: `<path d="M 5 20, l 0 -10,  5 0"/>`,
+  tr: `<path d="M 5 20, l 0 -10, -5 0"/>`,
+  bl: `<path d="M 5  0, l 0  10,  5 0"/>`,
+  br: `<path d="M 5  0, l 0  10, -5 0"/>`,
+  t: `<path d="M 0 20, l  5 -10,  5  10"/>`,
+  b: `<path d="M 0  0, l  5  10,  5 -10"/>`,
+  r: `<path d="M 0  0, l  5  10, -5  10"/>`,
+  l: `<path d="M 10 0, l -5  10,  5  10"/>`,
 };
 
 export const roundedCorners = {
-  tl: `<path d="M 5 20, 5 15, Q 5 10, 10 10"/>`,
-  tr: `<path d="M 5 20, 5 15, Q 5 10,  0 10"/>`,
-  bl: `<path d="M 5  0, 5  5, Q 5 10, 10 10"/>`,
-  br: `<path d="M 5  0, 5  5, Q 5 10,  0 10"/>`,
-  t: `<path d="M 0 20, Q 5 10, 10 20"/>`,
-  b: `<path d="M 0  0, Q 5 10, 10  0"/>`,
-  r: `<path d="M 0  0, Q 5 10,  0 20"/>`,
-  l: `<path d="M 10 0, Q 5 10, 10 20"/>`,
+  tl: `<path d="M 5 20, l 0 -5, q 0 -5,  5 -5"/>`,
+  tr: `<path d="M 5 20, l 0 -5, q 0 -5, -5 -5"/>`,
+  bl: `<path d="M 5  0, l 0  5, q 0  5,  5  5"/>`,
+  br: `<path d="M 5  0, l 0  5, q 0  5, -5  5"/>`,
+  t: `<path d="M 0 20, q  5 -10, 10  0"/>`,
+  b: `<path d="M 0  0, q  5  10, 10  0"/>`,
+  r: `<path d="M 0  0, q  5  10,  0 20"/>`,
+  l: `<path d="M 10 0, q -5  10,  0 20"/>`,
 };
 
 /*

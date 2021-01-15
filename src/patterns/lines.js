@@ -5,11 +5,11 @@ import { vline, hline, dline, uline, bline } from '../characters.js';
  * SVG templates
  */
 export const lines = {
-  '─': `<path d="M 0 10, 10 10"/>`,
-  '│': `<path d="M 5  0,  5 20"/>`,
-  '╲': `<path d="M 0  0, 10 20"/>`,
-  '╱': `<path d="M 0 20, 10  0"/>`,
-  _: `<path d="M 0 20, 10 20"/>`,
+  '─': `<path d="M 0 10, l 10   0"/>`,
+  '│': `<path d="M 5  0, l  0  20"/>`,
+  '╲': `<path d="M 0  0, l 10  20"/>`,
+  '╱': `<path d="M 0 20, l 10 -20"/>`,
+  _: `<path d="M 0 20, l 10   0"/>`,
 };
 
 /*

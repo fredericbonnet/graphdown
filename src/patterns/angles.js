@@ -5,43 +5,43 @@ import { endTop, endBottom, anchor } from '../characters.js';
  * SVG templates
  */
 export const narrowAngles = {
-  tl: `<path d="M  5 20, 5 10,  0 20"/>`,
-  tr: `<path d="M  5 20, 5 10, 10 20"/>`,
-  bl: `<path d="M  5  0, 5 10,  0  0"/>`,
-  br: `<path d="M  5  0, 5 10, 10  0"/>`,
-  lu: `<path d="M 10  0, 5 10, 10 10"/>`,
-  ld: `<path d="M 10 20, 5 10, 10 10"/>`,
-  ru: `<path d="M  0  0, 5 10,  0 10"/>`,
-  rd: `<path d="M  0 20, 5 10,  0 10"/>`,
+  tl: `<path d="M  5 20, l  0 -10, -5  10"/>`,
+  tr: `<path d="M  5 20, l  0 -10,  5  10"/>`,
+  bl: `<path d="M  5  0, l  0  10, -5 -10"/>`,
+  br: `<path d="M  5  0, l  0  10,  5 -10"/>`,
+  lu: `<path d="M 10  0, l -5  10,  5   0"/>`,
+  ld: `<path d="M 10 20, l -5 -10,  5   0"/>`,
+  ru: `<path d="M  0  0, l  5  10, -5   0"/>`,
+  rd: `<path d="M  0 20, l  5 -10, -5   0"/>`,
 };
 
 export const wideAngles = {
-  tl: `<path d="M  5 20, 5 10,  0  0"/>`,
-  tr: `<path d="M  5 20, 5 10, 10  0"/>`,
-  bl: `<path d="M  5  0, 5 10,  0 20"/>`,
-  br: `<path d="M  5  0, 5 10, 10 20"/>`,
-  lu: `<path d="M  0  0, 5 10, 10 10"/>`,
-  ld: `<path d="M  0 20, 5 10, 10 10"/>`,
-  ru: `<path d="M 10  0, 5 10,  0 10"/>`,
-  rd: `<path d="M 10 20, 5 10,  0 10"/>`,
+  tl: `<path d="M  5 20, l  0 -10, -5 -10"/>`,
+  tr: `<path d="M  5 20, l  0 -10,  5 -10"/>`,
+  bl: `<path d="M  5  0, l  0  10, -5  10"/>`,
+  br: `<path d="M  5  0, l  0  10,  5  10"/>`,
+  lu: `<path d="M  0  0, l  5  10,  5  0"/>`,
+  ld: `<path d="M  0 20, l  5 -10,  5  0"/>`,
+  ru: `<path d="M 10  0, l -5  10, -5  0"/>`,
+  rd: `<path d="M 10 20, l -5 -10, -5  0"/>`,
 };
 
 export const narrowRoundedAngles = {
-  tl: `<path d="M  5 20, Q 5 10,  0 20"/>`,
-  tr: `<path d="M  5 20, Q 5 10, 10 20"/>`,
-  bl: `<path d="M  5  0, Q 5 10,  0  0"/>`,
-  br: `<path d="M  5  0, Q 5 10, 10  0"/>`,
-  lu: `<path d="M 10  0, Q 5 10, 10 10"/>`,
-  ld: `<path d="M 10 20, Q 5 10, 10 10"/>`,
-  ru: `<path d="M  0  0, Q 5 10,  0 10"/>`,
-  rd: `<path d="M  0 20, Q 5 10,  0 10"/>`,
+  tl: `<path d="M  5 20, q  0 -10, -5   0"/>`,
+  tr: `<path d="M  5 20, q  0 -10,  5   0"/>`,
+  bl: `<path d="M  5  0, q  0  10, -5   0"/>`,
+  br: `<path d="M  5  0, q  0  10,  5   0"/>`,
+  lu: `<path d="M 10  0, q -5  10,  0  10"/>`,
+  ld: `<path d="M 10 20, q -5 -10,  0 -10"/>`,
+  ru: `<path d="M  0  0, q  5  10,  0  10"/>`,
+  rd: `<path d="M  0 20, q  5 -10,  0 -10"/>`,
 };
 
 export const wideRoundedAngles = {
-  lu: `<path d="M  0  0, Q 5 10, 10 10"/>`,
-  ld: `<path d="M  0 20, Q 5 10, 10 10"/>`,
-  ru: `<path d="M 10  0, Q 5 10,  0 10"/>`,
-  rd: `<path d="M 10 20, Q 5 10,  0 10"/>`,
+  lu: `<path d="M  0  0, q  5  10,  10  10"/>`,
+  ld: `<path d="M  0 20, q  5 -10,  10 -10"/>`,
+  ru: `<path d="M 10  0, q -5  10, -10  10"/>`,
+  rd: `<path d="M 10 20, q -5 -10, -10 -10"/>`,
 };
 
 /*

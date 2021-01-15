@@ -15,20 +15,20 @@ import { lines } from './lines.js';
  * SVG templates
  */
 export const ends = {
-  t: `<path d="M 5 10,  5 20"/>`,
-  b: `<path d="M 5 10,  5  0"/>`,
-  l: `<path d="M 5 10, 10 10"/>`,
-  r: `<path d="M 5 10,  0 10"/>`,
-  tl: `<path d="M 5 10, 10 20"/>`,
-  tr: `<path d="M 5 10,  0 20"/>`,
-  br: `<path d="M 5 10,  0  0"/>`,
-  bl: `<path d="M 5 10, 10  0"/>`,
+  t: `<path d="M 5 10, l  0  10"/>`,
+  b: `<path d="M 5 10, l  0 -10"/>`,
+  l: `<path d="M 5 10, l  5  0"/>`,
+  r: `<path d="M 5 10, l -5  0"/>`,
+  tl: `<path d="M 5 10, l  5  10"/>`,
+  tr: `<path d="M 5 10, l -5  10"/>`,
+  br: `<path d="M 5 10, l -5 -10"/>`,
+  bl: `<path d="M 5 10, l  5 -10"/>`,
 };
 const bottomEnds = {
-  l: `<path d="M  -5 20,  0 20"/>`,
-  r: `<path d="M  10 20, 15 20"/>`,
-  ll: `<path d="M -10 20,  0 20"/>`,
-  rr: `<path d="M  10 20, 20 20"/>`,
+  l: `<path d="M  0 20, l  -5 0"/>`,
+  r: `<path d="M 10 20, l   5 0"/>`,
+  ll: `<path d="M  0 20, l -10 0"/>`,
+  rr: `<path d="M 10 20, l  10 0"/>`,
 };
 
 /*
