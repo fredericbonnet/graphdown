@@ -10,6 +10,9 @@ import arrows from './patterns/arrows.js';
 import decorations from './patterns/decorations.js';
 import rays from './patterns/rays.js';
 
+/** @typedef {import('../render').Pattern} Pattern*/
+
+/** @type {Pattern[]} */
 export const patterns = [
   ...junctions,
   ...curves,

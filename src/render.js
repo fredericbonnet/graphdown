@@ -25,7 +25,24 @@ const hotspotCharacters = [
 /** RegExp matching any hotspot character */
 const hotspotsRE = charactersToRegExp(hotspotCharacters);
 
-/** Map of patterns per hotspot character */
+/**
+ * @typedef {Object} Pattern
+ * @property {string} hotspot
+ * @property {number} [size]
+ * @property {boolean[][]} [mask]
+ * @property {RegExp} [pattern]
+ * @property {string} [svg]
+ * @property {PatternRule[]} [rules]
+ */
+/**
+ * @typedef {Object} PatternRule
+ * @property {RegExp} pattern
+ * @property {string} svg
+ */
+
+/** Map of patterns per hotspot character
+ * @type {Map<string, Pattern[]>}
+ */
 const patternsPerHotspot = patterns.reduce((acc, pattern) => {
   const { hotspot } = pattern;
   let patterns = [...(acc.get(hotspot) || []), pattern];
@@ -161,14 +178,26 @@ const renderBlockContent = (lines) =>
   )}</div>`;
 
 /**
+ *
+ * @typedef {Object} MatchedPattern
+ * @property {number} row Row position of hotspot character
+ * @property {number} column Column position of hotspot character
+ * @property {number} [size] Pattern size
+ * @property {boolean[][]} [mask] Mask
+ * @property {string} [svg] SVG
+ */
+
+/**
  * Find all matching patterns with locations
  *
  * @param {string[]} lines Lines of text to match
  * @param {RegExp} hotspotsRE RegExp matching hotspot characters
- * @param {*} patternsPerHotspot Map of patterns to match per hotspot character
+ * @param {Map<string, Pattern[]>} patternsPerHotspot Map of patterns to match per hotspot character
  */
 function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
+  /** @type {MatchedPattern[]} */
   let results = [];
+
   // Try to find hotspots in text, row by row
   for (let row = 0; row < lines.length; row++) {
     const line = lines[row];
@@ -180,55 +209,75 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
     for (let match of matches) {
       const { 0: hotspot, index: column } = match;
 
-      // Try to find a matching pattern
+      // Add all matching patterns
       const patterns = patternsPerHotspot.get(hotspot);
-      const blocks = [];
-      for (let pattern of patterns) {
-        if (!pattern.pattern && !pattern.rules) {
-          // Simple case: no pattern, no rules, simple hotspot matching rule
-          results.push({ row, column, ...pattern });
-          break;
-        }
+      results.push(...getMatchingPatterns(lines, row, column, patterns));
+    }
+  }
+  return results;
+}
 
-        // Extract a block around the hotspot and compare with pattern/rules
-        if (!blocks[pattern.size]) {
-          blocks[pattern.size] = getBlock(lines, row, column, pattern.size);
-        }
-        const block = blocks[pattern.size];
+/**
+ * Find all matching patterns at a given location
+ *
+ * @param {string[]} lines Lines of text to match
+ * @param {number} row Row position of hotspot character
+ * @param {number} column Column position of hotspot character
+ * @param {Pattern[]} patterns Patterns to match for hotspot
+ */
+function getMatchingPatterns(lines, row, column, patterns) {
+  /** @type {MatchedPattern[]} */
+  const results = [];
+  /** @type {string[]} */
+  const blocks = [];
 
-        if (pattern.pattern) {
-          // Must match pattern
-          if (!block.match(pattern.pattern)) continue;
+  // Try to find a matching pattern
+  for (let pattern of patterns) {
+    if (!pattern.pattern && !pattern.rules) {
+      // Simple case: no pattern, no rules, simple hotspot matching rule
+      results.push({ row, column, ...pattern });
+      break;
+    }
 
-          // Add main SVG
-          let svgs = [];
-          if (pattern.svg) svgs.push(pattern.svg);
+    // Extract a block around the hotspot and compare with pattern/rules
+    if (!blocks[pattern.size]) {
+      blocks[pattern.size] = getBlock(lines, row, column, pattern.size);
+    }
+    const block = blocks[pattern.size];
 
-          if (pattern.rules) {
-            // Apply extra rules
-            for (let rule of pattern.rules) {
-              if (block.match(rule.pattern)) svgs.push(rule.svg);
-            }
-          }
+    if (pattern.pattern) {
+      // Must match pattern
+      if (!block.match(pattern.pattern)) continue;
 
-          // Add to results
-          results.push({ row, column, ...pattern, svg: svgs.join('') });
-          break;
-        } else if (pattern.rules) {
-          // No pattern, must match at least one rule
-          let svgs = [];
+      // Add main SVG
+      /** @type {string[]} */
+      let svgs = [];
+      if (pattern.svg) svgs.push(pattern.svg);
 
-          for (let rule of pattern.rules) {
-            if (block.match(rule.pattern)) svgs.push(rule.svg);
-          }
-          if (!svgs.length) continue;
-
-          // At least one rule matched
-          if (pattern.svg) svgs.push(pattern.svg);
-          results.push({ row, column, ...pattern, svg: svgs.join('') });
-          break;
+      if (pattern.rules) {
+        // Apply extra rules
+        for (let rule of pattern.rules) {
+          if (block.match(rule.pattern)) svgs.push(rule.svg);
         }
       }
+
+      // Add to results
+      results.push({ row, column, ...pattern, svg: svgs.join('') });
+      break;
+    } else if (pattern.rules) {
+      // No pattern, must match at least one rule
+      /** @type {string[]} */
+      let svgs = [];
+
+      for (let rule of pattern.rules) {
+        if (block.match(rule.pattern)) svgs.push(rule.svg);
+      }
+      if (!svgs.length) continue;
+
+      // At least one rule matched
+      if (pattern.svg) svgs.push(pattern.svg);
+      results.push({ row, column, ...pattern, svg: svgs.join('') });
+      break;
     }
   }
   return results;
