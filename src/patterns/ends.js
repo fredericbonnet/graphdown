@@ -46,6 +46,7 @@ export default [
   /* Top-left */
   {
     hotspot: endTop,
+    size: 1,
     pattern: connections({ br: true }),
     svg: ends.tl,
   },
@@ -69,6 +70,7 @@ export default [
   /* Top-right */
   {
     hotspot: endTop,
+    size: 1,
     pattern: connections({ bl: true }),
     svg: ends.tr,
   },
@@ -86,6 +88,7 @@ export default [
   /* Bottom-right */
   {
     hotspot: endBottom,
+    size: 1,
     pattern: connections({ tl: true }),
     svg: ends.br,
   },
@@ -109,6 +112,7 @@ export default [
   /* Bottom-left */
   {
     hotspot: endBottom,
+    size: 1,
     pattern: connections({ tr: true }),
     svg: ends.bl,
   },

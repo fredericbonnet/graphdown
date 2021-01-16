@@ -192,9 +192,9 @@ function findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot) {
 
         // Extract a block around the hotspot and compare with pattern/rules
         if (!blocks[pattern.size]) {
-          blocks[patterns.size] = getBlock(lines, row, column, pattern.size);
+          blocks[pattern.size] = getBlock(lines, row, column, pattern.size);
         }
-        const block = blocks[patterns.size];
+        const block = blocks[pattern.size];
 
         if (pattern.pattern) {
           // Must match pattern

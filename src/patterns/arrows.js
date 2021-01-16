@@ -104,6 +104,7 @@ export default [
   },
   {
     hotspot: anchor,
+    size: 1,
     pattern: connections({ b: include(arrowTop) }),
     svg: ticks['─'],
     rules: rays(allDirections),
@@ -132,6 +133,7 @@ export default [
   },
   {
     hotspot: anchor,
+    size: 1,
     pattern: connections({ t: include(arrowBottom) }),
     svg: ticks['─'],
     rules: rays(allDirections),
@@ -146,6 +148,7 @@ export default [
   },
   {
     hotspot: anchor,
+    size: 1,
     pattern: connections({ r: include(arrowLeft) }),
     svg: ticks['│'],
     rules: rays(allDirections),
@@ -160,6 +163,7 @@ export default [
   },
   {
     hotspot: anchor,
+    size: 1,
     pattern: connections({ l: include(arrowRight) }),
     svg: ticks['│'],
     rules: rays(allDirections),
