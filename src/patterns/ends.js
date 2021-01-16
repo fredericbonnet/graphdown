@@ -7,28 +7,32 @@ import {
   linkTopRight,
   linkTopLeft,
 } from '../characters.js';
-import { wide } from '../svg.js';
+import { wide, path } from '../svg.js';
 import { connections, include, except } from '../utils.js';
 import { lines } from './lines.js';
 
 /*
  * SVG templates
  */
+
+// prettier-ignore
 export const ends = {
-  t: `<path d="M 5 10, l  0  10"/>`,
-  b: `<path d="M 5 10, l  0 -10"/>`,
-  l: `<path d="M 5 10, l  5  0"/>`,
-  r: `<path d="M 5 10, l -5  0"/>`,
-  tl: `<path d="M 5 10, l  5  10"/>`,
-  tr: `<path d="M 5 10, l -5  10"/>`,
-  br: `<path d="M 5 10, l -5 -10"/>`,
-  bl: `<path d="M 5 10, l  5 -10"/>`,
+  t:  path([5, 10], 'l  0  10'),
+  b:  path([5, 10], 'l  0 -10'),
+  l:  path([5, 10], 'l  5  0'),
+  r:  path([5, 10], 'l -5  0'),
+  tl: path([5, 10], 'l  5  10'),
+  tr: path([5, 10], 'l -5  10'),
+  br: path([5, 10], 'l -5 -10'),
+  bl: path([5, 10], 'l  5 -10'),
 };
+
+// prettier-ignore
 const bottomEnds = {
-  l: `<path d="M  0 20, l  -5 0"/>`,
-  r: `<path d="M 10 20, l   5 0"/>`,
-  ll: `<path d="M  0 20, l -10 0"/>`,
-  rr: `<path d="M 10 20, l  10 0"/>`,
+  l:  path([0,  20], 'l  -5 0'),
+  r:  path([10, 20], 'l   5 0'),
+  ll: path([0,  20], 'l -10 0'),
+  rr: path([10, 20], 'l  10 0'),
 };
 
 /*

@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { wide } from '../svg.js';
+import { wide, path } from '../svg.js';
 import {
   endTop,
   endBottom,
@@ -23,26 +23,29 @@ import { rays } from './rays.js';
 /*
  * SVG templates
  */
+
+// prettier-ignore
 export const corners = {
-  tl: `<path d="M 5 20, l 0 -10,  5 0"/>`,
-  tr: `<path d="M 5 20, l 0 -10, -5 0"/>`,
-  bl: `<path d="M 5  0, l 0  10,  5 0"/>`,
-  br: `<path d="M 5  0, l 0  10, -5 0"/>`,
-  t: `<path d="M 0 20, l  5 -10,  5  10"/>`,
-  b: `<path d="M 0  0, l  5  10,  5 -10"/>`,
-  r: `<path d="M 0  0, l  5  10, -5  10"/>`,
-  l: `<path d="M 10 0, l -5  10,  5  10"/>`,
+  tl: path([ 5, 20], 'l  0 -10,  5   0'),
+  tr: path([ 5, 20], 'l  0 -10, -5   0'),
+  bl: path([ 5,  0], 'l  0  10,  5   0'),
+  br: path([ 5,  0], 'l  0  10, -5   0'),
+  t:  path([ 0, 20], 'l  5 -10,  5  10'),
+  b:  path([ 0,  0], 'l  5  10,  5 -10'),
+  r:  path([ 0,  0], 'l  5  10, -5  10'),
+  l:  path([10,  0], 'l -5  10,  5  10'),
 };
 
+// prettier-ignore
 export const roundedCorners = {
-  tl: `<path d="M 5 20, l 0 -5, q 0 -5,  5 -5"/>`,
-  tr: `<path d="M 5 20, l 0 -5, q 0 -5, -5 -5"/>`,
-  bl: `<path d="M 5  0, l 0  5, q 0  5,  5  5"/>`,
-  br: `<path d="M 5  0, l 0  5, q 0  5, -5  5"/>`,
-  t: `<path d="M 0 20, q  5 -10, 10  0"/>`,
-  b: `<path d="M 0  0, q  5  10, 10  0"/>`,
-  r: `<path d="M 0  0, q  5  10,  0 20"/>`,
-  l: `<path d="M 10 0, q -5  10,  0 20"/>`,
+  tl: path([ 5, 20], 'l 0 -5, q 0 -5,  5 -5'),
+  tr: path([ 5, 20], 'l 0 -5, q 0 -5, -5 -5'),
+  bl: path([ 5,  0], 'l 0  5, q 0  5,  5  5'),
+  br: path([ 5,  0], 'l 0  5, q 0  5, -5  5'),
+  t:  path([ 0, 20], 'q  5 -10, 10  0'),
+  b:  path([ 0,  0], 'q  5  10, 10  0'),
+  r:  path([ 0,  0], 'q  5  10,  0 20'),
+  l:  path([10,  0], 'q -5  10,  0 20'),
 };
 
 /*

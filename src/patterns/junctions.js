@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { wide } from '../svg.js';
+import { wide, path } from '../svg.js';
 import {
   anchor,
   endTop,
@@ -20,17 +20,19 @@ import { roundedCorners } from './corners.js';
 /*
  * SVG templates
  */
+
+// prettier-ignore
 const junctions = {
-  '┼': `<path d="M  5  0, l  0 20, M 0 10, l 10   0"/>`,
-  '╳': `<path d="M  0  0, l 10 20, M 0 20, l 10 -20"/>`,
-  '┬': `<path d="M  5 20, l  0 -10, M 0 10, l 10  0"/>`,
-  '┴': `<path d="M  5  0, l  0  10, M 0 10, l 10  0"/>`,
-  '┤': `<path d="M  0 10, l  5   0, M 5  0, l  0 20"/>`,
-  '├': `<path d="M 10 10, l -5   0, M 5  0, l  0 20"/>`,
-  '▟': `<path d="M 5 10, l  5 10, M 0 20, l 10 -20"/>`,
-  '▙': `<path d="M 0  0, l 10 20, M 0 20, l 5  -10"/>`,
-  '▜': `<path d="M 0  0, l 10 20, M 5 10, l 5  -10"/>`,
-  '▛': `<path d="M 0  0, l  5 10, M 0 20, l 10 -20"/>`,
+  '┼': path([ 5,  0], 'l  0  20') + path([0, 10], 'l 10   0'),
+  '╳': path([ 0,  0], 'l 10  20') + path([0, 20], 'l 10 -20'),
+  '┬': path([ 5, 20], 'l  0 -10') + path([0, 10], 'l 10   0'),
+  '┴': path([ 5,  0], 'l  0  10') + path([0, 10], 'l 10   0'),
+  '┤': path([ 0, 10], 'l  5   0') + path([5,  0], 'l  0  20'),
+  '├': path([10, 10], 'l -5   0') + path([5,  0], 'l  0  20'),
+  '▟': path([ 5, 10], 'l  5  10') + path([0, 20], 'l 10 -20'),
+  '▙': path([ 0,  0], 'l 10  20') + path([0, 20], 'l 5  -10'),
+  '▜': path([ 0,  0], 'l 10  20') + path([5, 10], 'l 5  -10'),
+  '▛': path([ 0,  0], 'l  5  10') + path([0, 20], 'l 10 -20'),
 };
 
 /*

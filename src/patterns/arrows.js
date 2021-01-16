@@ -1,3 +1,4 @@
+import { filledPath, path } from '../svg';
 import {
   anchor,
   arrowTop,
@@ -14,58 +15,64 @@ import { ticks } from './ticks.js';
  * SVG templates
  */
 
+// prettier-ignore
 const arrowShapes = {
-  t: `l  -5  10, 10  0 z`,
-  b: `l  -5 -10, 10  0 z`,
-  l: `l  10  -5,  0 10 z`,
-  r: `l -10  -5,  0 10 z`,
-  tl: `l 0  12, 9 -5 z`,
-  tr: `l 0  12,-9 -5 z`,
-  bl: `l 0 -12, 9  5 z`,
-  br: `l 0 -12,-9  5 z`,
+  t:  `l  -5  10, 10  0 z`,
+  b:  `l  -5 -10, 10  0 z`,
+  l:  `l  10  -5,  0 10 z`,
+  r:  `l -10  -5,  0 10 z`,
+  tl: `l   0  12,  9 -5 z`,
+  tr: `l   0  12, -9 -5 z`,
+  bl: `l   0 -12,  9  5 z`,
+  br: `l   0 -12, -9  5 z`,
 };
 
+// prettier-ignore
 const branches = {
-  t: `<path d="M 5 10, l  0 -10"/>`,
-  b: `<path d="M 5 10, l  0  10"/>`,
-  tr: `<path d="M 5 10, l  5 -10"/>`,
-  tl: `<path d="M 5 10, l -5 -10"/>`,
-  br: `<path d="M 5 10, l  5  10"/>`,
-  bl: `<path d="M 5 10, l -5  10"/>`,
+  t:  path([5, 10], 'l  0 -10'),
+  b:  path([5, 10], 'l  0  10'),
+  tr: path([5, 10], 'l  5 -10'),
+  tl: path([5, 10], 'l -5 -10'),
+  br: path([5, 10], 'l  5  10'),
+  bl: path([5, 10], 'l -5  10'),
 };
+// prettier-ignore
 const arrows = {
-  t: `<path d="M  5  0, ${arrowShapes.t}" class="filled"/>`,
-  b: `<path d="M  5 20, ${arrowShapes.b}" class="filled"/>`,
-  l: `<path d="M  0 10, ${arrowShapes.l}" class="filled"/>`,
-  r: `<path d="M 10 10, ${arrowShapes.r}" class="filled"/>`,
-  tl: `<path d="M  0  0, ${arrowShapes.tl}" class="filled"/>`,
-  tr: `<path d="M 10  0, ${arrowShapes.tr}" class="filled"/>`,
-  bl: `<path d="M  0 20, ${arrowShapes.bl}" class="filled"/>`,
-  br: `<path d="M 10 20, ${arrowShapes.br}" class="filled"/>`,
+  t:  filledPath([ 5,  0], arrowShapes.t),
+  b:  filledPath([ 5, 20], arrowShapes.b),
+  l:  filledPath([ 0, 10], arrowShapes.l),
+  r:  filledPath([10, 10], arrowShapes.r),
+  tl: filledPath([ 0,  0], arrowShapes.tl),
+  tr: filledPath([10,  0], arrowShapes.tr),
+  bl: filledPath([ 0, 20], arrowShapes.bl),
+  br: filledPath([10, 20], arrowShapes.br),
 };
+// prettier-ignore
 const longBranches = {
-  t: `<path d="M 5  0, l  0  20"/>`,
-  b: `<path d="M 5 20, l  0 -20"/>`,
-  r: `<path d="M 5 10, l  5   0"/>`,
-  l: `<path d="M 5 10, l -5   0"/>`,
-  tr: `<path d="M 5 20, q 0 -10,  5 -20"/>`,
-  tl: `<path d="M 5 20, q 0 -10, -5 -20"/>`,
-  br: `<path d="M 5  0, q 0  10,  5  20"/>`,
-  bl: `<path d="M 5  0, q 0  10, -5  20"/>`,
+  t:  path([5,  0], 'l  0  20'),
+  b:  path([5, 20], 'l  0 -20'),
+  r:  path([5, 10], 'l  5   0'),
+  l:  path([5, 10], 'l -5   0'),
+  tr: path([5, 20], 'q 0 -10,  5 -20'),
+  tl: path([5, 20], 'q 0 -10, -5 -20'),
+  br: path([5,  0], 'q 0  10,  5  20'),
+  bl: path([5,  0], 'q 0  10, -5  20'),
 };
+// prettier-ignore
 const anchoredArrows = {
-  t: `<path d="M  5 -10, ${arrowShapes.t}" class="filled"/>`,
-  b: `<path d="M  5  30, ${arrowShapes.b}" class="filled"/>`,
-  l: `<path d="M -5  10, ${arrowShapes.l}" class="filled"/>`,
-  r: `<path d="M 15  10, ${arrowShapes.r}" class="filled"/>`,
+  t: filledPath([ 5, -10], arrowShapes.t),
+  b: filledPath([ 5,  30], arrowShapes.b),
+  l: filledPath([-5,  10], arrowShapes.l),
+  r: filledPath([15,  10], arrowShapes.r),
 };
+// prettier-ignore
 const decoratedArrows = {
-  t: `<path d="M  5 20, l  0   -15"/><path d="M  5   -5, ${arrowShapes.t}"  class="filled"/>`,
-  b: `<path d="M  5  0, l  0    15"/><path d="M  5   25, ${arrowShapes.b}"  class="filled"/>`,
-  tl: `<path d="M 10 20, l -7.5 -15"/><path d="M -2.5 -5, ${arrowShapes.tl}" class="filled"/>`,
-  tr: `<path d="M  0 20, l  7.5 -15"/><path d="M 12.5 -5, ${arrowShapes.tr}" class="filled"/>`,
-  bl: `<path d="M 10  0, l -7.5  15"/><path d="M -2.5 25, ${arrowShapes.bl}" class="filled"/>`,
-  br: `<path d="M  0  0, l  7.5  15"/><path d="M 12.5 25, ${arrowShapes.br}" class="filled"/>`,
+  t:  path([ 5, 20], 'l  0   -15') + filledPath([ 5  , -5], arrowShapes.t),
+  b:  path([ 5,  0], 'l  0    15') + filledPath([ 5  , 25], arrowShapes.b),
+  tl: path([10, 20], 'l -7.5 -15') + filledPath([-2.5, -5], arrowShapes.tl),
+  tr: path([ 0, 20], 'l  7.5 -15') + filledPath([12.5, -5], arrowShapes.tr),
+  bl: path([10,  0], 'l -7.5  15') + filledPath([-2.5, 25], arrowShapes.bl),
+  br: path([ 0,  0], 'l  7.5  15') + filledPath([12.5, 25], arrowShapes.br),
 };
 
 /*

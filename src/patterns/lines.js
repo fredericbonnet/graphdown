@@ -1,15 +1,17 @@
-import { wide } from '../svg.js';
+import { wide, path } from '../svg.js';
 import { vline, hline, dline, uline, bline } from '../characters.js';
 
 /*
  * SVG templates
  */
+
+// prettier-ignore
 export const lines = {
-  '─': `<path d="M 0 10, l 10   0"/>`,
-  '│': `<path d="M 5  0, l  0  20"/>`,
-  '╲': `<path d="M 0  0, l 10  20"/>`,
-  '╱': `<path d="M 0 20, l 10 -20"/>`,
-  _: `<path d="M 0 20, l 10   0"/>`,
+  '─': path([0, 10], 'l 10   0'),
+  '│': path([5,  0], 'l  0  20'),
+  '╲': path([0,  0], 'l 10  20'),
+  '╱': path([0, 20], 'l 10 -20'),
+  _:   path([0, 20], 'l 10   0'),
 };
 
 /*

@@ -1,3 +1,4 @@
+import { circle, filledCircle, path } from '../svg.js';
 import {
   anchor,
   arrowBottom,
@@ -23,17 +24,20 @@ import { ends } from './ends.js';
 /*
  * SVG templates
  */
+
+// prettier-ignore
 export const discBranches = {
-  t: `<path d="M  5  0, l  0    5"></path>`,
-  b: `<path d="M  5 20, l  0   -5"></path>`,
-  tl: `<path d="M  0  0, l  2.5  5"></path>`,
-  tr: `<path d="M 10  0, l -2.5  5"></path>`,
-  bl: `<path d="M  0 20, l  2.5 -5"></path>`,
-  br: `<path d="M 10 20, l -2.5 -5"></path>`,
+  t:  path([ 5,  0], 'l  0    5'),
+  b:  path([ 5, 20], 'l  0   -5'),
+  tl: path([ 0,  0], 'l  2.5  5'),
+  tr: path([10,  0], 'l -2.5  5'),
+  bl: path([ 0, 20], 'l  2.5 -5'),
+  br: path([10, 20], 'l -2.5 -5'),
 };
+
 const shapes = {
-  disc: `<circle cx="5" cy="10" r="5"/>`,
-  ring: `<circle cx="5" cy="10" r="5" class="outline"/>`,
+  disc: filledCircle([5, 10], 5),
+  ring: circle([5, 10], 5),
 };
 
 /*

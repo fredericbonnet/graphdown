@@ -1,3 +1,4 @@
+import { path } from '../svg.js';
 import { connections, include, exclude, allDirections } from '../utils.js';
 import { ends } from './ends.js';
 import { rays } from './rays.js';
@@ -16,23 +17,29 @@ import {
 /*
  * SVG templates
  */
+
+// prettier-ignore
 const arcs = {
-  tl: `<path d="M 10 10, q -15 0, -15  15, l 0  5"/>`,
-  tr: `<path d="M  0 10, q  15 0,  15  15, l 0  5"/>`,
-  bl: `<path d="M 10 10, q -15 0, -15 -15, l 0 -5"/>`,
-  br: `<path d="M  0 10, q  15 0,  15 -15, l 0 -5"/>`,
+  tl: path([10, 10], 'q -15 0, -15  15, l 0  5'),
+  tr: path([ 0, 10], 'q  15 0,  15  15, l 0  5'),
+  bl: path([10, 10], 'q -15 0, -15 -15, l 0 -5'),
+  br: path([ 0, 10], 'q  15 0,  15 -15, l 0 -5'),
 };
+
+// prettier-ignore
 const shortArcsTop = {
-  tl: `<path d="M 10 10, q -5 0, -5  5"/>`,
-  tr: `<path d="M  0 10, q  5 0,  5  5"/>`,
-  bl: `<path d="M 10 20, q -5 0, -5 -5"/>`,
-  br: `<path d="M  0 20, q  5 0,  5 -5"/>`,
+  tl: path([10, 10], 'q -5 0, -5  5'),
+  tr: path([ 0, 10], 'q  5 0,  5  5'),
+  bl: path([10, 20], 'q -5 0, -5 -5'),
+  br: path([ 0, 20], 'q  5 0,  5 -5'),
 };
+
+// prettier-ignore
 const shortArcsBottom = {
-  tl: `<path d="M 10  0, q -5 0, -5  5"/>`,
-  tr: `<path d="M  0  0, q  5 0,  5  5"/>`,
-  bl: `<path d="M 10 10, q -5 0, -5 -5"/>`,
-  br: `<path d="M  0 10, q  5 0,  5 -5"/>`,
+  tl: path([10,  0], 'q -5 0, -5  5'),
+  tr: path([ 0,  0], 'q  5 0,  5  5'),
+  bl: path([10, 10], 'q -5 0, -5 -5'),
+  br: path([ 0, 10], 'q  5 0,  5 -5'),
 };
 
 /*

@@ -1,3 +1,4 @@
+import { path } from '../svg';
 import { connections, noDirection } from '../utils';
 import { anchor } from '../characters.js';
 import { lines } from './lines.js';
@@ -5,11 +6,13 @@ import { lines } from './lines.js';
 /*
  * SVG templates
  */
+
+// prettier-ignore
 export const ticks = {
-  '─': `<path d="M 2 10, l 6 0"/>`,
-  '│': `<path d="M 5  7, l 0 6"/>`,
-  '╲': `<path d="M 3  9, l 4 2"/>`,
-  '╱': `<path d="M 3 11, l 4 -2"/>`,
+  '─': path([2, 10], 'l 6  0'),
+  '│': path([5,  7], 'l 0  6'),
+  '╲': path([3,  9], 'l 4  2'),
+  '╱': path([3, 11], 'l 4 -2'),
 };
 
 /*
