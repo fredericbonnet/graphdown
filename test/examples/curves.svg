@@ -59,11 +59,7 @@
 <g transform="translate(100 0)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(110 0)"><path d="M 0 10 q  15 0,  15  15, l 0  5"/></g>
 <g transform="translate(150 0)"><path d="M 0 10 q  15 0,  15  15, l 0  5"/></g>
-<g transform="translate(0 20)"></g>
 <g transform="translate(30 20)"><path d="M 5 10 l  0  10"/></g>
-<g transform="translate(80 20)"></g>
-<g transform="translate(120 20)"></g>
-<g transform="translate(160 20)"></g>
 <g transform="translate(10 40)"><path d="M 10 10 q -15 0, -15 -15, l 0 -5"/></g>
 <g transform="translate(20 40)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(30 40)"><path d="M 5 0 l 0  5, q 0  5, -5  5"/></g>

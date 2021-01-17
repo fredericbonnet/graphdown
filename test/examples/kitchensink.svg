@@ -867,24 +867,12 @@
 <g transform="translate(120 960)"><path d="M 5 0 l 0  5, q 0  5,  5  5"/></g>
 <g transform="translate(130 960)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(140 960)"><path d="M 5 0 l 0  5, q 0  5, -5  5"/></g>
-<g transform="translate(170 960)"></g>
-<g transform="translate(210 960)"></g>
 <g transform="translate(440 960)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(450 960)"><path d="M 0 10 l 10   0"/></g>
-<g transform="translate(460 960)"></g>
 <g transform="translate(470 960)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(490 960)"><path d="M 0 10 l 10   0"/></g>
-<g transform="translate(500 960)"></g>
 <g transform="translate(510 960)"><path d="M 0 10 l 10   0"/></g>
 <g transform="translate(520 960)"><path d="M 0 10 l 10   0"/></g>
-<g transform="translate(560 960)"></g>
-<g transform="translate(600 960)"></g>
-<g transform="translate(630 960)"></g>
-<g transform="translate(660 960)"></g>
-<g transform="translate(680 960)"></g>
-<g transform="translate(710 960)"></g>
-<g transform="translate(730 960)"></g>
-<g transform="translate(750 960)"></g>
 <g transform="translate(10 980)"><path d="M 5 10 l  0 -10"/></g>
 <g transform="translate(80 980)"><path d="M 5 10 l  0 -10"/></g>
 <g transform="translate(180 980)"><path d="M 10 10 q -15 0, -15 -15, l 0 -5"/></g>
@@ -1208,7 +1196,6 @@
 <g transform="translate(620 1360)"><path d="M 5 0 l  0  20"/></g>
 <g transform="translate(10 1380)"><path d="M 5 0 l  0  20"/></g>
 <g transform="translate(60 1380)"><path d="M 5 10 l  0 -10"/></g>
-<g transform="translate(80 1380)"></g>
 <g transform="translate(120 1380)"><path d="M 5 0 l  0  20"/></g>
 <g transform="translate(150 1380)"><path d="M 5 0 l  0  20"/></g>
 <g transform="translate(200 1380)"><path d="M 5 0 l  0  20"/></g>

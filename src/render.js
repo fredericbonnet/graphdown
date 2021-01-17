@@ -32,12 +32,17 @@ const hotspotsRE = charactersToRegExp(hotspotCharacters);
  * @property {boolean[][]} [mask]
  * @property {RegExp} [pattern]
  * @property {string} [svg]
+ * @property {Shape[]} [shapes]
  * @property {PatternRule[]} [rules]
  */
 /**
  * @typedef {Object} PatternRule
  * @property {RegExp} pattern
- * @property {string} svg
+ * @property {string} [svg]
+ * @property {Shape[]} [shapes]
+ */
+/**
+ * @typedef {([x,y]:[number,number])=>string} Shape
  */
 
 /** Map of patterns per hotspot character
@@ -86,7 +91,7 @@ export function renderGraphdown(data, options = {}) {
   // Apply patterns to non-block text
   const matches = findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot);
   for (let match of matches) {
-    const { row, column, mask, size, svgs } = match;
+    const { row, column, mask, size, svgs, shapes } = match;
 
     if (!mask) {
       // Erase hotspot
@@ -99,7 +104,14 @@ export function renderGraphdown(data, options = {}) {
     // Add pattern SVGs
     const x = column * 10;
     const y = row * 20;
-    globalSvgs.push(`<g transform="translate(${x} ${y})">${svgs.join('')}</g>`);
+    if (svgs && svgs.length) {
+      globalSvgs.push(
+        `<g transform="translate(${x} ${y})">${svgs.join('')}</g>`
+      );
+    }
+    if (shapes && shapes.length) {
+      globalSvgs.push(...shapes.map((shape) => shape([x, y])));
+    }
   }
 
   // Apply erasure mask to text
@@ -184,7 +196,8 @@ const renderBlockContent = (lines) =>
  * @property {number} column Column position of hotspot character
  * @property {number} [size] Pattern size
  * @property {boolean[][]} [mask] Mask
- * @property {string[]} svgs SVGs
+ * @property {string[]} [svgs] SVGs
+ * @property {Shape[]} [shapes] Shapes
  */
 
 /**
@@ -235,7 +248,13 @@ function getMatchingPatterns(lines, row, column, patterns) {
   for (let pattern of patterns) {
     if (!pattern.pattern && !pattern.rules) {
       // Simple case: no pattern, no rules, simple hotspot matching rule
-      results.push({ row, column, ...pattern, svgs: [pattern.svg] });
+      results.push({
+        row,
+        column,
+        ...pattern,
+        svgs: [pattern.svg],
+        shapes: pattern.shapes,
+      });
       break;
     }
 
@@ -252,31 +271,45 @@ function getMatchingPatterns(lines, row, column, patterns) {
       // Add main SVG
       /** @type {string[]} */
       let svgs = [];
+      /** @type {Shape[]} */
+      let shapes = [];
       if (pattern.svg) svgs.push(pattern.svg);
+      if (pattern.shapes) shapes.push(...pattern.shapes);
 
       if (pattern.rules) {
         // Apply extra rules
         for (let rule of pattern.rules) {
-          if (block.match(rule.pattern)) svgs.push(rule.svg);
+          if (block.match(rule.pattern)) {
+            if (rule.svg) svgs.push(rule.svg);
+            if (rule.shapes) shapes.push(...rule.shapes);
+          }
         }
       }
 
       // Add to results
-      results.push({ row, column, ...pattern, svgs });
+      results.push({ row, column, ...pattern, svgs, shapes });
       break;
     } else if (pattern.rules) {
       // No pattern, must match at least one rule
       /** @type {string[]} */
       let svgs = [];
+      /** @type {Shape[]} */
+      let shapes = [];
 
+      let match = false;
       for (let rule of pattern.rules) {
-        if (block.match(rule.pattern)) svgs.push(rule.svg);
+        if (block.match(rule.pattern)) {
+          match = true;
+          if (rule.svg) svgs.push(rule.svg);
+          if (rule.shapes) shapes.push(...rule.shapes);
+        }
       }
-      if (!svgs.length) continue;
+      if (!match) continue;
 
       // At least one rule matched
       if (pattern.svg) svgs.push(pattern.svg);
-      results.push({ row, column, ...pattern, svgs });
+      if (pattern.shapes) shapes.push(...pattern.shapes);
+      results.push({ row, column, ...pattern, svgs, shapes });
       break;
     }
   }
