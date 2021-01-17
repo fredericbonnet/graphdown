@@ -7,7 +7,7 @@ import {
   linkTopRight,
   linkTopLeft,
 } from '../characters.js';
-import { path, wide } from '../shapes.js';
+import { segment, wide } from '../shapes.js';
 import { connections, include, except } from '../utils.js';
 import { lines } from './lines.js';
 
@@ -17,30 +17,30 @@ import { lines } from './lines.js';
 
 // prettier-ignore
 export const ends = {
-  t:  path([5, 10], 'l  0  10'),
-  b:  path([5, 10], 'l  0 -10'),
-  l:  path([5, 10], 'l  5  0'),
-  r:  path([5, 10], 'l -5  0'),
-  tl: path([5, 10], 'l  5  10'),
-  tr: path([5, 10], 'l -5  10'),
-  br: path([5, 10], 'l -5 -10'),
-  bl: path([5, 10], 'l  5 -10'),
+  t:  segment({from: [5, 10], to: [ 5, 20]}),
+  b:  segment({from: [5, 10], to: [ 5,  0]}),
+  l:  segment({from: [5, 10], to: [10, 10]}),
+  r:  segment({from: [5, 10], to: [ 0, 10]}),
+  tl: segment({from: [5, 10], to: [10, 20]}),
+  tr: segment({from: [5, 10], to: [ 0, 20]}),
+  br: segment({from: [5, 10], to: [ 0,  0]}),
+  bl: segment({from: [5, 10], to: [10,  0]}),
 };
 
 // prettier-ignore
 const wideEnds = {
-  t: path([5, 10], 'l  0  10', wide),
-  b: path([5, 10], 'l  0 -10', wide),
-  l: path([5, 10], 'l  5  0', wide),
-  r: path([5, 10], 'l -5  0', wide),
+  t: segment({from: [5, 10], to: [ 5, 20]}, wide),
+  b: segment({from: [5, 10], to: [ 5,  0]}, wide),
+  l: segment({from: [5, 10], to: [10, 10]}, wide),
+  r: segment({from: [5, 10], to: [ 0, 10]}, wide),
 };
 
 // prettier-ignore
 const bottomEnds = {
-  l:  path([0,  20], 'l  -5 0'),
-  r:  path([10, 20], 'l   5 0'),
-  ll: path([0,  20], 'l -10 0'),
-  rr: path([10, 20], 'l  10 0'),
+  l:  segment({from: [0,  20], to: [ -5, 20]}),
+  r:  segment({from: [10, 20], to: [ 15, 20]}),
+  ll: segment({from: [0,  20], to: [-10, 20]}),
+  rr: segment({from: [10, 20], to: [ 20, 20]}),
 };
 
 /*

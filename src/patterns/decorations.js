@@ -1,5 +1,5 @@
 import { circle, filledCircle } from '../svg.js';
-import { path } from '../shapes.js';
+import { segment } from '../shapes.js';
 import {
   anchor,
   arrowBottom,
@@ -37,12 +37,12 @@ const shapes = {
 
 // prettier-ignore
 export const discBranches = {
-  t:  path([ 5,  0], 'l  0    5'),
-  b:  path([ 5, 20], 'l  0   -5'),
-  tl: path([ 0,  0], 'l  2.5  5'),
-  tr: path([10,  0], 'l -2.5  5'),
-  bl: path([ 0, 20], 'l  2.5 -5'),
-  br: path([10, 20], 'l -2.5 -5'),
+  t:  segment({from: [ 5,  0], to: [5  ,  5]}),
+  b:  segment({from: [ 5, 20], to: [5  , 15]}),
+  tl: segment({from: [ 0,  0], to: [2.5,  5]}),
+  tr: segment({from: [10,  0], to: [7.5,  5]}),
+  bl: segment({from: [ 0, 20], to: [2.5, 15]}),
+  br: segment({from: [10, 20], to: [7.5, 15]}),
 };
 
 /*

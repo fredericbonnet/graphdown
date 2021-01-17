@@ -1,4 +1,4 @@
-import { path } from '../shapes.js';
+import { segment } from '../shapes.js';
 import { connections, noDirection } from '../utils.js';
 import { anchor } from '../characters.js';
 import { lines } from './lines.js';
@@ -9,10 +9,10 @@ import { lines } from './lines.js';
 
 // prettier-ignore
 export const ticks = {
-  '─': path([2, 10], 'l 6  0'),
-  '│': path([5,  7], 'l 0  6'),
-  '╲': path([3,  9], 'l 4  2'),
-  '╱': path([3, 11], 'l 4 -2'),
+  '─': segment({from: [2, 10], to: [8, 10]}),
+  '│': segment({from: [5,  7], to: [5, 13]}),
+  '╲': segment({from: [3,  9], to: [7, 11]}),
+  '╱': segment({from: [3, 11], to: [7,  9]}),
 };
 
 /*

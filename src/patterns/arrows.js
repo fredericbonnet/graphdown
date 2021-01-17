@@ -1,4 +1,4 @@
-import { path, filledPath } from '../shapes.js';
+import { filledPath, segment } from '../shapes.js';
 import {
   anchor,
   arrowTop,
@@ -29,12 +29,12 @@ const arrowShapes = {
 
 // prettier-ignore
 const branches = {
-  t:  path([5, 10], 'l  0 -10'),
-  b:  path([5, 10], 'l  0  10'),
-  tr: path([5, 10], 'l  5 -10'),
-  tl: path([5, 10], 'l -5 -10'),
-  br: path([5, 10], 'l  5  10'),
-  bl: path([5, 10], 'l -5  10'),
+  t:  segment({from: [5, 10], to:[ 5,  0]}),
+  b:  segment({from: [5, 10], to:[ 5, 20]}),
+  tr: segment({from: [5, 10], to:[10,  0]}),
+  tl: segment({from: [5, 10], to:[ 0,  0]}),
+  br: segment({from: [5, 10], to:[10, 20]}),
+  bl: segment({from: [5, 10], to:[ 0, 20]}),
 };
 
 // prettier-ignore
@@ -51,14 +51,14 @@ const arrows = {
 
 // prettier-ignore
 const longBranches = {
-  t:  path([5,  0], 'l  0  20'),
-  b:  path([5, 20], 'l  0 -20'),
-  r:  path([5, 10], 'l  5   0'),
-  l:  path([5, 10], 'l -5   0'),
-  tr: path([5, 20], 'q 0 -10,  5 -20'),
-  tl: path([5, 20], 'q 0 -10, -5 -20'),
-  br: path([5,  0], 'q 0  10,  5  20'),
-  bl: path([5,  0], 'q 0  10, -5  20'),
+  t:  segment({from: [5,  0], to: [5,  20]}),
+  b:  segment({from: [5, 20], to: [5,   0]}),
+  r:  segment({from: [5, 10], to: [10, 10]}),
+  l:  segment({from: [5, 10], to: [ 0, 10]}),
+  tr: segment({from: [5, 20], to: [10,  0], forward: 'q 0 -10,  5 -20', backward: 'q -5  10, -5  20'}),
+  tl: segment({from: [5, 20], to: [ 0,  0], forward: 'q 0 -10, -5 -20', backward: 'q  5  10,  5  20'}),
+  br: segment({from: [5,  0], to: [10, 20], forward: 'q 0  10,  5  20', backward: 'q -5 -10, -5 -20'}),
+  bl: segment({from: [5,  0], to: [ 0, 20], forward: 'q 0  10, -5  20', backward: 'q  5 -10,  5 -20'}),
 };
 
 // prettier-ignore
@@ -81,12 +81,12 @@ const decoratedArrows = {
 
 // prettier-ignore
 const decoratedBranches = {
-  t:  path([ 5, 20], 'l  0   -15'),
-  b:  path([ 5,  0], 'l  0    15'),
-  tl: path([10, 20], 'l -7.5 -15'),
-  tr: path([ 0, 20], 'l  7.5 -15'),
-  bl: path([10,  0], 'l -7.5  15'),
-  br: path([ 0,  0], 'l  7.5  15'),
+  t:  segment({from: [ 5, 20], to: [5  ,  5]}),
+  b:  segment({from: [ 5,  0], to: [5  , 15]}),
+  tl: segment({from: [10, 20], to: [2.5,  5]}),
+  tr: segment({from: [ 0, 20], to: [7.5,  5]}),
+  bl: segment({from: [10,  0], to: [2.5, 15]}),
+  br: segment({from: [ 0,  0], to: [7.5, 15]}),
 };
 
 /*

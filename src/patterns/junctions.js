@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { path, wide } from '../shapes.js';
+import { segment, wide } from '../shapes.js';
 import {
   anchor,
   endTop,
@@ -23,25 +23,25 @@ import { roundedCorners } from './corners.js';
 
 // prettier-ignore
 const junctions = {
-  '┼': [path([ 5,  0], 'l  0  20'), path([0, 10], 'l 10   0')],
-  '╳': [path([ 0,  0], 'l 10  20'), path([0, 20], 'l 10 -20')],
-  '┬': [path([ 5, 20], 'l  0 -10'), path([0, 10], 'l 10   0')],
-  '┴': [path([ 5,  0], 'l  0  10'), path([0, 10], 'l 10   0')],
-  '┤': [path([ 0, 10], 'l  5   0'), path([5,  0], 'l  0  20')],
-  '├': [path([10, 10], 'l -5   0'), path([5,  0], 'l  0  20')],
-  '▟': [path([ 5, 10], 'l  5  10'), path([0, 20], 'l 10 -20')],
-  '▙': [path([ 0,  0], 'l 10  20'), path([0, 20], 'l 5  -10')],
-  '▜': [path([ 0,  0], 'l 10  20'), path([5, 10], 'l 5  -10')],
-  '▛': [path([ 0,  0], 'l  5  10'), path([0, 20], 'l 10 -20')],
+  '┼': [segment({from: [ 5,  0], to: [ 5, 20]}), segment({from: [0, 10], to: [10, 10]})],
+  '╳': [segment({from: [ 0,  0], to: [10, 20]}), segment({from: [0, 20], to: [10,  0]})],
+  '┬': [segment({from: [ 5, 20], to: [ 5, 10]}), segment({from: [0, 10], to: [10, 10]})],
+  '┴': [segment({from: [ 5,  0], to: [ 5, 10]}), segment({from: [0, 10], to: [10, 10]})],
+  '┤': [segment({from: [ 0, 10], to: [ 5, 10]}), segment({from: [5,  0], to: [ 5, 20]})],
+  '├': [segment({from: [10, 10], to: [ 5, 10]}), segment({from: [5,  0], to: [ 5, 20]})],
+  '▟': [segment({from: [ 5, 10], to: [10, 20]}), segment({from: [0, 20], to: [10,  0]})],
+  '▙': [segment({from: [ 0,  0], to: [10, 20]}), segment({from: [0, 20], to: [ 5, 10]})],
+  '▜': [segment({from: [ 0,  0], to: [10, 20]}), segment({from: [5, 10], to: [10,  0]})],
+  '▛': [segment({from: [ 0,  0], to: [ 5, 10]}), segment({from: [0, 20], to: [10,  0]})],
 };
 
 // prettier-ignore
 const wideJunctions = {
-  '┼': [path([ 5,  0], 'l  0  20', wide), path([0, 10], 'l 10  0', wide)],
-  '┬': [path([ 5, 20], 'l  0 -10', wide), path([0, 10], 'l 10  0', wide)],
-  '┴': [path([ 5,  0], 'l  0  10', wide), path([0, 10], 'l 10  0', wide)],
-  '┤': [path([ 0, 10], 'l  5   0', wide), path([5,  0], 'l  0 20', wide)],
-  '├': [path([10, 10], 'l -5   0', wide), path([5,  0], 'l  0 20', wide)],
+  '┼': [segment({from: [ 5,  0], to: [ 5, 20]}, wide), segment({from: [0, 10], to: [10, 10]}, wide)],
+  '┬': [segment({from: [ 5, 20], to: [ 5, 10]}, wide), segment({from: [0, 10], to: [10, 10]}, wide)],
+  '┴': [segment({from: [ 5,  0], to: [ 5, 10]}, wide), segment({from: [0, 10], to: [10, 10]}, wide)],
+  '┤': [segment({from: [ 0, 10], to: [ 5, 10]}, wide), segment({from: [5,  0], to: [ 5, 20]}, wide)],
+  '├': [segment({from: [10, 10], to: [ 5, 10]}, wide), segment({from: [5,  0], to: [ 5, 20]}, wide)],
 };
 
 /*

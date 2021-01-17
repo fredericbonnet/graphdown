@@ -1,4 +1,4 @@
-import { path } from '../shapes.js';
+import { segment } from '../shapes.js';
 import { connections, include, exclude, allDirections } from '../utils.js';
 import { ends } from './ends.js';
 import { rays } from './rays.js';
@@ -20,26 +20,26 @@ import {
 
 // prettier-ignore
 const arcs = {
-  tl: path([10, 10], 'q -15 0, -15  15, l 0  5'),
-  tr: path([ 0, 10], 'q  15 0,  15  15, l 0  5'),
-  bl: path([10, 10], 'q -15 0, -15 -15, l 0 -5'),
-  br: path([ 0, 10], 'q  15 0,  15 -15, l 0 -5'),
+  tl: segment({from: [10, 10], to: [-5,  30], forward: 'q -15 0, -15  15', backward: 'l 0 -5, q 0 -15,  15 -15'}),
+  tr: segment({from: [ 0, 10], to: [15,  30], forward: 'q  15 0,  15  15', backward: 'l 0 -5, q 0 -15, -15 -15'}),
+  bl: segment({from: [10, 10], to: [-5, -10], forward: 'q -15 0, -15 -15', backward: 'l 0  5, q 0  15,  15  15'}),
+  br: segment({from: [ 0, 10], to: [15, -10], forward: 'q  15 0,  15 -15', backward: 'l 0  5, q 0  15, -15  15'}),
 };
 
 // prettier-ignore
 const shortArcsTop = {
-  tl: path([10, 10], 'q -5 0, -5  5'),
-  tr: path([ 0, 10], 'q  5 0,  5  5'),
-  bl: path([10, 20], 'q -5 0, -5 -5'),
-  br: path([ 0, 20], 'q  5 0,  5 -5'),
+  tl: segment({from: [10, 10], to: [5, 15], forward: 'q -5 0, -5  5', backward: 'q 0 -5,  5 -5'}),
+  tr: segment({from: [ 0, 10], to: [5, 15], forward: 'q  5 0,  5  5', backward: 'q 0 -5, -5 -5'}),
+  bl: segment({from: [10, 20], to: [5, 15], forward: 'q -5 0, -5 -5', backward: 'q 0  5,  5  5'}),
+  br: segment({from: [ 0, 20], to: [5, 15], forward: 'q  5 0,  5 -5', backward: 'q 0  5, -5  5'}),
 };
 
 // prettier-ignore
 const shortArcsBottom = {
-  tl: path([10,  0], 'q -5 0, -5  5'),
-  tr: path([ 0,  0], 'q  5 0,  5  5'),
-  bl: path([10, 10], 'q -5 0, -5 -5'),
-  br: path([ 0, 10], 'q  5 0,  5 -5'),
+  tl: segment({from: [10,  0], to: [5, 5], forward: 'q -5 0, -5  5', backward: 'q 0 -5,  5 -5'}),
+  tr: segment({from: [ 0,  0], to: [5, 5], forward: 'q  5 0,  5  5', backward: 'q 0 -5, -5 -5'}),
+  bl: segment({from: [10, 10], to: [5, 5], forward: 'q -5 0, -5 -5', backward: 'q 0  5,  5  5'}),
+  br: segment({from: [ 0, 10], to: [5, 5], forward: 'q  5 0,  5 -5', backward: 'q 0  5, -5  5'}),
 };
 
 /*

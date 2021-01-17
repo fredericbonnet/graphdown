@@ -1,4 +1,4 @@
-import { path } from '../shapes.js';
+import { segment } from '../shapes.js';
 import { connections, noDirection } from '../utils.js';
 import { endTop, endBottom, anchor } from '../characters.js';
 
@@ -8,46 +8,46 @@ import { endTop, endBottom, anchor } from '../characters.js';
 
 // prettier-ignore
 const narrowAngles = {
-  tl: path([ 5, 20], 'l  0 -10, -5  10'),
-  tr: path([ 5, 20], 'l  0 -10,  5  10'),
-  bl: path([ 5,  0], 'l  0  10, -5 -10'),
-  br: path([ 5,  0], 'l  0  10,  5 -10'),
-  lu: path([10,  0], 'l -5  10,  5   0'),
-  ld: path([10, 20], 'l -5 -10,  5   0'),
-  ru: path([ 0,  0], 'l  5  10, -5   0'),
-  rd: path([ 0, 20], 'l  5 -10, -5   0'),
+  tl: segment({from: [ 5, 20], to: [ 0, 20], forward: 'l  0 -10', backward: 'l  5 -10'}),
+  tr: segment({from: [ 5, 20], to: [10, 20], forward: 'l  0 -10', backward: 'l -5 -10'}),
+  bl: segment({from: [ 5,  0], to: [ 0,  0], forward: 'l  0  10', backward: 'l  5  10'}),
+  br: segment({from: [ 5,  0], to: [10,  0], forward: 'l  0  10', backward: 'l -5  10'}),
+  lu: segment({from: [10,  0], to: [10, 10], forward: 'l -5  10', backward: 'l -5   0'}),
+  ld: segment({from: [10, 20], to: [10, 10], forward: 'l -5 -10', backward: 'l -5   0'}),
+  ru: segment({from: [ 0,  0], to: [ 0, 10], forward: 'l  5  10', backward: 'l  5   0'}),
+  rd: segment({from: [ 0, 20], to: [ 0, 10], forward: 'l  5 -10', backward: 'l  5   0'}),
 };
 
 // prettier-ignore
 const wideAngles = {
-  tl: path([ 5, 20], 'l  0 -10, -5 -10'),
-  tr: path([ 5, 20], 'l  0 -10,  5 -10'),
-  bl: path([ 5,  0], 'l  0  10, -5  10'),
-  br: path([ 5,  0], 'l  0  10,  5  10'),
-  lu: path([ 0,  0], 'l  5  10,  5  0'),
-  ld: path([ 0, 20], 'l  5 -10,  5  0'),
-  ru: path([10,  0], 'l -5  10, -5  0'),
-  rd: path([10, 20], 'l -5 -10, -5  0'),
+  tl: segment({from: [ 5, 20], to: [0 ,  0], forward: 'l  0 -10', backward: 'l  5  10'}),
+  tr: segment({from: [ 5, 20], to: [10,  0], forward: 'l  0 -10', backward: 'l -5  10'}),
+  bl: segment({from: [ 5,  0], to: [ 0, 20], forward: 'l  0  10', backward: 'l  5 -10'}),
+  br: segment({from: [ 5,  0], to: [10, 20], forward: 'l  0  10', backward: 'l -5 -10'}),
+  lu: segment({from: [ 0,  0], to: [10, 10], forward: 'l  5  10', backward: 'l -5   0'}),
+  ld: segment({from: [ 0, 20], to: [10, 10], forward: 'l  5 -10', backward: 'l -5   0'}),
+  ru: segment({from: [10,  0], to: [ 0, 10], forward: 'l -5  10', backward: 'l  5   0'}),
+  rd: segment({from: [10, 20], to: [ 0, 10], forward: 'l -5 -10', backward: 'l  5   0'}),
 };
 
 // prettier-ignore
 const narrowRoundedAngles = {
-  tl: path([ 5, 20], 'q  0 -10, -5   0'),
-  tr: path([ 5, 20], 'q  0 -10,  5   0'),
-  bl: path([ 5,  0], 'q  0  10, -5   0'),
-  br: path([ 5,  0], 'q  0  10,  5   0'),
-  lu: path([10,  0], 'q -5  10,  0  10'),
-  ld: path([10, 20], 'q -5 -10,  0 -10'),
-  ru: path([ 0,  0], 'q  5  10,  0  10'),
-  rd: path([ 0, 20], 'q  5 -10,  0 -10'),
+  tl: segment({from: [ 5, 20], to: [ 0, 20], forward: 'q  0 -10, -5   0', backward: 'q  5 -10,  5   0'}),
+  tr: segment({from: [ 5, 20], to: [10, 20], forward: 'q  0 -10,  5   0', backward: 'q -5 -10, -5   0'}),
+  bl: segment({from: [ 5,  0], to: [ 0,  0], forward: 'q  0  10, -5   0', backward: 'q  5  10,  5   0'}),
+  br: segment({from: [ 5,  0], to: [10,  0], forward: 'q  0  10,  5   0', backward: 'q -5  10, -5   0'}),
+  lu: segment({from: [10,  0], to: [10, 10], forward: 'q -5  10,  0  10', backward: 'q -5   0,  0 -10'}),
+  ld: segment({from: [10, 20], to: [10, 10], forward: 'q -5 -10,  0 -10', backward: 'q -5   0,  0  10'}),
+  ru: segment({from: [ 0,  0], to: [ 0, 10], forward: 'q  5  10,  0  10', backward: 'q  5   0,  0 -10'}),
+  rd: segment({from: [ 0, 20], to: [ 0, 10], forward: 'q  5 -10,  0 -10', backward: 'q  5   0,  0  10'}),
 };
 
 // prettier-ignore
 const wideRoundedAngles = {
-  lu: path([ 0,  0], 'q  5  10,  10  10'),
-  ld: path([ 0, 20], 'q  5 -10,  10 -10'),
-  ru: path([10,  0], 'q -5  10, -10  10'),
-  rd: path([10, 20], 'q -5 -10, -10 -10'),
+  lu: segment({from: [ 0,  0], to: [10, 10], forward: 'q  5  10,  10  10', backward: 'q -5 0, -10 -10'}),
+  ld: segment({from: [ 0, 20], to: [10, 10], forward: 'q  5 -10,  10 -10', backward: 'q -5 0, -10  10'}),
+  ru: segment({from: [10,  0], to: [ 0, 10], forward: 'q -5  10, -10  10', backward: 'q  5 0,  10 -10'}),
+  rd: segment({from: [10, 20], to: [ 0, 10], forward: 'q -5 -10, -10 -10', backward: 'q  5 0,  10  10'}),
 };
 
 /*

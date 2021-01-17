@@ -1,3 +1,12 @@
+/** Make connectable segment */
+export const segment = (
+  { from: [x1, y1], to: [x2, y2], forward, backward },
+  attrs = ''
+) => ([dx, dy]) =>
+  `<path d="M ${x1 + dx} ${y1 + dy} ${forward || ''} L ${x2 + dx} ${y2 + dy}" ${
+    attrs || ''
+  }/>`;
+
 /** Make path */
 export const path = ([x, y], commands, attrs = '') => ([dx, dy]) =>
   `<path d="M ${x + dx} ${y + dy} ${commands}" ${attrs}/>`;

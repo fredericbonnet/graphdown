@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { path, wide } from '../shapes.js';
+import { segment, wide } from '../shapes.js';
 import {
   endTop,
   endBottom,
@@ -26,34 +26,34 @@ import { rays } from './rays.js';
 
 // prettier-ignore
 const corners = {
-  tl: path([ 5, 20], 'l  0 -10,  5   0'),
-  tr: path([ 5, 20], 'l  0 -10, -5   0'),
-  bl: path([ 5,  0], 'l  0  10,  5   0'),
-  br: path([ 5,  0], 'l  0  10, -5   0'),
-  t:  path([ 0, 20], 'l  5 -10,  5  10'),
-  b:  path([ 0,  0], 'l  5  10,  5 -10'),
-  r:  path([ 0,  0], 'l  5  10, -5  10'),
-  l:  path([10,  0], 'l -5  10,  5  10'),
+  tl: segment({from: [ 5, 20], to: [10, 10], forward: 'l  0 -10', backward: 'l -5   0'}),
+  tr: segment({from: [ 5, 20], to: [ 0, 10], forward: 'l  0 -10', backward: 'l  5   0'}),
+  bl: segment({from: [ 5,  0], to: [10, 10], forward: 'l  0  10', backward: 'l -5   0'}),
+  br: segment({from: [ 5,  0], to: [ 0, 10], forward: 'l  0  10', backward: 'l  5   0'}),
+  t:  segment({from: [ 0, 20], to: [10, 20], forward: 'l  5 -10', backward: 'l -5 -10'}),
+  b:  segment({from: [ 0,  0], to: [10,  0], forward: 'l  5  10', backward: 'l -5  10'}),
+  r:  segment({from: [ 0,  0], to: [ 0, 20], forward: 'l  5  10', backward: 'l  5 -10'}),
+  l:  segment({from: [10,  0], to: [10, 20], forward: 'l -5  10', backward: 'l -5 -10'}),
 };
 
 // prettier-ignore
 const wideCorners = {
-  tl: path([ 5, 20], 'l  0 -10,  5   0', wide),
-  tr: path([ 5, 20], 'l  0 -10, -5   0', wide),
-  bl: path([ 5,  0], 'l  0  10,  5   0', wide),
-  br: path([ 5,  0], 'l  0  10, -5   0', wide),
+  tl: segment({from: [ 5, 20], to: [10, 10], forward: 'l  0 -10', backward: 'l  -5  0'}, wide),
+  tr: segment({from: [ 5, 20], to: [ 0, 10], forward: 'l  0 -10', backward: 'l   5  0'}, wide),
+  bl: segment({from: [ 5,  0], to: [10, 10], forward: 'l  0  10', backward: 'l  -5  0'}, wide),
+  br: segment({from: [ 5,  0], to: [ 0, 10], forward: 'l  0  10', backward: 'l   5  0'}, wide),
 };
 
 // prettier-ignore
 export const roundedCorners = {
-  tl: path([ 5, 20], 'l 0 -5, q 0 -5,  5 -5'),
-  tr: path([ 5, 20], 'l 0 -5, q 0 -5, -5 -5'),
-  bl: path([ 5,  0], 'l 0  5, q 0  5,  5  5'),
-  br: path([ 5,  0], 'l 0  5, q 0  5, -5  5'),
-  t:  path([ 0, 20], 'q  5 -10, 10  0'),
-  b:  path([ 0,  0], 'q  5  10, 10  0'),
-  r:  path([ 0,  0], 'q  5  10,  0 20'),
-  l:  path([10,  0], 'q -5  10,  0 20'),
+  tl: segment({from: [ 5, 20], to: [10, 10], forward: 'l 0 -5, q 0 -5,  5 -5', backward: 'q -5 0, -5  5, l 0  5'}),
+  tr: segment({from: [ 5, 20], to: [ 0, 10], forward: 'l 0 -5, q 0 -5, -5 -5', backward: 'q  5 0,  5  5, l 0  5'}),
+  bl: segment({from: [ 5,  0], to: [10, 10], forward: 'l 0  5, q 0  5,  5  5', backward: 'q -5 0, -5 -5, l 0 -5'}),
+  br: segment({from: [ 5,  0], to: [ 0, 10], forward: 'l 0  5, q 0  5, -5  5', backward: 'q  5 0,  5 -5, l 0 -5'}),
+  t:  segment({from: [ 0, 20], to: [10, 20], forward: 'q  5 -10, 10  0', backward: 'q -5 -10, -10   0'}),
+  b:  segment({from: [ 0,  0], to: [10,  0], forward: 'q  5  10, 10  0', backward: 'q -5  10, -10   0'}),
+  r:  segment({from: [ 0,  0], to: [ 0, 20], forward: 'q  5  10,  0 20', backward: 'q  5 -10,   0 -20'}),
+  l:  segment({from: [10,  0], to: [10, 20], forward: 'q -5  10,  0 20', backward: 'q -5 -10,   0 -20'}),
 };
 
 /*

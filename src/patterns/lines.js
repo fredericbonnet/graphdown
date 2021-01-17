@@ -1,4 +1,4 @@
-import { path, wide } from '../shapes.js';
+import { segment, wide } from '../shapes.js';
 import { vline, hline, dline, uline, bline } from '../characters.js';
 
 /*
@@ -7,17 +7,17 @@ import { vline, hline, dline, uline, bline } from '../characters.js';
 
 // prettier-ignore
 export const lines = {
-  '─': path([0, 10], 'l 10   0'),
-  '│': path([5,  0], 'l  0  20'),
-  '╲': path([0,  0], 'l 10  20'),
-  '╱': path([0, 20], 'l 10 -20'),
-  _:   path([0, 20], 'l 10   0'),
+  '─': segment({from: [0, 10], to: [10, 10]}),
+  '│': segment({from: [5,  0], to: [ 5, 20]}),
+  '╲': segment({from: [0,  0], to: [10, 20]}),
+  '╱': segment({from: [0, 20], to: [10,  0]}),
+  _:   segment({from: [0, 20], to: [10, 20]}),
 };
 
 // prettier-ignore
 const wideLines = {
-  '─': path([0, 10], 'l 10   0', wide),
-  '│': path([5,  0], 'l  0  20', wide),
+  '─': segment({from: [0, 10], to: [10, 10]}, wide),
+  '│': segment({from: [5,  0], to: [ 5, 20]}, wide),
 };
 
 /*
