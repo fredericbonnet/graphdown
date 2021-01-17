@@ -71,7 +71,7 @@ export function renderGraphdown(data, options = {}) {
   const globalMask = [];
 
   /** Generated SVGs */
-  const svgs = [];
+  const globalSvgs = [];
 
   // Split source text into lines and blocks
   const { lines, blocks } = extractBlocks(data);
@@ -86,7 +86,7 @@ export function renderGraphdown(data, options = {}) {
   // Apply patterns to non-block text
   const matches = findMatchingPatterns(lines, hotspotsRE, patternsPerHotspot);
   for (let match of matches) {
-    const { row, column, mask, size, svg } = match;
+    const { row, column, mask, size, svgs } = match;
 
     if (!mask) {
       // Erase hotspot
@@ -96,10 +96,10 @@ export function renderGraphdown(data, options = {}) {
       addMask(globalMask, mask, row - size, column - size);
     }
 
-    // Add pattern SVG
+    // Add pattern SVGs
     const x = column * 10;
     const y = row * 20;
-    svgs.push(`<g transform="translate(${x} ${y})">${svg}</g>`);
+    globalSvgs.push(`<g transform="translate(${x} ${y})">${svgs.join('')}</g>`);
   }
 
   // Apply erasure mask to text
@@ -116,7 +116,7 @@ export function renderGraphdown(data, options = {}) {
   } ${height * 20}">${styleBlock}\n${[
     ...renderTextLines(rawText),
     ...renderBlocks(blocks),
-    ...svgs,
+    ...globalSvgs,
   ].join('\n')}</svg>`;
 }
 
@@ -184,7 +184,7 @@ const renderBlockContent = (lines) =>
  * @property {number} column Column position of hotspot character
  * @property {number} [size] Pattern size
  * @property {boolean[][]} [mask] Mask
- * @property {string} [svg] SVG
+ * @property {string[]} svgs SVGs
  */
 
 /**
@@ -235,7 +235,7 @@ function getMatchingPatterns(lines, row, column, patterns) {
   for (let pattern of patterns) {
     if (!pattern.pattern && !pattern.rules) {
       // Simple case: no pattern, no rules, simple hotspot matching rule
-      results.push({ row, column, ...pattern });
+      results.push({ row, column, ...pattern, svgs: [pattern.svg] });
       break;
     }
 
@@ -262,7 +262,7 @@ function getMatchingPatterns(lines, row, column, patterns) {
       }
 
       // Add to results
-      results.push({ row, column, ...pattern, svg: svgs.join('') });
+      results.push({ row, column, ...pattern, svgs });
       break;
     } else if (pattern.rules) {
       // No pattern, must match at least one rule
@@ -276,7 +276,7 @@ function getMatchingPatterns(lines, row, column, patterns) {
 
       // At least one rule matched
       if (pattern.svg) svgs.push(pattern.svg);
-      results.push({ row, column, ...pattern, svg: svgs.join('') });
+      results.push({ row, column, ...pattern, svgs });
       break;
     }
   }
