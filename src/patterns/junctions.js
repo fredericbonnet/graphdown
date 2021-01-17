@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { wide, path } from '../svg.js';
+import { path, wide } from '../shapes.js';
 import {
   anchor,
   endTop,
@@ -18,21 +18,30 @@ import { rays } from './rays.js';
 import { roundedCorners } from './corners.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
 const junctions = {
-  '┼': path([ 5,  0], 'l  0  20') + path([0, 10], 'l 10   0'),
-  '╳': path([ 0,  0], 'l 10  20') + path([0, 20], 'l 10 -20'),
-  '┬': path([ 5, 20], 'l  0 -10') + path([0, 10], 'l 10   0'),
-  '┴': path([ 5,  0], 'l  0  10') + path([0, 10], 'l 10   0'),
-  '┤': path([ 0, 10], 'l  5   0') + path([5,  0], 'l  0  20'),
-  '├': path([10, 10], 'l -5   0') + path([5,  0], 'l  0  20'),
-  '▟': path([ 5, 10], 'l  5  10') + path([0, 20], 'l 10 -20'),
-  '▙': path([ 0,  0], 'l 10  20') + path([0, 20], 'l 5  -10'),
-  '▜': path([ 0,  0], 'l 10  20') + path([5, 10], 'l 5  -10'),
-  '▛': path([ 0,  0], 'l  5  10') + path([0, 20], 'l 10 -20'),
+  '┼': [path([ 5,  0], 'l  0  20'), path([0, 10], 'l 10   0')],
+  '╳': [path([ 0,  0], 'l 10  20'), path([0, 20], 'l 10 -20')],
+  '┬': [path([ 5, 20], 'l  0 -10'), path([0, 10], 'l 10   0')],
+  '┴': [path([ 5,  0], 'l  0  10'), path([0, 10], 'l 10   0')],
+  '┤': [path([ 0, 10], 'l  5   0'), path([5,  0], 'l  0  20')],
+  '├': [path([10, 10], 'l -5   0'), path([5,  0], 'l  0  20')],
+  '▟': [path([ 5, 10], 'l  5  10'), path([0, 20], 'l 10 -20')],
+  '▙': [path([ 0,  0], 'l 10  20'), path([0, 20], 'l 5  -10')],
+  '▜': [path([ 0,  0], 'l 10  20'), path([5, 10], 'l 5  -10')],
+  '▛': [path([ 0,  0], 'l  5  10'), path([0, 20], 'l 10 -20')],
+};
+
+// prettier-ignore
+const wideJunctions = {
+  '┼': [path([ 5,  0], 'l  0  20', wide), path([0, 10], 'l 10  0', wide)],
+  '┬': [path([ 5, 20], 'l  0 -10', wide), path([0, 10], 'l 10  0', wide)],
+  '┴': [path([ 5,  0], 'l  0  10', wide), path([0, 10], 'l 10  0', wide)],
+  '┤': [path([ 0, 10], 'l  5   0', wide), path([5,  0], 'l  0 20', wide)],
+  '├': [path([10, 10], 'l -5   0', wide), path([5,  0], 'l  0 20', wide)],
 };
 
 /*
@@ -46,17 +55,17 @@ export default [
   /* Straight */
   {
     hotspot: '╋',
-    svg: wide(junctions['┼']),
+    shapes: wideJunctions['┼'],
   },
   {
     hotspot: '┼',
-    svg: junctions['┼'],
+    shapes: junctions['┼'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections(straightDirections),
-    svg: junctions['┼'],
+    shapes: junctions['┼'],
     rules: rays(diagonalDirections),
   },
 
@@ -65,23 +74,24 @@ export default [
     hotspot: hsplit,
     size: 1,
     pattern: connections(straightDirections),
-    svg:
-      roundedCorners.tr +
-      roundedCorners.tl +
-      roundedCorners.br +
+    shapes: [
+      roundedCorners.tr,
+      roundedCorners.tl,
+      roundedCorners.br,
       roundedCorners.bl,
+    ],
   },
 
   /* Diagonals */
   {
     hotspot: '╳',
-    svg: junctions['╳'],
+    shapes: junctions['╳'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections(diagonalDirections),
-    svg: junctions['╳'],
+    shapes: junctions['╳'],
     rules: rays(straightDirections),
   },
 
@@ -92,68 +102,68 @@ export default [
   /* Straight no bottom */
   {
     hotspot: '┻',
-    svg: wide(junctions['┴']),
+    shapes: wideJunctions['┴'],
   },
   {
     hotspot: '┴',
-    svg: junctions['┴'],
+    shapes: junctions['┴'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...straightDirections, b: false }),
-    svg: junctions['┴'],
+    shapes: junctions['┴'],
     rules: rays(diagonalDirections),
   },
 
   /* Straight no top */
   {
     hotspot: '┳',
-    svg: wide(junctions['┬']),
+    shapes: wideJunctions['┬'],
   },
   {
     hotspot: '┬',
-    svg: junctions['┬'],
+    shapes: junctions['┬'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...straightDirections, t: false }),
-    svg: junctions['┬'],
+    shapes: junctions['┬'],
     rules: rays(diagonalDirections),
   },
 
   /* Straight no right */
   {
     hotspot: '┫',
-    svg: wide(junctions['┤']),
+    shapes: wideJunctions['┤'],
   },
   {
     hotspot: '┤',
-    svg: junctions['┤'],
+    shapes: junctions['┤'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...straightDirections, r: false }),
-    svg: junctions['┤'],
+    shapes: junctions['┤'],
     rules: rays(diagonalDirections),
   },
 
   /* Straight no left */
   {
     hotspot: '┣',
-    svg: wide(junctions['├']),
+    shapes: wideJunctions['├'],
   },
   {
     hotspot: '├',
-    svg: junctions['├'],
+    shapes: junctions['├'],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...straightDirections, l: false }),
-    svg: junctions['├'],
+    shapes: junctions['├'],
     rules: rays(diagonalDirections),
   },
 
@@ -165,7 +175,7 @@ export default [
       r: except(endTop) + include(linkRight),
       l: except(endTop) + include(linkLeft),
     }),
-    svg: roundedCorners.tr + roundedCorners.tl,
+    shapes: [roundedCorners.tr, roundedCorners.tl],
   },
 
   /* Rounded no bottom */
@@ -176,7 +186,7 @@ export default [
       r: except(endBottom) + include(linkRight),
       l: except(endBottom) + include(linkLeft),
     }),
-    svg: roundedCorners.br + roundedCorners.bl,
+    shapes: [roundedCorners.br, roundedCorners.bl],
   },
 
   /* Rounded no left */
@@ -189,7 +199,7 @@ export default [
       t: true,
       b: true,
     }),
-    svg: roundedCorners.tl + roundedCorners.bl,
+    shapes: [roundedCorners.tl, roundedCorners.bl],
   },
 
   /* Rounded no right */
@@ -202,7 +212,7 @@ export default [
       t: true,
       b: true,
     }),
-    svg: roundedCorners.tr + roundedCorners.br,
+    shapes: [roundedCorners.tr, roundedCorners.br],
   },
 
   /* Diagonals no top-left */
@@ -210,7 +220,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...diagonalDirections, tl: false }),
-    svg: junctions['▟'],
+    shapes: junctions['▟'],
     rules: rays(straightDirections),
   },
 
@@ -219,7 +229,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...diagonalDirections, tr: false }),
-    svg: junctions['▙'],
+    shapes: junctions['▙'],
     rules: rays(straightDirections),
   },
 
@@ -228,7 +238,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...diagonalDirections, bl: false }),
-    svg: junctions['▜'],
+    shapes: junctions['▜'],
     rules: rays(straightDirections),
   },
 
@@ -237,7 +247,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...diagonalDirections, br: false }),
-    svg: junctions['▛'],
+    shapes: junctions['▛'],
     rules: rays(straightDirections),
   },
 ];

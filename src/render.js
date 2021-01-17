@@ -42,7 +42,7 @@ const hotspotsRE = charactersToRegExp(hotspotCharacters);
  * @property {Shape[]} [shapes]
  */
 /**
- * @typedef {([x,y]:[number,number])=>string} Shape
+ * @typedef { string | (([x,y]:[number,number])=>string) } Shape
  */
 
 /** Map of patterns per hotspot character
@@ -110,7 +110,13 @@ export function renderGraphdown(data, options = {}) {
       );
     }
     if (shapes && shapes.length) {
-      globalSvgs.push(...shapes.map((shape) => shape([x, y])));
+      globalSvgs.push(
+        ...shapes.map((shape) =>
+          typeof shape === 'function'
+            ? shape([x, y])
+            : `<g transform="translate(${x} ${y})">${shape}</g>`
+        )
+      );
     }
   }
 

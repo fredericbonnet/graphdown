@@ -1,8 +1,8 @@
-import { wide, path } from '../svg.js';
+import { path, wide } from '../shapes.js';
 import { vline, hline, dline, uline, bline } from '../characters.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
@@ -14,6 +14,12 @@ export const lines = {
   _:   path([0, 20], 'l 10   0'),
 };
 
+// prettier-ignore
+const wideLines = {
+  '─': path([0, 10], 'l 10   0', wide),
+  '│': path([5,  0], 'l  0  20', wide),
+};
+
 /*
  * Character patterns
  */
@@ -21,54 +27,54 @@ export default [
   /* Horizontal line */
   {
     hotspot: '━',
-    svg: wide(lines['─']),
+    shapes: [wideLines['─']],
   },
   {
     hotspot: '─',
-    svg: lines['─'],
+    shapes: [lines['─']],
   },
   {
     hotspot: hline,
-    svg: lines['─'],
+    shapes: [lines['─']],
   },
 
   /* Vertical line */
   {
     hotspot: '┃',
-    svg: wide(lines['│']),
+    shapes: [wideLines['│']],
   },
   {
     hotspot: '│',
-    svg: lines['│'],
+    shapes: [lines['│']],
   },
   {
     hotspot: vline,
-    svg: lines['│'],
+    shapes: [lines['│']],
   },
 
   /* Downward diagonal */
   {
     hotspot: '╲',
-    svg: lines['╲'],
+    shapes: [lines['╲']],
   },
   {
     hotspot: dline,
-    svg: lines['╲'],
+    shapes: [lines['╲']],
   },
 
   /* Upward diagonal */
   {
     hotspot: '╱',
-    svg: lines['╱'],
+    shapes: [lines['╱']],
   },
   {
     hotspot: uline,
-    svg: lines['╱'],
+    shapes: [lines['╱']],
   },
 
   /* Bottom line */
   {
     hotspot: bline,
-    svg: lines['_'],
+    shapes: [lines['_']],
   },
 ];

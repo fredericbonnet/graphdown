@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import { connections, include, except, exclude } from '../src/utils';
+import { connections, include, except, exclude } from '../src/utils.js';
 
 const { expect } = chai;
 

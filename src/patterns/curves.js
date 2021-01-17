@@ -1,4 +1,4 @@
-import { path } from '../svg.js';
+import { path } from '../shapes.js';
 import { connections, include, exclude, allDirections } from '../utils.js';
 import { ends } from './ends.js';
 import { rays } from './rays.js';
@@ -15,7 +15,7 @@ import {
 } from '../characters.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
@@ -76,7 +76,6 @@ export default [
         b: false,
       }
     ),
-    svg: '',
   },
 
   /* Short S-curve */
@@ -90,7 +89,7 @@ export default [
           r: include(hline),
           l: include(hline + bline),
         }),
-        svg: shortArcsTop.tl,
+        shapes: [shortArcsTop.tl],
       },
       {
         pattern: connections({
@@ -98,15 +97,15 @@ export default [
           l: include(hline),
           r: include(hline + bline),
         }),
-        svg: shortArcsTop.tr,
+        shapes: [shortArcsTop.tr],
       },
       {
         pattern: connections({ b: false, r: include(bline) }),
-        svg: shortArcsTop.bl,
+        shapes: [shortArcsTop.bl],
       },
       {
         pattern: connections({ b: false, l: include(bline) }),
-        svg: shortArcsTop.br,
+        shapes: [shortArcsTop.br],
       },
     ],
   },
@@ -116,11 +115,11 @@ export default [
     rules: [
       {
         pattern: connections({ t: false, tr: include(bline) }),
-        svg: shortArcsBottom.tl,
+        shapes: [shortArcsBottom.tl],
       },
       {
         pattern: connections({ t: false, tl: include(bline) }),
-        svg: shortArcsBottom.tr,
+        shapes: [shortArcsBottom.tr],
       },
       {
         pattern: connections({
@@ -128,7 +127,7 @@ export default [
           tl: include(bline),
           r: include(hline),
         }),
-        svg: shortArcsBottom.bl,
+        shapes: [shortArcsBottom.bl],
       },
       {
         pattern: connections({
@@ -136,7 +135,7 @@ export default [
           tr: include(bline),
           l: include(hline),
         }),
-        svg: shortArcsBottom.br,
+        shapes: [shortArcsBottom.br],
       },
     ],
   },
@@ -152,7 +151,7 @@ export default [
       bl: include(linkTop),
       l: exclude(hline + anchor),
     }),
-    svg: arcs.tl + arcs.bl,
+    shapes: [arcs.tl, arcs.bl],
   },
 
   /* Right arc split */
@@ -166,7 +165,7 @@ export default [
       br: include(linkTop),
       r: exclude(hline + anchor),
     }),
-    svg: arcs.tr + arcs.br,
+    shapes: [arcs.tr, arcs.br],
   },
 
   /* Top left arc */
@@ -178,7 +177,7 @@ export default [
       bl: include(linkTop),
       l: exclude(hline + anchor),
     }),
-    svg: arcs.tl,
+    shapes: [arcs.tl],
   },
   {
     hotspot: vline,
@@ -188,7 +187,7 @@ export default [
       tr: include(endTop + hsplit),
       r: exclude(linkBottom),
     }),
-    svg: ends.t,
+    shapes: [ends.t],
   },
   {
     hotspot: anchor,
@@ -206,7 +205,7 @@ export default [
       br: include(linkTop),
       r: exclude(hline + anchor),
     }),
-    svg: arcs.tr,
+    shapes: [arcs.tr],
   },
   {
     hotspot: vline,
@@ -216,7 +215,7 @@ export default [
       tl: include(endTop + hsplit),
       l: exclude(linkBottom),
     }),
-    svg: ends.t,
+    shapes: [ends.t],
   },
   {
     hotspot: anchor,
@@ -234,7 +233,7 @@ export default [
       tl: include(linkBottom),
       l: exclude(hline + anchor),
     }),
-    svg: arcs.bl,
+    shapes: [arcs.bl],
   },
   {
     hotspot: vline,
@@ -244,7 +243,7 @@ export default [
       br: include(endBottom + hsplit),
       r: exclude(linkTop),
     }),
-    svg: ends.b,
+    shapes: [ends.b],
   },
   {
     hotspot: anchor,
@@ -262,7 +261,7 @@ export default [
       tr: include(linkBottom),
       r: exclude(hline + anchor),
     }),
-    svg: arcs.br,
+    shapes: [arcs.br],
   },
   {
     hotspot: vline,
@@ -272,7 +271,7 @@ export default [
       bl: include(endBottom + hsplit),
       l: exclude(linkTop),
     }),
-    svg: ends.b,
+    shapes: [ends.b],
   },
   {
     hotspot: anchor,

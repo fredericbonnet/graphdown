@@ -5,7 +5,7 @@ import {
   straightDirections,
   diagonalDirections,
 } from '../utils.js';
-import { wide, path } from '../svg.js';
+import { path, wide } from '../shapes.js';
 import {
   endTop,
   endBottom,
@@ -21,11 +21,11 @@ import {
 import { rays } from './rays.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
-export const corners = {
+const corners = {
   tl: path([ 5, 20], 'l  0 -10,  5   0'),
   tr: path([ 5, 20], 'l  0 -10, -5   0'),
   bl: path([ 5,  0], 'l  0  10,  5   0'),
@@ -34,6 +34,14 @@ export const corners = {
   b:  path([ 0,  0], 'l  5  10,  5 -10'),
   r:  path([ 0,  0], 'l  5  10, -5  10'),
   l:  path([10,  0], 'l -5  10,  5  10'),
+};
+
+// prettier-ignore
+const wideCorners = {
+  tl: path([ 5, 20], 'l  0 -10,  5   0', wide),
+  tr: path([ 5, 20], 'l  0 -10, -5   0', wide),
+  bl: path([ 5,  0], 'l  0  10,  5   0', wide),
+  br: path([ 5,  0], 'l  0  10, -5   0', wide),
 };
 
 // prettier-ignore
@@ -59,17 +67,17 @@ export default [
   /* Top-left */
   {
     hotspot: '┌',
-    svg: corners.tl,
+    shapes: [corners.tl],
   },
   {
     hotspot: '┏',
-    svg: wide(corners.tl),
+    shapes: [wideCorners.tl],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: true, b: true, l: false }),
-    svg: corners.tl,
+    shapes: [corners.tl],
     rules: rays(diagonalDirections),
   },
 
@@ -78,24 +86,24 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: false, tr: false, br: true, bl: true }),
-    svg: corners.t,
+    shapes: [corners.t],
     rules: rays(straightDirections),
   },
 
   /* Top-right */
   {
     hotspot: '┐',
-    svg: corners.tr,
+    shapes: [corners.tr],
   },
   {
     hotspot: '┓',
-    svg: wide(corners.tr),
+    shapes: [wideCorners.tr],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: false, r: false, b: true, l: true }),
-    svg: corners.tr,
+    shapes: [corners.tr],
     rules: rays(diagonalDirections),
   },
 
@@ -104,24 +112,24 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tr: false, br: false, tl: true, bl: true }),
-    svg: corners.r,
+    shapes: [corners.r],
     rules: rays(straightDirections),
   },
 
   /* Bottom-right */
   {
     hotspot: '┘',
-    svg: corners.br,
+    shapes: [corners.br],
   },
   {
     hotspot: '┛',
-    svg: wide(corners.br),
+    shapes: [wideCorners.br],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: true, r: false, b: false, l: true }),
-    svg: corners.br,
+    shapes: [corners.br],
     rules: rays(diagonalDirections),
   },
 
@@ -130,28 +138,28 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tl: true, tr: true, br: false, bl: false }),
-    svg: corners.b,
+    shapes: [corners.b],
     rules: rays(straightDirections),
   },
 
   /* Bottom-left */
   {
     hotspot: '└',
-    svg: corners.bl,
+    shapes: [corners.bl],
   },
   {
     hotspot: '┗',
-    svg: wide(corners.bl),
+    shapes: [wideCorners.bl],
   },
   {
     hotspot: '└',
-    svg: corners.bl,
+    shapes: [corners.bl],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: true, r: true, b: false, l: false }),
-    svg: corners.bl,
+    shapes: [corners.bl],
     rules: rays(diagonalDirections),
   },
 
@@ -160,7 +168,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ tr: true, br: true, tl: false, bl: false }),
-    svg: corners.l,
+    shapes: [corners.l],
     rules: rays(straightDirections),
   },
 
@@ -171,7 +179,7 @@ export default [
   /* Top-left */
   {
     hotspot: '╭',
-    svg: roundedCorners.tl,
+    shapes: [roundedCorners.tl],
   },
   {
     hotspot: endTop,
@@ -180,7 +188,7 @@ export default [
       r: except(endTop) + include(linkRight),
       l: false,
     }),
-    svg: roundedCorners.tl,
+    shapes: [roundedCorners.tl],
   },
 
   /* Top */
@@ -188,13 +196,13 @@ export default [
     hotspot: endTop,
     size: 1,
     pattern: connections({ br: true, bl: true }),
-    svg: roundedCorners.t,
+    shapes: [roundedCorners.t],
   },
 
   /* Top-right */
   {
     hotspot: '╮',
-    svg: roundedCorners.tr,
+    shapes: [roundedCorners.tr],
   },
   {
     hotspot: endTop,
@@ -203,7 +211,7 @@ export default [
       r: false,
       l: except(endTop) + include(linkLeft),
     }),
-    svg: roundedCorners.tr,
+    shapes: [roundedCorners.tr],
   },
 
   /* Right */
@@ -215,13 +223,13 @@ export default [
       { bl: include(linkBottomLeft + anchor + endBottom) },
       { l: include(bline) }
     ),
-    svg: roundedCorners.r,
+    shapes: [roundedCorners.r],
   },
 
   /* Bottom-right */
   {
     hotspot: '╯',
-    svg: roundedCorners.br,
+    shapes: [roundedCorners.br],
   },
   {
     hotspot: endBottom,
@@ -230,7 +238,7 @@ export default [
       r: false,
       l: except(endBottom) + include(linkLeft),
     }),
-    svg: roundedCorners.br,
+    shapes: [roundedCorners.br],
   },
 
   /* Bottom */
@@ -238,13 +246,13 @@ export default [
     hotspot: endBottom,
     size: 1,
     pattern: connections({ tl: true, tr: true }),
-    svg: roundedCorners.b,
+    shapes: [roundedCorners.b],
   },
 
   /* Bottom-left */
   {
     hotspot: '╰',
-    svg: roundedCorners.bl,
+    shapes: [roundedCorners.bl],
   },
   {
     hotspot: endBottom,
@@ -253,7 +261,7 @@ export default [
       r: except(endBottom) + include(linkRight),
       l: false,
     }),
-    svg: roundedCorners.bl,
+    shapes: [roundedCorners.bl],
   },
 
   /* Left */
@@ -265,6 +273,6 @@ export default [
       { br: include(linkBottomRight + anchor + endBottom) },
       { r: include(bline) }
     ),
-    svg: roundedCorners.l,
+    shapes: [roundedCorners.l],
   },
 ];

@@ -1,4 +1,5 @@
-import { circle, filledCircle, path } from '../svg.js';
+import { circle, filledCircle } from '../svg.js';
+import { path } from '../shapes.js';
 import {
   anchor,
   arrowBottom,
@@ -25,6 +26,15 @@ import { ends } from './ends.js';
  * SVG templates
  */
 
+const shapes = {
+  disc: filledCircle([5, 10], 5),
+  ring: circle([5, 10], 5),
+};
+
+/*
+ * Shapes
+ */
+
 // prettier-ignore
 export const discBranches = {
   t:  path([ 5,  0], 'l  0    5'),
@@ -35,11 +45,6 @@ export const discBranches = {
   br: path([10, 20], 'l -2.5 -5'),
 };
 
-const shapes = {
-  disc: filledCircle([5, 10], 5),
-  ring: circle([5, 10], 5),
-};
-
 /*
  * Character patterns
  */
@@ -47,39 +52,39 @@ const shapes = {
 const discRays = [
   {
     pattern: connections({ tl: except(decorations) + include(linkTopLeft) }),
-    svg: discBranches.tl,
+    shapes: [discBranches.tl],
   },
   {
     pattern: connections({ t: except(decorations) + include(linkTop) }),
-    svg: discBranches.t,
+    shapes: [discBranches.t],
   },
   {
     pattern: connections({
       tr: except(decorations) + include(linkTopRight),
     }),
-    svg: discBranches.tr,
+    shapes: [discBranches.tr],
   },
   {
     pattern: connections({ r: except(decorations) + include(linkRight) }),
-    svg: discBranches.r,
+    shapes: [discBranches.r],
   },
   {
     pattern: connections({
       br: except(decorations) + include(linkBottomRight),
     }),
-    svg: discBranches.br,
+    shapes: [discBranches.br],
   },
   {
     pattern: connections({ b: except(decorations) + include(linkBottom) }),
-    svg: discBranches.b,
+    shapes: [discBranches.b],
   },
   {
     pattern: connections({ bl: except(decorations) + include(linkBottomLeft) }),
-    svg: discBranches.bl,
+    shapes: [discBranches.bl],
   },
   {
     pattern: connections({ l: except(decorations) + include(linkLeft) }),
-    svg: discBranches.l,
+    shapes: [discBranches.l],
   },
 ];
 
@@ -111,42 +116,42 @@ export default [
       {
         /* Top-left */
         pattern: connections({ ...noDirection, br: true }),
-        svg: ends.tl + ticks['╱'],
+        shapes: [ends.tl, ticks['╱']],
       },
       {
         /* Top */
         pattern: connections({ ...noDirection, b: true }),
-        svg: ends.t + ticks['─'],
+        shapes: [ends.t, ticks['─']],
       },
       {
         /* Top-right */
         pattern: connections({ ...noDirection, bl: true }),
-        svg: ends.tr + ticks['╲'],
+        shapes: [ends.tr, ticks['╲']],
       },
       {
         /* Right */
         pattern: connections({ ...noDirection, l: true }),
-        svg: ends.r + ticks['│'],
+        shapes: [ends.r, ticks['│']],
       },
       {
         /* Bottom-right */
         pattern: connections({ ...noDirection, tl: true }),
-        svg: ends.br + ticks['╱'],
+        shapes: [ends.br, ticks['╱']],
       },
       {
         /* Bottom */
         pattern: connections({ ...noDirection, t: true }),
-        svg: ends.b + ticks['─'],
+        shapes: [ends.b, ticks['─']],
       },
       {
         /* Bottom-left */
         pattern: connections({ ...noDirection, tr: true }),
-        svg: ends.bl + ticks['╲'],
+        shapes: [ends.bl, ticks['╲']],
       },
       {
         /* Left */
         pattern: connections({ ...noDirection, r: true }),
-        svg: ends.l + ticks['│'],
+        shapes: [ends.l, ticks['│']],
       },
     ],
   },

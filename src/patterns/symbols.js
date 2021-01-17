@@ -10,6 +10,6 @@ export default [
    */
   {
     hotspot: anchor,
-    svg: ticks['│'] + ticks['─'],
+    shapes: [ticks['│'], ticks['─']],
   },
 ];

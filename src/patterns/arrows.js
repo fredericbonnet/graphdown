@@ -1,4 +1,4 @@
-import { filledPath, path } from '../svg';
+import { path, filledPath } from '../shapes.js';
 import {
   anchor,
   arrowTop,
@@ -12,7 +12,7 @@ import { rays } from './rays.js';
 import { ticks } from './ticks.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
@@ -36,6 +36,7 @@ const branches = {
   br: path([5, 10], 'l  5  10'),
   bl: path([5, 10], 'l -5  10'),
 };
+
 // prettier-ignore
 const arrows = {
   t:  filledPath([ 5,  0], arrowShapes.t),
@@ -47,6 +48,7 @@ const arrows = {
   bl: filledPath([ 0, 20], arrowShapes.bl),
   br: filledPath([10, 20], arrowShapes.br),
 };
+
 // prettier-ignore
 const longBranches = {
   t:  path([5,  0], 'l  0  20'),
@@ -58,6 +60,7 @@ const longBranches = {
   br: path([5,  0], 'q 0  10,  5  20'),
   bl: path([5,  0], 'q 0  10, -5  20'),
 };
+
 // prettier-ignore
 const anchoredArrows = {
   t: filledPath([ 5, -10], arrowShapes.t),
@@ -65,14 +68,25 @@ const anchoredArrows = {
   l: filledPath([-5,  10], arrowShapes.l),
   r: filledPath([15,  10], arrowShapes.r),
 };
+
 // prettier-ignore
 const decoratedArrows = {
-  t:  path([ 5, 20], 'l  0   -15') + filledPath([ 5  , -5], arrowShapes.t),
-  b:  path([ 5,  0], 'l  0    15') + filledPath([ 5  , 25], arrowShapes.b),
-  tl: path([10, 20], 'l -7.5 -15') + filledPath([-2.5, -5], arrowShapes.tl),
-  tr: path([ 0, 20], 'l  7.5 -15') + filledPath([12.5, -5], arrowShapes.tr),
-  bl: path([10,  0], 'l -7.5  15') + filledPath([-2.5, 25], arrowShapes.bl),
-  br: path([ 0,  0], 'l  7.5  15') + filledPath([12.5, 25], arrowShapes.br),
+  t:  filledPath([ 5  , -5], arrowShapes.t),
+  b:  filledPath([ 5  , 25], arrowShapes.b),
+  tl: filledPath([-2.5, -5], arrowShapes.tl),
+  tr: filledPath([12.5, -5], arrowShapes.tr),
+  bl: filledPath([-2.5, 25], arrowShapes.bl),
+  br: filledPath([12.5, 25], arrowShapes.br),
+};
+
+// prettier-ignore
+const decoratedBranches = {
+  t:  path([ 5, 20], 'l  0   -15'),
+  b:  path([ 5,  0], 'l  0    15'),
+  tl: path([10, 20], 'l -7.5 -15'),
+  tr: path([ 0, 20], 'l  7.5 -15'),
+  bl: path([10,  0], 'l -7.5  15'),
+  br: path([ 0,  0], 'l  7.5  15'),
 };
 
 /*
@@ -86,19 +100,19 @@ export default [
     hotspot: arrowTop,
     size: 1,
     pattern: connections({ t: include(anchor) }),
-    svg: anchoredArrows.t,
+    shapes: [anchoredArrows.t],
     rules: [
       {
         pattern: connections({ b: true }),
-        svg: longBranches.b,
+        shapes: [longBranches.b],
       },
       {
         pattern: connections({ bl: true }),
-        svg: longBranches.bl,
+        shapes: [longBranches.bl],
       },
       {
         pattern: connections({ br: true }),
-        svg: longBranches.br,
+        shapes: [longBranches.br],
       },
     ],
   },
@@ -106,7 +120,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ b: include(arrowTop) }),
-    svg: ticks['─'],
+    shapes: [ticks['─']],
     rules: rays(allDirections),
   },
 
@@ -115,19 +129,19 @@ export default [
     hotspot: arrowBottom,
     size: 1,
     pattern: connections({ b: include(anchor) }),
-    svg: anchoredArrows.b,
+    shapes: [anchoredArrows.b],
     rules: [
       {
         pattern: connections({ t: true }),
-        svg: longBranches.t,
+        shapes: [longBranches.t],
       },
       {
         pattern: connections({ tl: true }),
-        svg: longBranches.tl,
+        shapes: [longBranches.tl],
       },
       {
         pattern: connections({ tr: true }),
-        svg: longBranches.tr,
+        shapes: [longBranches.tr],
       },
     ],
   },
@@ -135,7 +149,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ t: include(arrowBottom) }),
-    svg: ticks['─'],
+    shapes: [ticks['─']],
     rules: rays(allDirections),
   },
 
@@ -144,13 +158,13 @@ export default [
     hotspot: arrowLeft,
     size: 1,
     pattern: connections({ l: include(anchor) }),
-    svg: anchoredArrows.l + longBranches.r,
+    shapes: [anchoredArrows.l, longBranches.r],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ r: include(arrowLeft) }),
-    svg: ticks['│'],
+    shapes: [ticks['│']],
     rules: rays(allDirections),
   },
 
@@ -159,13 +173,13 @@ export default [
     hotspot: arrowRight,
     size: 1,
     pattern: connections({ r: include(anchor) }),
-    svg: anchoredArrows.r + longBranches.l,
+    shapes: [anchoredArrows.r, longBranches.l],
   },
   {
     hotspot: anchor,
     size: 1,
     pattern: connections({ l: include(arrowRight) }),
-    svg: ticks['│'],
+    shapes: [ticks['│']],
     rules: rays(allDirections),
   },
 
@@ -179,15 +193,15 @@ export default [
     rules: [
       {
         pattern: connections({ tl: include(decorations) }),
-        svg: decoratedArrows.tl,
+        shapes: [decoratedArrows.tl, decoratedBranches.tl],
       },
       {
         pattern: connections({ t: include(decorations) }),
-        svg: decoratedArrows.t,
+        shapes: [decoratedArrows.t, decoratedBranches.t],
       },
       {
         pattern: connections({ tr: include(decorations) }),
-        svg: decoratedArrows.tr,
+        shapes: [decoratedArrows.tr, decoratedBranches.tr],
       },
     ],
   },
@@ -197,15 +211,15 @@ export default [
     rules: [
       {
         pattern: connections({ bl: include(decorations) }),
-        svg: decoratedArrows.bl,
+        shapes: [decoratedArrows.bl, decoratedBranches.bl],
       },
       {
         pattern: connections({ b: include(decorations) }),
-        svg: decoratedArrows.b,
+        shapes: [decoratedArrows.b, decoratedBranches.b],
       },
       {
         pattern: connections({ br: include(decorations) }),
-        svg: decoratedArrows.br,
+        shapes: [decoratedArrows.br, decoratedBranches.br],
       },
     ],
   },
@@ -213,13 +227,13 @@ export default [
     hotspot: arrowLeft,
     size: 1,
     pattern: connections({ l: include(decorations) }),
-    svg: arrows.l,
+    shapes: [arrows.l],
   },
   {
     hotspot: arrowRight,
     size: 1,
     pattern: connections({ r: include(decorations) }),
-    svg: arrows.r,
+    shapes: [arrows.r],
   },
 
   /*
@@ -231,19 +245,19 @@ export default [
     hotspot: arrowTop,
     size: 1,
     pattern: connections({ b: true }, { br: true, bl: true }),
-    svg: arrows.t,
+    shapes: [arrows.t],
     rules: [
       {
         pattern: connections({ b: true }),
-        svg: branches.b,
+        shapes: [branches.b],
       },
       {
         pattern: connections({ bl: true }),
-        svg: branches.bl,
+        shapes: [branches.bl],
       },
       {
         pattern: connections({ br: true }),
-        svg: branches.br,
+        shapes: [branches.br],
       },
     ],
   },
@@ -253,7 +267,7 @@ export default [
     hotspot: arrowTop,
     size: 1,
     pattern: connections({ br: true }),
-    svg: arrows.tl + branches.br,
+    shapes: [arrows.tl, branches.br],
   },
 
   /* Top-right */
@@ -261,7 +275,7 @@ export default [
     hotspot: arrowTop,
     size: 1,
     pattern: connections({ bl: true }),
-    svg: arrows.tr + branches.bl,
+    shapes: [arrows.tr, branches.bl],
   },
 
   /* Bottom */
@@ -269,19 +283,19 @@ export default [
     hotspot: arrowBottom,
     size: 1,
     pattern: connections({ t: true }, { tr: true, tl: true }),
-    svg: arrows.b,
+    shapes: [arrows.b],
     rules: [
       {
         pattern: connections({ t: true }),
-        svg: branches.t,
+        shapes: [branches.t],
       },
       {
         pattern: connections({ tl: true }),
-        svg: branches.tl,
+        shapes: [branches.tl],
       },
       {
         pattern: connections({ tr: true }),
-        svg: branches.tr,
+        shapes: [branches.tr],
       },
     ],
   },
@@ -291,7 +305,7 @@ export default [
     hotspot: arrowBottom,
     size: 1,
     pattern: connections({ tr: true }),
-    svg: arrows.bl + branches.tr,
+    shapes: [arrows.bl, branches.tr],
   },
 
   /* Bottom-right */
@@ -299,7 +313,7 @@ export default [
     hotspot: arrowBottom,
     size: 1,
     pattern: connections({ tl: true }),
-    svg: arrows.br + branches.tl,
+    shapes: [arrows.br, branches.tl],
   },
 
   /* Left */
@@ -307,7 +321,7 @@ export default [
     hotspot: arrowLeft,
     size: 1,
     pattern: connections({ r: true }),
-    svg: arrows.l,
+    shapes: [arrows.l],
   },
 
   /* Right */
@@ -315,6 +329,6 @@ export default [
     hotspot: arrowRight,
     size: 1,
     pattern: connections({ l: true }),
-    svg: arrows.r,
+    shapes: [arrows.r],
   },
 ];

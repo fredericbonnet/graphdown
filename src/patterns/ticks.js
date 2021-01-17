@@ -1,10 +1,10 @@
-import { path } from '../svg';
-import { connections, noDirection } from '../utils';
+import { path } from '../shapes.js';
+import { connections, noDirection } from '../utils.js';
 import { anchor } from '../characters.js';
 import { lines } from './lines.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
@@ -28,7 +28,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...noDirection, t: true, b: true }),
-    svg: lines['│'] + ticks['─'],
+    shapes: [lines['│'], ticks['─']],
   },
 
   /* Horizontal line with tick */
@@ -36,7 +36,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...noDirection, r: true, l: true }),
-    svg: lines['─'] + ticks['│'],
+    shapes: [lines['─'], ticks['│']],
   },
 
   /* Downward line with tick */
@@ -44,7 +44,7 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...noDirection, tl: true, br: true }),
-    svg: lines['╲'] + ticks['╱'],
+    shapes: [lines['╲'], ticks['╱']],
   },
 
   /* Upward line with tick */
@@ -52,6 +52,6 @@ export default [
     hotspot: anchor,
     size: 1,
     pattern: connections({ ...noDirection, tr: true, bl: true }),
-    svg: lines['╱'] + ticks['╲'],
+    shapes: [lines['╱'], ticks['╲']],
   },
 ];

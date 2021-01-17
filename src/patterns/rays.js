@@ -8,35 +8,35 @@ import { ends } from './ends.js';
 const rayPatterns = {
   tl: {
     pattern: connections({ tl: true }),
-    svg: ends.br,
+    shapes: [ends.br],
   },
   t: {
     pattern: connections({ t: true }),
-    svg: ends.b,
+    shapes: [ends.b],
   },
   tr: {
     pattern: connections({ tr: true }),
-    svg: ends.bl,
+    shapes: [ends.bl],
   },
   r: {
     pattern: connections({ r: true }),
-    svg: ends.l,
+    shapes: [ends.l],
   },
   br: {
     pattern: connections({ br: true }),
-    svg: ends.tl,
+    shapes: [ends.tl],
   },
   b: {
     pattern: connections({ b: true }),
-    svg: ends.t,
+    shapes: [ends.t],
   },
   bl: {
     pattern: connections({ bl: true }),
-    svg: ends.tr,
+    shapes: [ends.tr],
   },
   l: {
     pattern: connections({ l: true }),
-    svg: ends.r,
+    shapes: [ends.r],
   },
 };
 export const rays = ({ t, tr, r, br, b, bl, l, tl }) => {

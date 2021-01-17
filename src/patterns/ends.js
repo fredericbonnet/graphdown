@@ -7,12 +7,12 @@ import {
   linkTopRight,
   linkTopLeft,
 } from '../characters.js';
-import { wide, path } from '../svg.js';
+import { path, wide } from '../shapes.js';
 import { connections, include, except } from '../utils.js';
 import { lines } from './lines.js';
 
 /*
- * SVG templates
+ * Shapes
  */
 
 // prettier-ignore
@@ -25,6 +25,14 @@ export const ends = {
   tr: path([5, 10], 'l -5  10'),
   br: path([5, 10], 'l -5 -10'),
   bl: path([5, 10], 'l  5 -10'),
+};
+
+// prettier-ignore
+const wideEnds = {
+  t: path([5, 10], 'l  0  10', wide),
+  b: path([5, 10], 'l  0 -10', wide),
+  l: path([5, 10], 'l  5  0', wide),
+  r: path([5, 10], 'l -5  0', wide),
 };
 
 // prettier-ignore
@@ -48,23 +56,23 @@ export default [
     hotspot: endTop,
     size: 1,
     pattern: connections({ br: true }),
-    svg: ends.tl,
+    shapes: [ends.tl],
   },
 
   /* Top */
   {
     hotspot: '╻',
-    svg: wide(ends.t),
+    shapes: [wideEnds.t],
   },
   {
     hotspot: '╷',
-    svg: ends.t,
+    shapes: [ends.t],
   },
   {
     hotspot: endTop,
     size: 1,
     pattern: connections({ b: true }),
-    svg: ends.t,
+    shapes: [ends.t],
   },
 
   /* Top-right */
@@ -72,17 +80,17 @@ export default [
     hotspot: endTop,
     size: 1,
     pattern: connections({ bl: true }),
-    svg: ends.tr,
+    shapes: [ends.tr],
   },
 
   /* Right */
   {
     hotspot: '╸',
-    svg: wide(ends.r),
+    shapes: [wideEnds.r],
   },
   {
     hotspot: '╴',
-    svg: ends.r,
+    shapes: [ends.r],
   },
 
   /* Bottom-right */
@@ -90,23 +98,23 @@ export default [
     hotspot: endBottom,
     size: 1,
     pattern: connections({ tl: true }),
-    svg: ends.br,
+    shapes: [ends.br],
   },
 
   /* Bottom */
   {
     hotspot: '╹',
-    svg: wide(ends.b),
+    shapes: [wideEnds.b],
   },
   {
     hotspot: '╵',
-    svg: ends.b,
+    shapes: [ends.b],
   },
   {
     hotspot: endBottom,
     size: 1,
     pattern: connections({ t: true }),
-    svg: ends.b,
+    shapes: [ends.b],
   },
 
   /* Bottom-left */
@@ -114,46 +122,46 @@ export default [
     hotspot: endBottom,
     size: 1,
     pattern: connections({ tr: true }),
-    svg: ends.bl,
+    shapes: [ends.bl],
   },
 
   /* Left */
   {
     hotspot: '╺',
-    svg: wide(ends.l),
+    shapes: [wideEnds.l],
   },
   {
     hotspot: '╶',
-    svg: ends.l,
+    shapes: [ends.l],
   },
 
   /* Bottom line */
   {
     hotspot: bline,
     size: 1,
-    svg: lines['_'],
+    shapes: [lines['_']],
     rules: [
       {
         pattern: connections(
           { l: except(endTop) + include(linkTop) },
           { bl: except(endBottom) + include(linkBottom) }
         ),
-        svg: bottomEnds.l,
+        shapes: [bottomEnds.l],
       },
       {
         pattern: connections(
           { r: except(endTop) + include(linkTop) },
           { br: except(endBottom) + include(linkBottom) }
         ),
-        svg: bottomEnds.r,
+        shapes: [bottomEnds.r],
       },
       {
         pattern: connections({ l: include(linkTopRight) }),
-        svg: bottomEnds.ll,
+        shapes: [bottomEnds.ll],
       },
       {
         pattern: connections({ r: include(linkTopLeft) }),
-        svg: bottomEnds.rr,
+        shapes: [bottomEnds.rr],
       },
     ],
   },
