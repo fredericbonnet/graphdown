@@ -3,6 +3,7 @@ import { regexpEscape } from './utils.js';
 import { patterns } from './patterns.js';
 import { blockRE } from './characters.js';
 import { defaultStyle } from './default-style.js';
+import { Segment } from './shapes.js';
 
 /**
  * Escape special HTML chars
@@ -42,7 +43,7 @@ const hotspotsRE = charactersToRegExp(hotspotCharacters);
  * @property {Shape[]} [shapes]
  */
 /**
- * @typedef { string | (([x,y]:[number,number])=>string) } Shape
+ * @typedef { string | (([x,y]:[number,number])=>string) | Segment } Shape
  */
 
 /** Map of patterns per hotspot character
@@ -114,6 +115,8 @@ export function renderGraphdown(data, options = {}) {
         ...shapes.map((shape) =>
           typeof shape === 'function'
             ? shape([x, y])
+            : shape instanceof Segment
+            ? shape.render([x, y])
             : `<g transform="translate(${x} ${y})">${shape}</g>`
         )
       );
