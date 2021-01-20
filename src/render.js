@@ -3,7 +3,7 @@ import { regexpEscape } from './utils.js';
 import { patterns } from './patterns.js';
 import { blockRE } from './characters.js';
 import { defaultStyle } from './default-style.js';
-import { Segment } from './shapes.js';
+import { Segment, SegmentList } from './shapes.js';
 
 /**
  * Escape special HTML chars
@@ -76,6 +76,9 @@ export function renderGraphdown(data, options = {}) {
   /** Global erasure mask */
   const globalMask = [];
 
+  /** Mergeable segments */
+  const segments = new SegmentList();
+
   /** Generated SVGs */
   const globalSvgs = [];
 
@@ -110,17 +113,28 @@ export function renderGraphdown(data, options = {}) {
         `<g transform="translate(${x} ${y})">${svgs.join('')}</g>`
       );
     }
+
+    // Add pattern shapes
     if (shapes && shapes.length) {
-      globalSvgs.push(
-        ...shapes.map((shape) =>
-          typeof shape === 'function'
-            ? shape([x, y])
-            : shape instanceof Segment
-            ? shape.render([x, y])
-            : `<g transform="translate(${x} ${y})">${shape}</g>`
-        )
-      );
+      for (let shape of shapes) {
+        if (shape instanceof Segment) {
+          // Mergeable segment
+          segments.add(shape.offset([x, y]));
+        } else {
+          // Render shape
+          globalSvgs.push(
+            typeof shape === 'function'
+              ? shape([x, y])
+              : `<g transform="translate(${x} ${y})">${shape}</g>`
+          );
+        }
+      }
     }
+  }
+
+  // Render merged segments
+  for (let segment of segments.segments) {
+    globalSvgs.push(segment.render([0, 0]));
   }
 
   // Apply erasure mask to text
