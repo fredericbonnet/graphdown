@@ -109,9 +109,10 @@ export function renderGraphdown(data, options = {}) {
     const x = column * 10;
     const y = row * 20;
     if (svgs && svgs.length) {
-      globalSvgs.push(
-        `<g transform="translate(${x} ${y})">${svgs.join('')}</g>`
-      );
+      const code = svgs.join('');
+      if (code) {
+        globalSvgs.push(`<g transform="translate(${x} ${y})">${code}</g>`);
+      }
     }
 
     // Add pattern shapes
@@ -120,7 +121,7 @@ export function renderGraphdown(data, options = {}) {
         if (shape instanceof Segment) {
           // Mergeable segment
           segments.add(shape.offset([x, y]));
-        } else {
+        } else if (shape) {
           // Render shape
           globalSvgs.push(
             typeof shape === 'function'
@@ -175,9 +176,11 @@ const renderTextLines = (lines) =>
  * @return SVG code
  */
 const renderTextLine = (line, row, column) =>
-  `<text x="${column * 10}" y="${(row + 1) * 20 - 5}" textLength="${
-    line.length * 10
-  }">${htmlEscape(line)}</text>`;
+  line.trim().length
+    ? `<text x="${column * 10}" y="${(row + 1) * 20 - 5}" textLength="${
+        line.length * 10
+      }">${htmlEscape(line)}</text>`
+    : '';
 
 /**
  * Render text blocks
